@@ -1,0 +1,25 @@
+# mp user configuration.
+{ ... }:
+let
+  username = "mp";
+in
+{
+  users.users.${username} = {
+    isNormalUser = true;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+  };
+
+  home-manager.users.${username} = {
+    programs.home-manager.enable = true;
+    home = {
+      inherit username;
+      homeDirectory = "/home/${username}";
+      stateVersion = "24.11";
+    };
+  };
+
+  imports = [ ];
+}
