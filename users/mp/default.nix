@@ -10,6 +10,9 @@ in
       "networkmanager"
       "wheel"
     ];
+    openssh.authorizedKeys.keyFiles = [
+      ./key/yubikey.pub
+    ];
   };
 
   home-manager.users.${username} = {
