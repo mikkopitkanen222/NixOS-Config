@@ -26,5 +26,8 @@ in
 
   imports = [
     ./git.nix
+    ../modules/plasma-browser-integration.nix
   ];
+
+  plasmaBrowserIntegration.mp.enable = true;
 }
