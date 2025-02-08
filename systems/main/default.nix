@@ -11,6 +11,7 @@
     ../modules/audio.nix
     ../modules/locale.nix
     ../modules/openssh.nix
+    ../modules/pam.nix
     ../modules/plasma.nix
     ../modules/sc-crypto.nix
     ../modules/sddm.nix
