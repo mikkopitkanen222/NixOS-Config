@@ -25,6 +25,7 @@ in
   };
 
   imports = [
+    ./brave.nix
     ./codium.nix
     ./git.nix
     ../modules/plasma-browser-integration.nix
