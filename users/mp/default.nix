@@ -29,7 +29,9 @@ in
     ./codium.nix
     ./git.nix
     ../modules/plasma-browser-integration.nix
+    ../modules/spotify.nix
   ];
 
   plasmaBrowserIntegration.mp.enable = true;
+  spotify.mp.enable = true;
 }
