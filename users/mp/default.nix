@@ -1,5 +1,5 @@
 # mp user configuration.
-{ ... }:
+{ pkgs, ... }:
 let
   username = "mp";
 in
@@ -22,6 +22,10 @@ in
       homeDirectory = "/home/${username}";
       stateVersion = "24.11";
     };
+
+    home.packages = with pkgs; [
+      vesktop
+    ];
   };
 
   imports = [
