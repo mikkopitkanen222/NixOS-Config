@@ -2,10 +2,9 @@
   description = "Modular NixOS configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl = {
@@ -30,7 +29,6 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./overlays/nixpkgs-unstable.nix
             ./hosts/desknix
             ./systems/main
             ./users/mp
@@ -41,7 +39,6 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./overlays/nixpkgs-unstable.nix
             ./hosts/lapnix
             ./systems/main
             ./users/mp
@@ -52,7 +49,6 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            ./overlays/nixpkgs-unstable.nix
             ./hosts/wsl
             ./systems/wsl
             ./users/wsl
