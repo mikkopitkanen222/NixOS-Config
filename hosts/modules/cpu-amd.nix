@@ -1,11 +1,28 @@
-# Amd platform options and kernel modules.
-{ config, lib, ... }:
+# Enable AMD CPU.
 {
-  boot.kernelModules = [
-    "kvm-amd"
-    "k10temp"
-  ];
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.system.hardware.cpu;
+in
+{
+  options.system.hardware.cpu = {
+    amd = lib.mkOption {
+      description = "Enable AMD CPU kernel modules";
+      type = lib.types.bool;
+      default = false;
+    };
+  };
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  config = lib.mkIf cfg.amd {
+    boot.kernelModules = [
+      "kvm-amd"
+      "k10temp"
+    ];
+
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
 }

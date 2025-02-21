@@ -1,45 +1,59 @@
-# Nvidia drivers and related graphics settings.
+# Enable Nvidia GPU.
 # https://wiki.nixos.org/wiki/Graphics
 # https://wiki.nixos.org/wiki/NVIDIA
 {
   config,
+  lib,
   ...
 }:
+let
+  cfg = config.system.hardware.gpu;
+in
 {
   imports = [
     ../../modules/unfree.nix
   ];
 
-  # Nvidia kernel modules require proprietary userspace libraries.
-  unfree.allowedPackages = [
-    "nvidia-x11"
-    "nvidia-settings"
-  ];
+  options.system.hardware.gpu = {
+    nvidia = lib.mkOption {
+      description = "Enable Nvidia GPU driver";
+      type = lib.types.bool;
+      default = false;
+    };
+  };
 
-  # Enable Nvidia kernel modules for X and Wayland.
-  services.xserver.videoDrivers = [ "nvidia" ];
+  config = lib.mkIf cfg.nvidia {
+    # Nvidia kernel modules require proprietary userspace libraries.
+    unfree.allowedPackages = [
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
 
-  # Install Mesa (OpenGL & Vulkan drivers).
-  hardware.graphics.enable = true;
+    # Enable Nvidia kernel modules for X and Wayland.
+    services.xserver.videoDrivers = [ "nvidia" ];
 
-  hardware.nvidia = {
-    # Select driver version. Currently > 550.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Install Mesa (OpenGL & Vulkan drivers).
+    hardware.graphics.enable = true;
 
-    # Enable kernel modesetting when using proprietary drivers.
-    # Wayland requires this and driver version >= 545.
-    # Enabled by default on driver versions >= 535.
-    modesetting.enable = true;
+    hardware.nvidia = {
+      # Select driver version. Currently > 550.
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # RTX 2070 supports open source kernel modules,
-    # but there's no output from GPU when waking from sleep.
-    open = false;
+      # Enable kernel modesetting when using proprietary drivers.
+      # Wayland requires this and driver version >= 545.
+      # Enabled by default on driver versions >= 535.
+      modesetting.enable = true;
 
-    # RTX 2070 supports the GPU System Processor, which is required
-    # (and enabled by default) when using open source kernel modules.
-    gsp.enable = true;
+      # RTX 2070 supports open source kernel modules,
+      # but there's no output from GPU when waking from sleep.
+      open = false;
 
-    # Fix graphics corruption when waking from sleep.
-    powerManagement.enable = true;
+      # RTX 2070 supports the GPU System Processor, which is required
+      # (and enabled by default) when using open source kernel modules.
+      gsp.enable = true;
+
+      # Fix graphics corruption when waking from sleep.
+      powerManagement.enable = true;
+    };
   };
 }
