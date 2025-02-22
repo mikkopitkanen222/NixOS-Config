@@ -1,4 +1,4 @@
-# Default values for basic system options.
+# Enable default values for basic system options.
 {
   config,
   inputs,
@@ -6,15 +6,19 @@
   ...
 }:
 let
-  cfg = config.systemDefaults;
+  cfg = config.system.software.systemDefaults;
 in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  options.systemDefaults = {
-    enable = lib.mkEnableOption "default values for basic options set system wide.";
+  options.system.software.systemDefaults = {
+    enable = lib.mkOption {
+      description = "Enable default values for basic options set system wide";
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {

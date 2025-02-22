@@ -7,11 +7,15 @@
   ...
 }:
 let
-  cfg = config.scCrypto;
+  cfg = config.system.software.scCrypto;
 in
 {
-  options.scCrypto = {
-    enable = lib.mkEnableOption "PGP and SSH smartcard functionality.";
+  options.system.software.scCrypto = {
+    enable = lib.mkOption {
+      description = "Enable PGP and SSH smartcard functionality";
+      type = lib.types.bool;
+      default = false;
+    };
 
     pinentryPackage = lib.mkOption {
       type = lib.types.package;

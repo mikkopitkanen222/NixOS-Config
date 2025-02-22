@@ -1,16 +1,33 @@
-# Allow secure remote login.
-{ ... }:
+# Enable secure remote login.
 {
-  services.openssh = {
-    enable = true;
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.system.software.openssh;
+in
+{
+  options.system.software.openssh = {
+    enable = lib.mkOption {
+      description = "Enable OpenSSH logins";
+      type = lib.types.bool;
+      default = false;
+    };
+  };
 
-    settings = {
-      # Allow login using crypto keys only.
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
+  config = lib.mkIf cfg.enable {
+    services.openssh = {
+      enable = true;
 
-      # Root user does not need to login remotely.
-      PermitRootLogin = "no";
+      settings = {
+        # Allow login using crypto keys only.
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = false;
+
+        # Root user does not need to login remotely.
+        PermitRootLogin = "no";
+      };
     };
   };
 }
