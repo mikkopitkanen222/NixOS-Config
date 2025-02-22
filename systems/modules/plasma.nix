@@ -1,8 +1,26 @@
 # Enable KDE Plasma 6.
-{ pkgs, ... }:
 {
-  services.desktopManager.plasma6.enable = true;
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.system.software.plasma;
+in
+{
+  options.system.software.plasma = {
+    enable = lib.mkOption {
+      description = "Enable KDE Plasma 6";
+      type = lib.types.bool;
+      default = false;
+    };
+  };
 
-  # Disable unwanted packages enabled by default.
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [ kate ];
+  config = lib.mkIf cfg.enable {
+    services.desktopManager.plasma6.enable = true;
+
+    # Disable unwanted packages enabled by default.
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [ kate ];
+  };
 }
