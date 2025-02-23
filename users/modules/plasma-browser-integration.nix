@@ -6,42 +6,40 @@
   ...
 }:
 let
-  cfg = config.plasmaBrowserIntegration;
+  cfg = config.system.users.plasmaBrowserIntegration;
 
   userType = lib.types.submodule {
     options = {
       enable = lib.mkEnableOption "the Plasma browser integration.";
 
       package = lib.mkOption {
+        description = "The host components which browsers integrate with.";
         type = lib.types.package;
         default = pkgs.kdePackages.plasma-browser-integration;
-        description = "The host components which browsers integrate with.";
       };
 
       extension = lib.mkOption {
+        description = "The browser extension which hosts integrate with.";
         type = lib.types.str;
         default = "cimiefiiaegbelhefglklhhakcgmhkai";
-        description = "The browser extension which hosts integrate with.";
       };
     };
   };
 in
 {
-  options = {
+  options.system.users = {
     plasmaBrowserIntegration = lib.mkOption {
+      description = "Plasma browser integration config for each user.";
       type = lib.types.attrsOf userType;
       default = { };
-      description = "Plasma browser integration config for each user.";
     };
   };
 
-  config = {
-    home-manager.users = builtins.mapAttrs (
-      name: value:
-      lib.mkIf value.enable {
-        home.packages = [ value.package ];
-        programs.chromium.extensions = [ value.extension ];
-      }
-    ) cfg;
-  };
+  config.home-manager.users = builtins.mapAttrs (
+    name: value:
+    lib.mkIf value.enable {
+      home.packages = [ value.package ];
+      programs.chromium.extensions = [ value.extension ];
+    }
+  ) cfg;
 }
