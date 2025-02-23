@@ -1,28 +1,45 @@
-# mp wsl user configuration.
-{ pkgs, ... }:
-let
-  username = "mp";
-in
+# wsl user configuration.
 {
-  wsl.defaultUser = username;
+  config,
+  lib,
+  ...
+}:
+let
+  userName = "wsl";
+  username = "mp";
 
-  users.users.${username} = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-    ];
-  };
+  userConfig = {
+    wsl.defaultUser = username;
 
-  home-manager.users.${username} = {
-    programs.home-manager.enable = true;
-    home = {
-      inherit username;
-      homeDirectory = "/home/${username}";
-      stateVersion = "24.11";
+    users.users.${username} = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+      ];
+    };
+
+    home-manager.users.${username} = {
+      programs.home-manager.enable = true;
+
+      home = {
+        inherit username;
+        homeDirectory = "/home/${username}";
+        stateVersion = "24.11";
+      };
+
+      programs.git = {
+        enable = true;
+        userName = "Mikko Pitkänen";
+        userEmail = "mikko.pitkanen@quux.fi";
+        signing.signByDefault = true;
+        signing.key = "66E93779B6C5AA0A!";
+      };
     };
   };
-
-  imports = [
-    ./git.nix
+in
+{
+  config = lib.mkMerge [
+    ({ system.userNames' = [ userName ]; })
+    (lib.mkIf (builtins.elem userName config.system.userNames) userConfig)
   ];
 }

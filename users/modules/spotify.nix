@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.spotify;
+  cfg = config.system.users.spotify;
 
   userType = lib.types.submodule {
     options = {
@@ -19,7 +19,7 @@ in
     ../../modules/unfree.nix
   ];
 
-  options = {
+  options.system.users = {
     spotify = lib.mkOption {
       description = "Spotify options for each user.";
       type = lib.types.attrsOf userType;
@@ -27,19 +27,15 @@ in
     };
   };
 
-  config = {
-    unfree.allowedPackages = [
-      "spotify"
-    ];
+  config.unfree.allowedPackages = [ "spotify" ];
 
-    home-manager.users = builtins.mapAttrs (
-      name: value:
-      lib.mkIf value.enable {
-        home.packages = with pkgs; [
-          spotify
-          spicetify-cli
-        ];
-      }
-    ) cfg;
-  };
+  config.home-manager.users = builtins.mapAttrs (
+    name: value:
+    lib.mkIf value.enable {
+      home.packages = with pkgs; [
+        spotify
+        spicetify-cli
+      ];
+    }
+  ) cfg;
 }
