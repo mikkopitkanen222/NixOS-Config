@@ -19,40 +19,45 @@
 
   outputs =
     { nixpkgs, ... }@inputs:
+    let
+      makeSystem =
+        system: syscfg:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            inputs.home-manager.nixosModules.home-manager
+            inputs.nixos-wsl.nixosModules.wsl
+            inputs.vscode-server.nixosModules.default
+            ./hosts
+            ./systems
+            ./users
+            syscfg
+          ];
+        };
+    in
     {
       formatter = {
         x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       };
 
       nixosConfigurations = {
-        desknix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desknix
-            ./systems/main
-            ./users/mp
-          ];
+        desknix = makeSystem "x86_64-linux" {
+          system.hostName = "desknix";
+          system.systemName = "main";
+          system.userNames = [ "mp" ];
         };
 
-        lapnix = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/lapnix
-            ./systems/main
-            ./users/mp
-          ];
+        lapnix = makeSystem "x86_64-linux" {
+          system.hostName = "lapnix";
+          system.systemName = "main";
+          system.userNames = [ "mp" ];
         };
 
-        wsl = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/wsl
-            ./systems/wsl
-            ./users/wsl
-          ];
+        wsl = makeSystem "x86_64-linux" {
+          system.hostName = "wsl";
+          system.systemName = "wsl";
+          system.userNames = [ "wsl" ];
         };
       };
     };
