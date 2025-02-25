@@ -1,7 +1,6 @@
 # main system configuration.
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -30,10 +29,6 @@ let
   };
 in
 {
-  imports = [
-    inputs.vscode-server.nixosModules.default
-  ];
-
   config = lib.mkMerge [
     ({ system.systemNames' = [ systemName ]; })
     (lib.mkIf (config.system.systemName == systemName) systemConfig)

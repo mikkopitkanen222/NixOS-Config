@@ -1,7 +1,6 @@
 # wsl host configuration.
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -18,10 +17,6 @@ let
   };
 in
 {
-  imports = [
-    inputs.nixos-wsl.nixosModules.wsl
-  ];
-
   config = lib.mkMerge [
     ({ system.hostNames' = [ hostName ]; })
     (lib.mkIf (config.system.hostName == hostName) hostConfig)
