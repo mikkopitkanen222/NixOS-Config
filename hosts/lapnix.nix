@@ -22,6 +22,8 @@ let
       useDHCP = lib.mkDefault true;
     };
 
+    hardware.bluetooth.enable = true;
+
     system.hardware.cpu.amd = true;
     system.hardware.fprint.enable = true;
   };

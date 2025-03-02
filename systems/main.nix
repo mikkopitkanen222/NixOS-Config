@@ -9,8 +9,6 @@ let
   systemName = "main";
 
   systemConfig = {
-    hardware.bluetooth.enable = true;
-
     services.vscode-server.enable = true;
 
     system.software.audio.enable = true;
