@@ -71,15 +71,25 @@ let
       };
 
       home.packages = with pkgs; [
+        obsidian
+        qalculate-qt
         vesktop
       ];
     };
+
+    unfree.allowedPackages = [
+      "obsidian"
+    ];
 
     system.users.plasmaBrowserIntegration.${username}.enable = true;
     system.users.spotify.${username}.enable = true;
   };
 in
 {
+  imports = [
+    ../../modules/unfree.nix
+  ];
+
   config = lib.mkMerge [
     ({ system.userNames' = [ userName ]; })
     (lib.mkIf (builtins.elem userName config.system.userNames) userConfig)
