@@ -9,14 +9,13 @@ let
   systemName = "wsl";
 
   systemConfig = {
-    services.vscode-server.enable = true;
-
     system.software.locale.enable = true;
     system.software.scCrypto.enable = true;
     system.software.systemDefaults.enable = true;
 
     environment.systemPackages = with pkgs; [
       tree
+      wget
     ];
   };
 in
