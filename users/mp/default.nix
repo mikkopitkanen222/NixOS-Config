@@ -71,6 +71,7 @@ let
       };
 
       home.packages = with pkgs; [
+        bolt-launcher
         obsidian
         qalculate-qt
         vesktop
