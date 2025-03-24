@@ -15,6 +15,7 @@ let
     ];
 
     system.stateVersion = "24.11";
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13;
 
     networking = {
       inherit hostName;

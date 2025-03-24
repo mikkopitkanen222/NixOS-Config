@@ -36,7 +36,7 @@ in
     hardware.graphics.enable = true;
 
     hardware.nvidia = {
-      # Select driver version. Currently > 550.
+      # Select driver version. Currently > 570.
       package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       # Enable kernel modesetting when using proprietary drivers.
