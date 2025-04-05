@@ -35,9 +35,11 @@ let
         userName = "Mikko Pitkänen";
         userEmail = "mikko.pitkanen.code@pm.me";
         signing.signByDefault = true;
-
-        # Let GnuPG pick the key based on email.
-        signing.key = null;
+        signing.key = null; # Let GnuPG pick the key based on userEmail.
+        extraConfig = {
+          init.defaultBranch = "master";
+          core.pager = "less -x2";
+        };
       };
 
       programs.chromium = {

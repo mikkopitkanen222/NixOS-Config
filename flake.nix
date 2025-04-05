@@ -48,6 +48,12 @@
           system.userNames = [ "mp" ];
         };
 
+        previousnix = makeSystem "x86_64-linux" {
+          system.hostName = "previousnix";
+          system.systemName = "main";
+          system.userNames = [ "mp" ];
+        };
+
         lapnix = makeSystem "x86_64-linux" {
           system.hostName = "lapnix";
           system.systemName = "main";

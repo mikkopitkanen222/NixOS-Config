@@ -15,19 +15,18 @@ let
       "usbhid"
     ];
 
-    system.stateVersion = "24.11";
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_13;
+    system.stateVersion = "25.05";
+    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
 
     networking = {
       inherit hostName;
-      hostId = "639acf2f";
       useDHCP = lib.mkDefault true;
     };
 
     hardware.bluetooth.enable = true;
 
-    system.hardware.cpu.intel = true;
-    system.hardware.gpu.nvidia = true;
+    system.hardware.cpu.amd = true;
+    system.hardware.gpu.amd = true;
   };
 
   disks = {
@@ -42,15 +41,17 @@ let
       efi.canTouchEfiVariables = true;
     };
 
-    boot.supportedFilesystems = [ "zfs" ];
-
     fileSystems = {
       "/" = {
-        device = "rpool/local/root";
-        fsType = "zfs";
+        device = "/dev/disk/by-uuid/20fc2412-5fd5-4a3b-a86d-2c9d8fcd32d3";
+        fsType = "btrfs";
+        options = [
+          "compress=zstd"
+          "subvol=root"
+        ];
       };
       "/boot" = {
-        device = "/dev/disk/by-uuid/71BB-C496";
+        device = "/dev/disk/by-uuid/6308-5111";
         fsType = "vfat";
         options = [
           "fmask=0022"
@@ -58,21 +59,36 @@ let
         ];
       };
       "/nix" = {
-        device = "rpool/local/nix";
-        fsType = "zfs";
+        device = "/dev/disk/by-uuid/20fc2412-5fd5-4a3b-a86d-2c9d8fcd32d3";
+        fsType = "btrfs";
+        options = [
+          "compress=zstd"
+          "noatime"
+          "subvol=nix"
+        ];
       };
       "/home" = {
-        device = "rpool/safe/home";
-        fsType = "zfs";
+        device = "/dev/disk/by-uuid/20fc2412-5fd5-4a3b-a86d-2c9d8fcd32d3";
+        fsType = "btrfs";
+        options = [
+          "compress=zstd"
+          "subvol=home"
+        ];
       };
       "/persist" = {
-        device = "rpool/safe/persist";
-        fsType = "zfs";
+        device = "/dev/disk/by-uuid/4f3c5398-23bd-431b-89ae-d270ed393630";
+        fsType = "btrfs";
+        options = [
+          "compress=zstd"
+          "subvol=persist"
+        ];
       };
-      "/mnt/ssd2" = {
-        device = "/dev/disk/by-uuid/b5a5800a-8c64-4c4d-8736-b0b9cb30a5b6";
-        fsType = "ext4";
-      };
+    };
+
+    services.btrfs.autoScrub = {
+      enable = true;
+      interval = "weekly";
+      fileSystems = [ "/" ];
     };
 
     swapDevices = [ ];
