@@ -14,6 +14,7 @@ in
     ./modules
     ./desknix.nix
     ./lapnix.nix
+    ./previousnix.nix
     ./wsl.nix
   ];
 
