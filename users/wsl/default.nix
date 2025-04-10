@@ -1,9 +1,5 @@
 # Configuration for user "wsl".
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   # Build this user by setting the attribute "system.userNames" in flake.nix.
   userName = "wsl";
@@ -16,9 +12,7 @@ let
 
       users.users.${userName} = {
         isNormalUser = true;
-        extraGroups = [
-          "wheel"
-        ];
+        extraGroups = [ "wheel" ];
       };
 
       home-manager.users.${userName} = {

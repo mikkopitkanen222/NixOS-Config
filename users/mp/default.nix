@@ -19,9 +19,7 @@ let
           "networkmanager"
           "wheel"
         ];
-        openssh.authorizedKeys.keyFiles = [
-          ./key/yubikey.pub
-        ];
+        openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];
       };
 
       home-manager.users.${userName} = {
@@ -97,9 +95,7 @@ let
   ];
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
+  imports = [ ../../modules/unfree.nix ];
 
   config = lib.mkMerge [
     # Merge this user's userName to the list of all userNames.

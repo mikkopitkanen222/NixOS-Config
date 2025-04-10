@@ -1,9 +1,5 @@
 # Import user configurations.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system;
 in

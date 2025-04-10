@@ -127,16 +127,12 @@ let
       programs.steam.enable = true;
       services.vscode-server.enable = true;
 
-      environment.systemPackages = with pkgs; [
-        tree
-      ];
+      environment.systemPackages = with pkgs; [ tree ];
     }
   ];
 in
 {
-  imports = [
-    ../modules/unfree.nix
-  ];
+  imports = [ ../modules/unfree.nix ];
 
   config = lib.mkMerge [
     # Merge this system's systemName to the list of all systemNames.

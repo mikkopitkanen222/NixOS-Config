@@ -1,9 +1,5 @@
 # Configuration for host "wsl".
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   # Build this host by setting the attribute "system.hostName" in flake.nix.
   hostName = "wsl";
@@ -11,9 +7,7 @@ let
   # Configure hardware, disks, and other device specific options:
   hostConfig = lib.mkMerge [
     # Versions
-    {
-      system.stateVersion = "24.11";
-    }
+    { system.stateVersion = "24.11"; }
     # WSL
     {
       wsl = {

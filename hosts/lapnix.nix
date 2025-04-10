@@ -130,9 +130,7 @@ let
   ];
 in
 {
-  imports = [
-    ../modules/unfree.nix
-  ];
+  imports = [ ../modules/unfree.nix ];
 
   config = lib.mkMerge [
     # Merge this host's hostName to the list of all hostNames.
