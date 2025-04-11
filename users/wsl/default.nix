@@ -27,6 +27,10 @@ let
     # Programs
     {
       home-manager.users.${userName} = {
+        nix.settings = {
+          bash-prompt = ''\n\001\033[1;32m\002\u@\h \001\033[1;34m\002\w \001\033[1;35m\002$(__git_ps1 "(%s)")\001\033[0m\002\n\$\040'';
+        };
+
         programs.git = {
           enable = true;
           userName = "Mikko Pitkänen";
@@ -36,6 +40,31 @@ let
           extraConfig = {
             core.pager = "less -x2";
           };
+        };
+
+        programs.bash = {
+          enable = true;
+          historyControl = [ "ignoreboth" ];
+          historyFile = ".bash_history";
+          historyIgnore = [
+            "clear"
+            "ls"
+            "pwd"
+            "cd"
+            "exit"
+            "git log"
+            "git status"
+          ];
+          shellAliases = {
+            "ll" = "ls -l";
+            ".." = "cd ..";
+          };
+          initExtra = ''
+            . /etc/profiles/per-user/${userName}/share/bash-completion/completions/git
+            . /etc/profiles/per-user/${userName}/share/bash-completion/completions/git-prompt.sh
+            export GIT_PS1_SHOWDIRTYSTATE=1
+            PS1='\n\001\033[1;32m\002\u@\h \001\033[1;34m\002\w \001\033[1;31m\002$(__git_ps1 "(%s)")\001\033[0m\002\n\$ '
+          '';
         };
       };
     }

@@ -127,6 +127,14 @@ let
       programs.steam.enable = true;
       services.vscode-server.enable = true;
 
+      programs.nano.nanorc = ''
+        set autoindent
+        set linenumbers
+        set mouse
+        set positionlog
+        set tabsize 2
+      '';
+
       environment.systemPackages = with pkgs; [ tree ];
     }
   ];
