@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.system.users.plasmaBrowserIntegration;
+  cfg = config.build.users.plasmaBrowserIntegration;
 
   userType = lib.types.submodule {
     options = {
@@ -27,7 +27,7 @@ let
   };
 in
 {
-  options.system.users = {
+  options.build.users = {
     plasmaBrowserIntegration = lib.mkOption {
       description = "Plasma browser integration config for each user.";
       type = lib.types.attrsOf userType;

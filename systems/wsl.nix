@@ -9,9 +9,9 @@ let
   systemName = "wsl";
 
   systemConfig = {
-    system.software.locale.enable = true;
-    system.software.scCrypto.enable = true;
-    system.software.systemDefaults.enable = true;
+    build.software.locale.enable = true;
+    build.software.scCrypto.enable = true;
+    build.software.systemDefaults.enable = true;
 
     environment.systemPackages = with pkgs; [
       tree
@@ -20,8 +20,9 @@ let
   };
 in
 {
-  config = lib.mkMerge [
-    ({ system.systemNames' = [ systemName ]; })
-    (lib.mkIf (config.system.systemName == systemName) systemConfig)
-  ];
+  options = {
+    build.systemName = lib.mkOption { type = lib.types.enum [ systemName ]; };
+  };
+
+  config = lib.mkIf (config.build.systemName == systemName) systemConfig;
 }

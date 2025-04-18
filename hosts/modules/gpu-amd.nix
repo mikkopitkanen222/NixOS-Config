@@ -1,10 +1,10 @@
 # Enable AMD GPU.
 { config, lib, ... }:
 let
-  cfg = config.system.hardware.gpu;
+  cfg = config.build.hardware.gpu;
 in
 {
-  options.system.hardware.gpu = {
+  options.build.hardware.gpu = {
     amd = lib.mkOption {
       description = "Enable AMD GPU driver";
       type = lib.types.bool;

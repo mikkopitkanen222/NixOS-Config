@@ -7,10 +7,9 @@
 }:
 let
   userName = "mp";
-  username = userName;
 
   userConfig = {
-    users.users.${username} = {
+    users.users.${userName} = {
       isNormalUser = true;
       extraGroups = [
         "networkmanager"
@@ -19,12 +18,12 @@ let
       openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];
     };
 
-    home-manager.users.${username} = {
+    home-manager.users.${userName} = {
       programs.home-manager.enable = true;
 
       home = {
-        inherit username;
-        homeDirectory = "/home/${username}";
+        username = userName;
+        homeDirectory = "/home/${userName}";
         stateVersion = "24.11";
       };
 
@@ -80,13 +79,14 @@ let
 
     unfree.allowedPackages = [ "obsidian" ];
 
-    system.users.plasmaBrowserIntegration.${username}.enable = true;
-    system.users.spotify.${username}.enable = true;
+    build.users.plasmaBrowserIntegration.${userName}.enable = true;
+    build.users.spotify.${userName}.enable = true;
   };
 in
 {
-  config = lib.mkMerge [
-    ({ system.userNames' = [ userName ]; })
-    (lib.mkIf (builtins.elem userName config.system.userNames) userConfig)
-  ];
+  options = {
+    build.userNames = lib.mkOption { type = lib.types.listOf (lib.types.enum [ userName ]); };
+  };
+
+  config = lib.mkIf (builtins.elem userName config.build.userNames) userConfig;
 }

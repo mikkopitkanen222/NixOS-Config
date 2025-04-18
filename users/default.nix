@@ -1,8 +1,5 @@
 # Import user configurations.
-{ config, lib, ... }:
-let
-  cfg = config.system;
-in
+{ lib, ... }:
 {
   imports = [
     ./modules
@@ -10,15 +7,14 @@ in
     ./wsl
   ];
 
-  options.system = {
-    userNames' = lib.mkOption {
-      description = "List of allowed userNames";
-      type = lib.types.listOf lib.types.str;
-    };
-
+  options.build = {
     userNames = lib.mkOption {
-      description = "List of names of user configurations to build";
-      type = lib.types.listOf (lib.types.enum cfg.userNames');
+      description = "List of names of the user configurations to build.";
+      type = lib.types.listOf (lib.types.enum [ ]);
+      example = [
+        "alice"
+        "bob"
+      ];
     };
   };
 }

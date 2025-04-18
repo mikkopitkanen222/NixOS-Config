@@ -11,22 +11,23 @@ let
   systemConfig = {
     services.vscode-server.enable = true;
 
-    system.software.audio.enable = true;
-    system.software.locale.enable = true;
-    system.software.openssh.enable = true;
-    system.software.pam.enable = true;
-    system.software.plasma.enable = true;
-    system.software.scCrypto.enable = true;
-    system.software.sddm.enable = true;
-    system.software.steam.enable = true;
-    system.software.systemDefaults.enable = true;
+    build.software.audio.enable = true;
+    build.software.locale.enable = true;
+    build.software.openssh.enable = true;
+    build.software.pam.enable = true;
+    build.software.plasma.enable = true;
+    build.software.scCrypto.enable = true;
+    build.software.sddm.enable = true;
+    build.software.steam.enable = true;
+    build.software.systemDefaults.enable = true;
 
     environment.systemPackages = with pkgs; [ tree ];
   };
 in
 {
-  config = lib.mkMerge [
-    ({ system.systemNames' = [ systemName ]; })
-    (lib.mkIf (config.system.systemName == systemName) systemConfig)
-  ];
+  options = {
+    build.systemName = lib.mkOption { type = lib.types.enum [ systemName ]; };
+  };
+
+  config = lib.mkIf (config.build.systemName == systemName) systemConfig;
 }

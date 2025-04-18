@@ -1,10 +1,10 @@
 # Enable Intel CPU.
 { config, lib, ... }:
 let
-  cfg = config.system.hardware.cpu;
+  cfg = config.build.hardware.cpu;
 in
 {
-  options.system.hardware.cpu = {
+  options.build.hardware.cpu = {
     intel = lib.mkOption {
       description = "Enable Intel CPU kernel modules";
       type = lib.types.bool;

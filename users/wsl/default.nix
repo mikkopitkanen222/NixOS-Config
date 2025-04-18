@@ -2,22 +2,21 @@
 { config, lib, ... }:
 let
   userName = "wsl";
-  username = "mp";
 
   userConfig = {
-    wsl.defaultUser = username;
+    wsl.defaultUser = userName;
 
-    users.users.${username} = {
+    users.users.${userName} = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
     };
 
-    home-manager.users.${username} = {
+    home-manager.users.${userName} = {
       programs.home-manager.enable = true;
 
       home = {
-        inherit username;
-        homeDirectory = "/home/${username}";
+        username = userName;
+        homeDirectory = "/home/${userName}";
         stateVersion = "24.11";
       };
 
@@ -25,7 +24,7 @@ let
       home.file.".vscode-server/server-env-setup".text = ''
         PATH=$PATH:/run/current-system/sw/bin/
         PKGS_EXPRESSION=nixpkgs/nixos-unstable#pkgs
-        VSCODE_SERVER_DIR="/home/${username}/.vscode-server"
+        VSCODE_SERVER_DIR="/home/${userName}/.vscode-server"
 
         nix shell $PKGS_EXPRESSION.patchelf $PKGS_EXPRESSION.stdenv.cc -c bash -c "
           for versiondir in $VSCODE_SERVER_DIR/bin/*/; do
@@ -47,8 +46,9 @@ let
   };
 in
 {
-  config = lib.mkMerge [
-    ({ system.userNames' = [ userName ]; })
-    (lib.mkIf (builtins.elem userName config.system.userNames) userConfig)
-  ];
+  options = {
+    build.userNames = lib.mkOption { type = lib.types.listOf (lib.types.enum [ userName ]); };
+  };
+
+  config = lib.mkIf (builtins.elem userName config.build.userNames) userConfig;
 }

@@ -1,10 +1,10 @@
 # Enable default values for basic system options.
 { config, lib, ... }:
 let
-  cfg = config.system.software.systemDefaults;
+  cfg = config.build.software.systemDefaults;
 in
 {
-  options.system.software.systemDefaults = {
+  options.build.software.systemDefaults = {
     enable = lib.mkOption {
       description = "Enable default values for basic options set system wide";
       type = lib.types.bool;

@@ -41,7 +41,7 @@
       );
 
       makeSystem =
-        system: syscfg:
+        system: buildConfig:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -53,7 +53,7 @@
             ./modules
             ./systems
             ./users
-            syscfg
+            buildConfig
           ];
         };
     in
@@ -62,27 +62,27 @@
 
       nixosConfigurations = {
         desknix = makeSystem "x86_64-linux" {
-          system.hostName = "desknix";
-          system.systemName = "main";
-          system.userNames = [ "mp" ];
+          build.hostName = "desknix";
+          build.systemName = "main";
+          build.userNames = [ "mp" ];
         };
 
         previousnix = makeSystem "x86_64-linux" {
-          system.hostName = "previousnix";
-          system.systemName = "main";
-          system.userNames = [ "mp" ];
+          build.hostName = "previousnix";
+          build.systemName = "main";
+          build.userNames = [ "mp" ];
         };
 
         lapnix = makeSystem "x86_64-linux" {
-          system.hostName = "lapnix";
-          system.systemName = "main";
-          system.userNames = [ "mp" ];
+          build.hostName = "lapnix";
+          build.systemName = "main";
+          build.userNames = [ "mp" ];
         };
 
         wsl = makeSystem "x86_64-linux" {
-          system.hostName = "wsl";
-          system.systemName = "wsl";
-          system.userNames = [ "wsl" ];
+          build.hostName = "wsl";
+          build.systemName = "wsl";
+          build.userNames = [ "wsl" ];
         };
       };
     };

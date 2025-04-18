@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.system.users.spotify;
+  cfg = config.build.users.spotify;
 
   userType = lib.types.submodule {
     options = {
@@ -15,7 +15,7 @@ let
   };
 in
 {
-  options.system.users = {
+  options.build.users = {
     spotify = lib.mkOption {
       description = "Spotify options for each user.";
       type = lib.types.attrsOf userType;

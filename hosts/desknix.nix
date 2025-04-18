@@ -25,8 +25,8 @@ let
 
     hardware.bluetooth.enable = true;
 
-    system.hardware.cpu.amd = true;
-    system.hardware.gpu.amd = true;
+    build.hardware.cpu.amd = true;
+    build.hardware.gpu.amd = true;
   };
 
   disks = {
@@ -100,8 +100,9 @@ let
   ];
 in
 {
-  config = lib.mkMerge [
-    ({ system.hostNames' = [ hostName ]; })
-    (lib.mkIf (config.system.hostName == hostName) hostConfig)
-  ];
+  options = {
+    build.hostName = lib.mkOption { type = lib.types.enum [ hostName ]; };
+  };
+
+  config = lib.mkIf (config.build.hostName == hostName) hostConfig;
 }

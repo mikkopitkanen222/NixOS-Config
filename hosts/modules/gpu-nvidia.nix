@@ -3,10 +3,10 @@
 # https://wiki.nixos.org/wiki/NVIDIA
 { config, lib, ... }:
 let
-  cfg = config.system.hardware.gpu;
+  cfg = config.build.hardware.gpu;
 in
 {
-  options.system.hardware.gpu = {
+  options.build.hardware.gpu = {
     nvidia = lib.mkOption {
       description = "Enable Nvidia GPU driver";
       type = lib.types.bool;

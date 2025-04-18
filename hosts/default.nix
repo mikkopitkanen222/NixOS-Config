@@ -1,13 +1,5 @@
 # Import host configurations.
-{
-  config,
-  lib,
-  modulesPath,
-  ...
-}:
-let
-  cfg = config.system;
-in
+{ lib, modulesPath, ... }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -18,15 +10,11 @@ in
     ./wsl.nix
   ];
 
-  options.system = {
-    hostNames' = lib.mkOption {
-      description = "List of allowed hostNames";
-      type = lib.types.listOf lib.types.str;
-    };
-
+  options.build = {
     hostName = lib.mkOption {
-      description = "Name of the hardware configuration to build";
-      type = lib.types.enum cfg.hostNames';
+      description = "Name of the host configuration to build.";
+      type = lib.types.enum [ ];
+      example = "myDesktop";
     };
   };
 }

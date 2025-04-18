@@ -1,10 +1,10 @@
 # Enable default localization settings: time, languages, keyboard layout.
 { config, lib, ... }:
 let
-  cfg = config.system.software.locale;
+  cfg = config.build.software.locale;
 in
 {
-  options.system.software.locale = {
+  options.build.software.locale = {
     enable = lib.mkOption {
       description = "Enable default locale";
       type = lib.types.bool;

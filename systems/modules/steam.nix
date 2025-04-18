@@ -1,10 +1,10 @@
 # Enable Steam.
 { config, lib, ... }:
 let
-  cfg = config.system.software.steam;
+  cfg = config.build.software.steam;
 in
 {
-  options.system.software.steam = {
+  options.build.software.steam = {
     enable = lib.mkOption {
       description = "Enable Steam";
       type = lib.types.bool;
