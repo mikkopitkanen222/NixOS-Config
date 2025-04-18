@@ -43,6 +43,10 @@ let
         signing.key = "66E93779B6C5AA0A!";
       };
     };
+
+    build.user.${userName} = {
+      nano.usableDefaults = true;
+    };
   };
 in
 {

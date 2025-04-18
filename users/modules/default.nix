@@ -2,6 +2,7 @@
 { ... }:
 {
   imports = [
+    ./nano.nix
     ./plasma-browser-integration.nix
     ./spotify.nix
   ];

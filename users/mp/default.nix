@@ -77,6 +77,10 @@ let
       ];
     };
 
+    build.user.${userName} = {
+      nano.usableDefaults = true;
+    };
+
     unfree.allowedPackages = [ "obsidian" ];
 
     build.users.plasmaBrowserIntegration.${userName}.enable = true;
