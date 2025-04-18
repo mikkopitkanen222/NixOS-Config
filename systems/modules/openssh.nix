@@ -1,9 +1,5 @@
 # Enable secure remote login.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.openssh;
 in

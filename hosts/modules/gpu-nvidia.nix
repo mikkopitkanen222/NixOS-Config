@@ -1,11 +1,7 @@
 # Enable Nvidia GPU.
 # https://wiki.nixos.org/wiki/Graphics
 # https://wiki.nixos.org/wiki/NVIDIA
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.hardware.gpu;
 in

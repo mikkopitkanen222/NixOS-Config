@@ -16,9 +16,7 @@ let
         "networkmanager"
         "wheel"
       ];
-      openssh.authorizedKeys.keyFiles = [
-        ./key/yubikey.pub
-      ];
+      openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];
     };
 
     home-manager.users.${username} = {
@@ -80,9 +78,7 @@ let
       ];
     };
 
-    unfree.allowedPackages = [
-      "obsidian"
-    ];
+    unfree.allowedPackages = [ "obsidian" ];
 
     system.users.plasmaBrowserIntegration.${username}.enable = true;
     system.users.spotify.${username}.enable = true;

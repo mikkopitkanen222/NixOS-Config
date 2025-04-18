@@ -1,10 +1,6 @@
 # Allow installing only specific unfree software packages.
 # https://nixos.org/manual/nixpkgs/unstable/#sec-allow-unfree.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.unfree;
 in

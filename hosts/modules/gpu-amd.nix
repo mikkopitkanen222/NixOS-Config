@@ -1,9 +1,5 @@
 # Enable AMD GPU.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.hardware.gpu;
 in

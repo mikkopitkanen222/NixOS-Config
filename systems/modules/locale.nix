@@ -1,9 +1,5 @@
 # Enable default localization settings: time, languages, keyboard layout.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.locale;
 in

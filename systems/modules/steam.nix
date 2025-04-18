@@ -1,9 +1,5 @@
 # Enable Steam.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.steam;
 in

@@ -1,9 +1,5 @@
 # Enable audio.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.audio;
 in

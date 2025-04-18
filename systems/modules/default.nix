@@ -1,7 +1,5 @@
 # Import system modules.
-{
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./audio.nix

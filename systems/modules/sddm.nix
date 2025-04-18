@@ -1,9 +1,5 @@
 # Enable graphical login screen.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.sddm;
 in

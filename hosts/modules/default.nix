@@ -1,7 +1,5 @@
 # Import host modules.
-{
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./cpu-amd.nix

@@ -1,9 +1,5 @@
 # Enable smartcard in place of password.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.pam;
 in

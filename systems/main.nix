@@ -21,9 +21,7 @@ let
     system.software.steam.enable = true;
     system.software.systemDefaults.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      tree
-    ];
+    environment.systemPackages = with pkgs; [ tree ];
   };
 in
 {

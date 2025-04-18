@@ -1,9 +1,5 @@
 # lapnix host configuration.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   hostName = "lapnix";
 

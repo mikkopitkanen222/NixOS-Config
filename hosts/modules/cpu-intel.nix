@@ -1,9 +1,5 @@
 # Enable Intel CPU.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.hardware.cpu;
 in

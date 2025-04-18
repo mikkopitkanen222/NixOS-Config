@@ -1,9 +1,5 @@
 # wsl user configuration.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   userName = "wsl";
   username = "mp";
@@ -13,9 +9,7 @@ let
 
     users.users.${username} = {
       isNormalUser = true;
-      extraGroups = [
-        "wheel"
-      ];
+      extraGroups = [ "wheel" ];
     };
 
     home-manager.users.${username} = {

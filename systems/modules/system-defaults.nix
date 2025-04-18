@@ -1,9 +1,5 @@
 # Enable default values for basic system options.
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.system.software.systemDefaults;
 in
