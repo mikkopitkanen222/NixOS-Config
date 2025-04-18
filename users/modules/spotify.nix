@@ -15,10 +15,6 @@ let
   };
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
-
   options.system.users = {
     spotify = lib.mkOption {
       description = "Spotify options for each user.";

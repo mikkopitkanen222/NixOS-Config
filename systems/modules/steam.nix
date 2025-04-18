@@ -8,10 +8,6 @@ let
   cfg = config.system.software.steam;
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
-
   options.system.software.steam = {
     enable = lib.mkOption {
       description = "Enable Steam";

@@ -30,6 +30,7 @@
             inputs.nixos-wsl.nixosModules.wsl
             inputs.vscode-server.nixosModules.default
             ./hosts
+            ./modules
             ./systems
             ./users
             syscfg

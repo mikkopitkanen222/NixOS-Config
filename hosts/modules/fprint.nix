@@ -9,10 +9,6 @@ let
   cfg = config.system.hardware.fprint;
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
-
   options.system.hardware.fprint = {
     enable = lib.mkOption {
       description = "Enable fingerprint reader";

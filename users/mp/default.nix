@@ -89,10 +89,6 @@ let
   };
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
-
   config = lib.mkMerge [
     ({ system.userNames' = [ userName ]; })
     (lib.mkIf (builtins.elem userName config.system.userNames) userConfig)

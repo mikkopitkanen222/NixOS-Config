@@ -14,7 +14,7 @@ in
       description = ''
         By default, Nix disallows installing packages with unfree licenses.
         Option 'nixpkgs.config.allowUnfree' allows all unfree software.
-        Without it, this option allows only the named packages in this option.
+        Without it, only the packages listed in this option are allowed.
       '';
       type = lib.types.listOf lib.types.str;
       default = [ ];

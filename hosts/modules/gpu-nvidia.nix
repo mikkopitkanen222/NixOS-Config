@@ -10,10 +10,6 @@ let
   cfg = config.system.hardware.gpu;
 in
 {
-  imports = [
-    ../../modules/unfree.nix
-  ];
-
   options.system.hardware.gpu = {
     nvidia = lib.mkOption {
       description = "Enable Nvidia GPU driver";
