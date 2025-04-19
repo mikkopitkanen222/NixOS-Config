@@ -142,6 +142,14 @@ let
         enable = true;
         package = pkgs.gimp-with-plugins;
       };
+      libreoffice = {
+        enable = true;
+        package = pkgs.libreoffice-qt6-fresh;
+        spellcheck = {
+          enable = true;
+          languages = [ "en_US" ];
+        };
+      };
 
       image-viewer.enable = true;
     };
