@@ -10,6 +10,7 @@
     ./libreoffice.nix
     ./nano.nix
     ./obsidian.nix
+    ./osrs.nix
     ./plasma-browser-integration.nix
     ./spotify.nix
   ];

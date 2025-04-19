@@ -66,8 +66,6 @@ let
           llvm-vs-code-extensions.vscode-clangd
         ];
       };
-
-      home.packages = with pkgs; [ bolt-launcher ];
     };
 
     build.user.${userName} = {
@@ -149,6 +147,7 @@ let
       };
 
       image-viewer.enable = true;
+      osrs.enable = true;
 
       obsidian.enable = true;
     };
