@@ -59,12 +59,13 @@ let
       programs.vscode = {
         enable = true;
         package = pkgs.vscodium;
-        profiles.default.extensions = with pkgs.vscode-extensions; [
-          jnoortheen.nix-ide
-          twxs.cmake
-          ms-vscode.cmake-tools
-          llvm-vs-code-extensions.vscode-clangd
-        ];
+        profiles.default = {
+          extensions = with pkgs.vscode-extensions; [
+            jnoortheen.nix-ide
+            ms-vscode.cmake-tools
+            llvm-vs-code-extensions.vscode-clangd
+          ];
+        };
       };
     };
 
