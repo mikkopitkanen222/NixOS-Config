@@ -149,6 +149,10 @@ let
 
       image-viewer.enable = true;
       osrs.enable = true;
+      spotify = {
+        enable = true;
+        spicetify.enable = true;
+      };
 
       obsidian.enable = true;
       plasma-browser-integration.enable = true;
@@ -157,8 +161,6 @@ let
       protonpass.enable = true;
       protonvpn.enable = true;
     };
-
-    build.users.spotify.${userName}.enable = true;
   };
 in
 {

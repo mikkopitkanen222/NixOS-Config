@@ -1,4 +1,4 @@
-# Enable Spotify.
+# Configuration for user module "spotify".
 {
   config,
   lib,
@@ -6,32 +6,35 @@
   ...
 }:
 let
-  cfg = config.build.users.spotify;
+  moduleOptions = {
+    options.spotify = {
+      enable = lib.mkEnableOption "spotify";
 
-  userType = lib.types.submodule {
-    options = {
-      enable = lib.mkEnableOption "Spotify.";
+      package = lib.mkPackageOption pkgs "spotify" { };
+
+      spicetify.enable = lib.mkEnableOption "spicetify";
     };
   };
+
+  moduleConfig =
+    user: cfg:
+    let
+      module = cfg.spotify;
+    in
+    lib.mkMerge [
+      (lib.mkIf module.enable { home.packages = [ module.package ]; })
+      (lib.mkIf (module.enable && module.spicetify.enable) { home.packages = [ pkgs.spicetify-cli ]; })
+    ];
+
+  cfg = config.build.user;
 in
 {
-  options.build.users = {
-    spotify = lib.mkOption {
-      description = "Spotify options for each user.";
-      type = lib.types.attrsOf userType;
-      default = { };
-    };
+  options = {
+    build.user = lib.mkOption { type = lib.types.attrsOf (lib.types.submodule moduleOptions); };
   };
 
-  config.unfree.allowedPackages = [ "spotify" ];
-
-  config.home-manager.users = builtins.mapAttrs (
-    name: value:
-    lib.mkIf value.enable {
-      home.packages = with pkgs; [
-        spotify
-        spicetify-cli
-      ];
-    }
-  ) cfg;
+  config = {
+    unfree.allowedPackages = [ "spotify" ];
+    home-manager.users = builtins.mapAttrs (moduleConfig) cfg;
+  };
 }
