@@ -70,7 +70,6 @@ let
       home.packages = with pkgs; [
         bolt-launcher
         obsidian
-        vesktop
       ];
     };
 
@@ -136,6 +135,8 @@ let
         };
 
       calculator.enable = true;
+
+      discord.enable = true;
     };
 
     unfree.allowedPackages = [ "obsidian" ];
