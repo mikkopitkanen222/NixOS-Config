@@ -151,6 +151,7 @@ let
 
       obsidian.enable = true;
       plasma-browser-integration.enable = true;
+      protondrive.enable = true;
       protonpass.enable = true;
     };
 

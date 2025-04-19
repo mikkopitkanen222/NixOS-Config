@@ -12,6 +12,7 @@
     ./obsidian.nix
     ./osrs.nix
     ./plasma-browser-integration.nix
+    ./protondrive.nix
     ./protonpass.nix
     ./spotify.nix
   ];
