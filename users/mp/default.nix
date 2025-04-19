@@ -71,7 +71,6 @@ let
       home.packages = with pkgs; [
         bolt-launcher
         obsidian
-        qalculate-qt
         vesktop
       ];
     };
@@ -136,6 +135,8 @@ let
             { text = "\\n\\$\\040"; }
           ];
         };
+
+      calculator.enable = true;
     };
 
     unfree.allowedPackages = [ "obsidian" ];
