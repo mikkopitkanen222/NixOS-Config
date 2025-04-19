@@ -25,8 +25,6 @@ in
       options = lib.mkDefault "--delete-older-than 5d";
     };
 
-    networking.networkmanager.enable = lib.mkDefault true;
-
     # Use the same instance of pkgs for NixOS and home-manager.
     home-manager.useGlobalPkgs = lib.mkDefault true;
 

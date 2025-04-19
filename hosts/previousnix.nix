@@ -21,6 +21,7 @@ let
     networking = {
       inherit hostName;
       hostId = "639acf2f";
+      networkmanager.enable = true;
       useDHCP = lib.mkDefault true;
     };
 

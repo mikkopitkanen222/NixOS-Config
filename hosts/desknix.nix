@@ -20,6 +20,8 @@ let
 
     networking = {
       inherit hostName;
+      hostId = "e375a759";
+      networkmanager.enable = true;
       useDHCP = lib.mkDefault true;
     };
 
