@@ -29,6 +29,8 @@ let
     };
     hardware.bluetooth.enable = true;
 
+    hardware.keyboard.qmk.enable = true;
+
     build.host.cpu.amd = true;
     build.host.gpu.amd = true;
 
