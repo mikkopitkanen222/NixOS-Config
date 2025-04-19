@@ -137,6 +137,8 @@ let
       calculator.enable = true;
 
       discord.enable = true;
+
+      gimp.enable = true;
     };
 
     unfree.allowedPackages = [ "obsidian" ];
