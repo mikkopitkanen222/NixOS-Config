@@ -9,6 +9,7 @@
     ./image-viewer.nix
     ./libreoffice.nix
     ./nano.nix
+    ./obsidian.nix
     ./plasma-browser-integration.nix
     ./spotify.nix
   ];

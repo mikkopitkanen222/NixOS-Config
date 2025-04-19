@@ -67,10 +67,7 @@ let
         ];
       };
 
-      home.packages = with pkgs; [
-        bolt-launcher
-        obsidian
-      ];
+      home.packages = with pkgs; [ bolt-launcher ];
     };
 
     build.user.${userName} = {
@@ -152,9 +149,9 @@ let
       };
 
       image-viewer.enable = true;
-    };
 
-    unfree.allowedPackages = [ "obsidian" ];
+      obsidian.enable = true;
+    };
 
     build.users.plasmaBrowserIntegration.${userName}.enable = true;
     build.users.spotify.${userName}.enable = true;
