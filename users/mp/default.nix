@@ -152,6 +152,7 @@ let
       obsidian.enable = true;
       plasma-browser-integration.enable = true;
       protondrive.enable = true;
+      protonmail-bridge.enable = true;
       protonpass.enable = true;
     };
 

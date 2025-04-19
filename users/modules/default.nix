@@ -13,6 +13,7 @@
     ./osrs.nix
     ./plasma-browser-integration.nix
     ./protondrive.nix
+    ./protonmail-bridge.nix
     ./protonpass.nix
     ./spotify.nix
   ];
