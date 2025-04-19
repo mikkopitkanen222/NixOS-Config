@@ -155,6 +155,7 @@ let
         enable = true;
         spicetify.enable = true;
       };
+      video-player.enable = true;
 
       obsidian.enable = true;
       plasma-browser-integration.enable = true;

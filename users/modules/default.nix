@@ -20,5 +20,6 @@
     ./spotify.nix
     ./terminal.nix
     ./thunderbird.nix
+    ./video-player.nix
   ];
 }
