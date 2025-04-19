@@ -15,7 +15,15 @@ let
     build.system.locale.enable = true;
     build.system.openssh.enable = true;
     build.system.pam.enable = true;
-    build.system.plasma.enable = true;
+    build.system.plasma = {
+      enable = true;
+      excludePackages = with pkgs.kdePackages; [
+        elisa
+        gwenview
+        kate
+        konsole
+      ];
+    };
     build.system.scCrypto.enable = true;
     build.system.sddm.enable = true;
     build.system.steam.enable = true;
