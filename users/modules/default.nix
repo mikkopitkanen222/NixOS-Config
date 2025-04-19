@@ -21,5 +21,6 @@
     ./terminal.nix
     ./thunderbird.nix
     ./video-player.nix
+    ./whatsapp.nix
   ];
 }

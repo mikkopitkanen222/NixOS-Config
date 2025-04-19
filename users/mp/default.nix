@@ -135,6 +135,7 @@ let
 
       discord.enable = true;
       thunderbird.enable = true;
+      whatsapp.enable = true;
 
       gimp = {
         enable = true;
