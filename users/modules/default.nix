@@ -18,5 +18,6 @@
     ./protonvpn.nix
     ./shotcut.nix
     ./spotify.nix
+    ./terminal.nix
   ];
 }

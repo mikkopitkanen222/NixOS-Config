@@ -130,6 +130,7 @@ let
         };
 
       calculator.enable = true;
+      terminal.enable = true;
 
       discord.enable = true;
 
