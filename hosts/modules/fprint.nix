@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.build.hardware.fprint;
+  cfg = config.build.host.fprint;
 in
 {
-  options.build.hardware.fprint = {
+  options.build.host.fprint = {
     enable = lib.mkOption {
       description = "Enable fingerprint reader";
       type = lib.types.bool;

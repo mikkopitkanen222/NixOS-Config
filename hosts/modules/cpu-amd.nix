@@ -1,10 +1,10 @@
 # Enable AMD CPU.
 { config, lib, ... }:
 let
-  cfg = config.build.hardware.cpu;
+  cfg = config.build.host.cpu;
 in
 {
-  options.build.hardware.cpu = {
+  options.build.host.cpu = {
     amd = lib.mkOption {
       description = "Enable AMD CPU kernel modules";
       type = lib.types.bool;

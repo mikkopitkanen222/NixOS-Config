@@ -8,11 +8,14 @@
 let
   hostName = "lapnix";
 
-  hardware = {
+  hostConfig = {
     # https://gist.github.com/CMCDragonkai/810f78ee29c8fce916d072875f7e1751
     boot.initrd.availableKernelModules = [
       "xhci_pci"
       "usbhid"
+      "ahci"
+      "nvme"
+      "sdhci_pci"
     ];
 
     system.stateVersion = "24.11";
@@ -24,19 +27,11 @@ let
       networkmanager.enable = true;
       useDHCP = lib.mkDefault true;
     };
-
     hardware.bluetooth.enable = true;
 
-    build.hardware.cpu.amd = true;
-    build.hardware.fprint.enable = true;
-  };
-
-  disks = {
-    boot.initrd.availableKernelModules = [
-      "ahci"
-      "nvme"
-      "sdhci_pci"
-    ];
+    build.host.cpu.amd = true;
+    build.host.gpu.amd = true;
+    build.host.fprint.enable = true;
 
     boot.initrd.kernelModules = [
       "dm-snapshot"
@@ -104,11 +99,6 @@ let
 
     swapDevices = [ { device = "/dev/disk/by-uuid/07e77238-58cc-4601-9202-681f975675ed"; } ];
   };
-
-  hostConfig = lib.mkMerge [
-    hardware
-    disks
-  ];
 in
 {
   options = {
