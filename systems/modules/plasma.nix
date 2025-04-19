@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.build.software.plasma;
+  cfg = config.build.system.plasma;
 in
 {
-  options.build.software.plasma = {
+  options.build.system.plasma = {
     enable = lib.mkOption {
       description = "Enable KDE Plasma 6";
       type = lib.types.bool;

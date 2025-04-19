@@ -9,9 +9,9 @@ let
   systemName = "wsl";
 
   systemConfig = {
-    build.software.locale.enable = true;
-    build.software.scCrypto.enable = true;
-    build.software.systemDefaults.enable = true;
+    build.system.locale.enable = true;
+    build.system.scCrypto.enable = true;
+    build.system.systemDefaults.enable = true;
 
     environment.systemPackages = with pkgs; [
       tree

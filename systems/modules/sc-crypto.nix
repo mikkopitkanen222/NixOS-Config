@@ -7,10 +7,10 @@
   ...
 }:
 let
-  cfg = config.build.software.scCrypto;
+  cfg = config.build.system.scCrypto;
 in
 {
-  options.build.software.scCrypto = {
+  options.build.system.scCrypto = {
     enable = lib.mkOption {
       description = "Enable PGP and SSH smartcard functionality";
       type = lib.types.bool;

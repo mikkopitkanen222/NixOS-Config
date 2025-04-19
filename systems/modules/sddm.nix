@@ -1,10 +1,10 @@
 # Enable graphical login screen.
 { config, lib, ... }:
 let
-  cfg = config.build.software.sddm;
+  cfg = config.build.system.sddm;
 in
 {
-  options.build.software.sddm = {
+  options.build.system.sddm = {
     enable = lib.mkOption {
       description = "Enable SDDM";
       type = lib.types.bool;

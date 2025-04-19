@@ -1,10 +1,10 @@
 # Enable secure remote login.
 { config, lib, ... }:
 let
-  cfg = config.build.software.openssh;
+  cfg = config.build.system.openssh;
 in
 {
-  options.build.software.openssh = {
+  options.build.system.openssh = {
     enable = lib.mkOption {
       description = "Enable OpenSSH logins";
       type = lib.types.bool;

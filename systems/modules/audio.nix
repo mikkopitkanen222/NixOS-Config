@@ -1,10 +1,10 @@
 # Enable audio.
 { config, lib, ... }:
 let
-  cfg = config.build.software.audio;
+  cfg = config.build.system.audio;
 in
 {
-  options.build.software.audio = {
+  options.build.system.audio = {
     enable = lib.mkOption {
       description = "Enable audio services";
       type = lib.types.bool;

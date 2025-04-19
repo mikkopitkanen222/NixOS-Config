@@ -1,10 +1,10 @@
 # Enable smartcard in place of password.
 { config, lib, ... }:
 let
-  cfg = config.build.software.pam;
+  cfg = config.build.system.pam;
 in
 {
-  options.build.software.pam = {
+  options.build.system.pam = {
     enable = lib.mkOption {
       description = "Enable PAM";
       type = lib.types.bool;

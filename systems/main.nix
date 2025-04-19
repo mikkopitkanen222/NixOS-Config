@@ -11,15 +11,15 @@ let
   systemConfig = {
     services.vscode-server.enable = true;
 
-    build.software.audio.enable = true;
-    build.software.locale.enable = true;
-    build.software.openssh.enable = true;
-    build.software.pam.enable = true;
-    build.software.plasma.enable = true;
-    build.software.scCrypto.enable = true;
-    build.software.sddm.enable = true;
-    build.software.steam.enable = true;
-    build.software.systemDefaults.enable = true;
+    build.system.audio.enable = true;
+    build.system.locale.enable = true;
+    build.system.openssh.enable = true;
+    build.system.pam.enable = true;
+    build.system.plasma.enable = true;
+    build.system.scCrypto.enable = true;
+    build.system.sddm.enable = true;
+    build.system.steam.enable = true;
+    build.system.systemDefaults.enable = true;
 
     environment.systemPackages = with pkgs; [ tree ];
   };
