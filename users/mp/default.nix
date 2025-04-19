@@ -145,6 +145,7 @@ let
           languages = [ "en_US" ];
         };
       };
+      shotcut.enable = true;
 
       image-viewer.enable = true;
       osrs.enable = true;
