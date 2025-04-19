@@ -19,5 +19,6 @@
     ./shotcut.nix
     ./spotify.nix
     ./terminal.nix
+    ./thunderbird.nix
   ];
 }

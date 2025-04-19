@@ -133,6 +133,7 @@ let
       terminal.enable = true;
 
       discord.enable = true;
+      thunderbird.enable = true;
 
       gimp = {
         enable = true;
