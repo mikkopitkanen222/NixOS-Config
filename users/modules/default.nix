@@ -15,6 +15,7 @@
     ./protondrive.nix
     ./protonmail-bridge.nix
     ./protonpass.nix
+    ./protonvpn.nix
     ./spotify.nix
   ];
 }

@@ -154,6 +154,7 @@ let
       protondrive.enable = true;
       protonmail-bridge.enable = true;
       protonpass.enable = true;
+      protonvpn.enable = true;
     };
 
     build.users.spotify.${userName}.enable = true;
