@@ -138,7 +138,12 @@ let
 
       discord.enable = true;
 
-      gimp.enable = true;
+      gimp = {
+        enable = true;
+        package = pkgs.gimp-with-plugins;
+      };
+
+      image-viewer.enable = true;
     };
 
     unfree.allowedPackages = [ "obsidian" ];
