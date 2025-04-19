@@ -79,6 +79,64 @@ let
 
     build.user.${userName} = {
       nano.usableDefaults = true;
+      bash =
+        let
+          green = {
+            r = 0;
+            g = 255;
+            b = 43;
+          };
+          cyan = {
+            r = 0;
+            g = 215;
+            b = 255;
+          };
+          red = {
+            r = 255;
+            g = 0;
+            b = 78;
+          };
+          magenta = {
+            r = 102;
+            g = 44;
+            b = 86;
+          };
+        in
+        {
+          usableDefaults = true;
+          gitPrompt = true;
+          bashPrompt = [
+            {
+              foreground = green;
+              text = "\\n\\u@\\h";
+            }
+            {
+              foreground = cyan;
+              text = " \\w";
+            }
+            {
+              foreground = red;
+              text = " $(__git_ps1 \"(%s)\")";
+            }
+            { text = "\\n\\$\\040"; }
+          ];
+          devshellPrompt = [
+            {
+              foreground = green;
+              background = magenta;
+              text = "\\n\\u@\\h";
+            }
+            {
+              foreground = cyan;
+              text = " \\w";
+            }
+            {
+              foreground = red;
+              text = " $(__git_ps1 \"(%s)\")";
+            }
+            { text = "\\n\\$\\040"; }
+          ];
+        };
     };
 
     unfree.allowedPackages = [ "obsidian" ];
