@@ -52,7 +52,6 @@ let
           "ammjkodgmmoknidbanneddgankgfejfh" # 7TV
           "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
           "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam
-
           "baajncdfffcpahjjmhhnhflmbelpbpli" # Video Downloader
         ];
       };
