@@ -150,9 +150,9 @@ let
       osrs.enable = true;
 
       obsidian.enable = true;
+      plasma-browser-integration.enable = true;
     };
 
-    build.users.plasmaBrowserIntegration.${userName}.enable = true;
     build.users.spotify.${userName}.enable = true;
   };
 in

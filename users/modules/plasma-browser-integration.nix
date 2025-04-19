@@ -1,4 +1,4 @@
-# Enable Chromium browser integration with KDE Plasma.
+# Configuration for user module "plasma-browser-integration".
 {
   config,
   lib,
@@ -6,40 +6,32 @@
   ...
 }:
 let
-  cfg = config.build.users.plasmaBrowserIntegration;
+  moduleOptions = {
+    options.plasma-browser-integration = {
+      enable = lib.mkEnableOption "plasma-browser-integration";
 
-  userType = lib.types.submodule {
-    options = {
-      enable = lib.mkEnableOption "the Plasma browser integration.";
-
-      package = lib.mkOption {
-        description = "The host components which browsers integrate with.";
-        type = lib.types.package;
-        default = pkgs.kdePackages.plasma-browser-integration;
-      };
-
-      extension = lib.mkOption {
-        description = "The browser extension which hosts integrate with.";
-        type = lib.types.str;
-        default = "cimiefiiaegbelhefglklhhakcgmhkai";
-      };
+      package = lib.mkPackageOption pkgs [ "kdePackages" "plasma-browser-integration" ] { };
     };
   };
+
+  moduleConfig =
+    user: cfg:
+    let
+      module = cfg.plasma-browser-integration;
+    in
+    lib.mkIf module.enable {
+      programs.chromium.extensions = [ "cimiefiiaegbelhefglklhhakcgmhkai" ];
+      home.packages = [ module.package ];
+    };
+
+  cfg = config.build.user;
 in
 {
-  options.build.users = {
-    plasmaBrowserIntegration = lib.mkOption {
-      description = "Plasma browser integration config for each user.";
-      type = lib.types.attrsOf userType;
-      default = { };
-    };
+  options = {
+    build.user = lib.mkOption { type = lib.types.attrsOf (lib.types.submodule moduleOptions); };
   };
 
-  config.home-manager.users = builtins.mapAttrs (
-    name: value:
-    lib.mkIf value.enable {
-      home.packages = [ value.package ];
-      programs.chromium.extensions = [ value.extension ];
-    }
-  ) cfg;
+  config = {
+    home-manager.users = builtins.mapAttrs (moduleConfig) cfg;
+  };
 }
