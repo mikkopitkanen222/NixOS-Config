@@ -32,10 +32,9 @@ let
         userName = "Mikko Pitkänen";
         userEmail = "mikko.pitkanen.code@pm.me";
         signing.signByDefault = true;
-        signing.key = null; # Let GnuPG pick the key based on userEmail.
         extraConfig = {
-          init.defaultBranch = "master";
           core.pager = "less -x2";
+          init.defaultBranch = "master";
         };
       };
 
