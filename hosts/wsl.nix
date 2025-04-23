@@ -10,6 +10,14 @@ let
       enable = true;
       wslConf.network.hostname = hostName;
     };
+
+    build.host.usbip = {
+      enable = true;
+      autoAttach = [
+        "5-1"
+        "7-2"
+      ];
+    };
   };
 in
 {

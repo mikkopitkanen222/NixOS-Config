@@ -7,5 +7,6 @@
     ./fprint.nix
     ./gpu-amd.nix
     ./gpu-nvidia.nix
+    ./usbip.nix
   ];
 }
