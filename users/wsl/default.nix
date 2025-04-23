@@ -4,8 +4,6 @@ let
   userName = "wsl";
 
   userConfig = {
-    wsl.defaultUser = userName;
-
     users.users.${userName} = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];

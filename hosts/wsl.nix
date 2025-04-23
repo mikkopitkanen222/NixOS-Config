@@ -9,6 +9,7 @@ let
     wsl = {
       enable = true;
       wslConf.network.hostname = hostName;
+      defaultUser = builtins.head config.build.userNames;
     };
 
     build.host.usbip = {
