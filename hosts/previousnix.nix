@@ -1,4 +1,4 @@
-# previousnix host configuration.
+# Configuration for host "previousnix".
 {
   config,
   lib,

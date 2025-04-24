@@ -1,4 +1,4 @@
-# Enable smartcard in place of password.
+# Configuration for system module "pam".
 { config, lib, ... }:
 let
   cfg = config.build.system.pam;

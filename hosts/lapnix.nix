@@ -1,4 +1,4 @@
-# lapnix host configuration.
+# Configuration for host "lapnix".
 {
   config,
   lib,

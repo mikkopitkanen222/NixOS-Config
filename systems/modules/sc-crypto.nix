@@ -1,4 +1,4 @@
-# Enable smartcards (Yubikey) for signing, encryption, and authentication.
+# Configuration for system module "sc-crypto".
 # https://nixos.wiki/wiki/Yubikey
 {
   config,

@@ -1,4 +1,4 @@
-# Enable Nvidia GPU.
+# Configuration for host module "gpu-nvidia".
 # https://wiki.nixos.org/wiki/Graphics
 # https://wiki.nixos.org/wiki/NVIDIA
 { config, lib, ... }:

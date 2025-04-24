@@ -1,4 +1,4 @@
-# Enable audio.
+# Configuration for system module "audio".
 { config, lib, ... }:
 let
   cfg = config.build.system.audio;

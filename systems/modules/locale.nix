@@ -1,4 +1,4 @@
-# Enable default localization settings: time, languages, keyboard layout.
+# Configuration for system module "locale".
 { config, lib, ... }:
 let
   cfg = config.build.system.locale;

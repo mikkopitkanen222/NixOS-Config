@@ -1,4 +1,4 @@
-# wsl user configuration.
+# Configuration for user "wsl".
 { config, lib, ... }:
 let
   userName = "wsl";

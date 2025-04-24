@@ -1,4 +1,4 @@
-# desknix host configuration.
+# Configuration for host "desknix".
 {
   config,
   lib,

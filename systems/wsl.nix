@@ -1,4 +1,4 @@
-# wsl system configuration.
+# Configuration for system "wsl".
 {
   config,
   lib,

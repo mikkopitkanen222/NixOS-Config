@@ -1,4 +1,4 @@
-# Enable AMD GPU.
+# Configuration for host module "gpu-amd".
 { config, lib, ... }:
 let
   cfg = config.build.host.gpu;

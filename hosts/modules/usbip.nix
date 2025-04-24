@@ -1,4 +1,4 @@
-# Enable USB passthrough on WSL.
+# Configuration for host module "usbip".
 # https://lgug2z.com/articles/yubikey-passthrough-on-wsl2-with-full-fido2-support/
 {
   config,

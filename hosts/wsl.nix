@@ -1,4 +1,4 @@
-# wsl host configuration.
+# Configuration for host "wsl".
 { config, lib, ... }:
 let
   hostName = "wsl";

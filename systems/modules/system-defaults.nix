@@ -1,4 +1,4 @@
-# Enable default values for basic system options.
+# Configuration for system module "system-defaults".
 { config, lib, ... }:
 let
   cfg = config.build.system.systemDefaults;

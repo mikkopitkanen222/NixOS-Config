@@ -1,4 +1,4 @@
-# Enable KDE Plasma 6.
+# Configuration for system module "plasma".
 {
   config,
   lib,

@@ -1,4 +1,4 @@
-# Enable AMD CPU.
+# Configuration for host module "cpu-amd".
 { config, lib, ... }:
 let
   cfg = config.build.host.cpu;

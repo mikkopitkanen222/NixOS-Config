@@ -1,4 +1,4 @@
-# Enable graphical login screen.
+# Configuration for system module "sddm".
 { config, lib, ... }:
 let
   cfg = config.build.system.sddm;

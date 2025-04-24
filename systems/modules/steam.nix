@@ -1,4 +1,4 @@
-# Enable Steam.
+# Configuration for system module "steam".
 { config, lib, ... }:
 let
   cfg = config.build.system.steam;

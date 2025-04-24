@@ -1,4 +1,4 @@
-# main system configuration.
+# Configuration for system "main".
 {
   config,
   lib,

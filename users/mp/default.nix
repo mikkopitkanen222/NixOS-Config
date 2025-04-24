@@ -1,4 +1,4 @@
-# mp user configuration.
+# Configuration for user "mp".
 {
   config,
   lib,

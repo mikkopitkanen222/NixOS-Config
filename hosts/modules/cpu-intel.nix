@@ -1,4 +1,4 @@
-# Enable Intel CPU.
+# Configuration for host module "cpu-intel".
 { config, lib, ... }:
 let
   cfg = config.build.host.cpu;

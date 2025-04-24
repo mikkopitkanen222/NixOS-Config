@@ -1,4 +1,4 @@
-# Enable fingerprint reader.
+# Configuration for host module "fprint".
 {
   config,
   lib,

@@ -1,4 +1,4 @@
-# Enable secure remote login.
+# Configuration for system module "openssh".
 { config, lib, ... }:
 let
   cfg = config.build.system.openssh;
