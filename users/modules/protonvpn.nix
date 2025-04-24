@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.protonvpn = {
-      enable = lib.mkEnableOption "protonvpn";
+    options = {
+      protonvpn = {
+        enable = lib.mkEnableOption "protonvpn";
+      };
     };
   };
 

@@ -4,11 +4,13 @@ let
   cfg = config.build.system.pam;
 in
 {
-  options.build.system.pam = {
-    enable = lib.mkOption {
-      description = "Enable PAM";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.pam = {
+      enable = lib.mkOption {
+        description = "Enable PAM";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

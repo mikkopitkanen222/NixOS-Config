@@ -5,16 +5,18 @@ let
   cfg = config.unfree;
 in
 {
-  options.unfree = {
-    allowedPackages = lib.mkOption {
-      description = ''
-        By default, Nix disallows installing packages with unfree licenses.
-        Option 'nixpkgs.config.allowUnfree' allows all unfree software.
-        Without it, only the packages listed in this option are allowed.
-      '';
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      example = [ "nvidia-x11" ];
+  options = {
+    unfree = {
+      allowedPackages = lib.mkOption {
+        description = ''
+          By default, Nix disallows installing packages with unfree licenses.
+          Option 'nixpkgs.config.allowUnfree' allows all unfree software.
+          Without it, only the packages listed in this option are allowed.
+        '';
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        example = [ "nvidia-x11" ];
+      };
     };
   };
 

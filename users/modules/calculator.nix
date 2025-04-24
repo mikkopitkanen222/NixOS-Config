@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.calculator = {
-      enable = lib.mkEnableOption "calculator";
+    options = {
+      calculator = {
+        enable = lib.mkEnableOption "calculator";
 
-      package = lib.mkPackageOption pkgs "calculator" { default = [ "qalculate-qt" ]; };
+        package = lib.mkPackageOption pkgs "calculator" { default = [ "qalculate-qt" ]; };
+      };
     };
   };
 

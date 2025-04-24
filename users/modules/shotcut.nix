@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.shotcut = {
-      enable = lib.mkEnableOption "shotcut";
+    options = {
+      shotcut = {
+        enable = lib.mkEnableOption "shotcut";
+      };
     };
   };
 

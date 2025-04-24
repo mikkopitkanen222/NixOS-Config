@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.obsidian = {
-      enable = lib.mkEnableOption "obsidian";
+    options = {
+      obsidian = {
+        enable = lib.mkEnableOption "obsidian";
+      };
     };
   };
 

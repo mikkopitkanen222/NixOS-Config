@@ -7,12 +7,14 @@
 }:
 let
   moduleOptions = {
-    options.spotify = {
-      enable = lib.mkEnableOption "spotify";
+    options = {
+      spotify = {
+        enable = lib.mkEnableOption "spotify";
 
-      package = lib.mkPackageOption pkgs "spotify" { };
+        package = lib.mkPackageOption pkgs "spotify" { };
 
-      spicetify.enable = lib.mkEnableOption "spicetify";
+        spicetify.enable = lib.mkEnableOption "spicetify";
+      };
     };
   };
 

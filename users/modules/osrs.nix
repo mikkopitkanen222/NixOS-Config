@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.osrs = {
-      enable = lib.mkEnableOption "osrs";
+    options = {
+      osrs = {
+        enable = lib.mkEnableOption "osrs";
 
-      package = lib.mkPackageOption pkgs "osrs" { default = [ "bolt-launcher" ]; };
+        package = lib.mkPackageOption pkgs "osrs" { default = [ "bolt-launcher" ]; };
+      };
     };
   };
 

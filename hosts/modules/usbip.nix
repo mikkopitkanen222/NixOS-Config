@@ -15,14 +15,16 @@ let
   cfg = config.build.host.usbip;
 in
 {
-  options.build.host.usbip = {
-    enable = lib.mkEnableOption "USB/IP integration";
+  options = {
+    build.host.usbip = {
+      enable = lib.mkEnableOption "USB/IP integration";
 
-    autoAttach = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      example = [ "4-1" ];
-      description = "Auto attach devices with provided Bus IDs.";
+      autoAttach = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        example = [ "4-1" ];
+        description = "Auto attach devices with provided Bus IDs.";
+      };
     };
   };
 

@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.plasma-browser-integration = {
-      enable = lib.mkEnableOption "plasma-browser-integration";
+    options = {
+      plasma-browser-integration = {
+        enable = lib.mkEnableOption "plasma-browser-integration";
 
-      package = lib.mkPackageOption pkgs [ "kdePackages" "plasma-browser-integration" ] { };
+        package = lib.mkPackageOption pkgs [ "kdePackages" "plasma-browser-integration" ] { };
+      };
     };
   };
 

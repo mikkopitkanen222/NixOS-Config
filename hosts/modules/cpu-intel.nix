@@ -4,11 +4,13 @@ let
   cfg = config.build.host.cpu;
 in
 {
-  options.build.host.cpu = {
-    intel = lib.mkOption {
-      description = "Enable Intel CPU kernel modules";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.host.cpu = {
+      intel = lib.mkOption {
+        description = "Enable Intel CPU kernel modules";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

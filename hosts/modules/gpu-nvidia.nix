@@ -6,11 +6,13 @@ let
   cfg = config.build.host.gpu;
 in
 {
-  options.build.host.gpu = {
-    nvidia = lib.mkOption {
-      description = "Enable Nvidia GPU driver";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.host.gpu = {
+      nvidia = lib.mkOption {
+        description = "Enable Nvidia GPU driver";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

@@ -4,11 +4,13 @@ let
   cfg = config.build.system.locale;
 in
 {
-  options.build.system.locale = {
-    enable = lib.mkOption {
-      description = "Enable default locale";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.locale = {
+      enable = lib.mkOption {
+        description = "Enable default locale";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

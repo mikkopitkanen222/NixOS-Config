@@ -4,11 +4,13 @@ let
   cfg = config.build.system.steam;
 in
 {
-  options.build.system.steam = {
-    enable = lib.mkOption {
-      description = "Enable Steam";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.steam = {
+      enable = lib.mkOption {
+        description = "Enable Steam";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

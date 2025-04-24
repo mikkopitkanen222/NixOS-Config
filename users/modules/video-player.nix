@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.video-player = {
-      enable = lib.mkEnableOption "video-player";
+    options = {
+      video-player = {
+        enable = lib.mkEnableOption "video-player";
 
-      package = lib.mkPackageOption pkgs "video-player" { default = [ "vlc" ]; };
+        package = lib.mkPackageOption pkgs "video-player" { default = [ "vlc" ]; };
+      };
     };
   };
 

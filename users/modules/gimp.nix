@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.gimp = {
-      enable = lib.mkEnableOption "gimp";
+    options = {
+      gimp = {
+        enable = lib.mkEnableOption "gimp";
 
-      package = lib.mkPackageOption pkgs "gimp" { };
+        package = lib.mkPackageOption pkgs "gimp" { };
+      };
     };
   };
 

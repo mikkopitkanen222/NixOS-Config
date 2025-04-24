@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.discord = {
-      enable = lib.mkEnableOption "discord";
+    options = {
+      discord = {
+        enable = lib.mkEnableOption "discord";
 
-      package = lib.mkPackageOption pkgs "discord" { default = [ "vesktop" ]; };
+        package = lib.mkPackageOption pkgs "discord" { default = [ "vesktop" ]; };
+      };
     };
   };
 

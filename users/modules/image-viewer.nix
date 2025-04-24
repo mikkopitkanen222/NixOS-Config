@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.image-viewer = {
-      enable = lib.mkEnableOption "image-viewer";
+    options = {
+      image-viewer = {
+        enable = lib.mkEnableOption "image-viewer";
 
-      package = lib.mkPackageOption pkgs "image-viewer" { default = [ "qimgv" ]; };
+        package = lib.mkPackageOption pkgs "image-viewer" { default = [ "qimgv" ]; };
+      };
     };
   };
 

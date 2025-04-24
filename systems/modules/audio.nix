@@ -4,11 +4,13 @@ let
   cfg = config.build.system.audio;
 in
 {
-  options.build.system.audio = {
-    enable = lib.mkOption {
-      description = "Enable audio services";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.audio = {
+      enable = lib.mkOption {
+        description = "Enable audio services";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

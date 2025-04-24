@@ -4,11 +4,13 @@ let
   cfg = config.build.system.systemDefaults;
 in
 {
-  options.build.system.systemDefaults = {
-    enable = lib.mkOption {
-      description = "Enable default values for basic options set system wide";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.systemDefaults = {
+      enable = lib.mkOption {
+        description = "Enable default values for basic options set system wide";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

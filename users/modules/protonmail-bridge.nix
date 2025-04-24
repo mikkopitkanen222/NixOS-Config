@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.protonmail-bridge = {
-      enable = lib.mkEnableOption "protonmail-bridge";
+    options = {
+      protonmail-bridge = {
+        enable = lib.mkEnableOption "protonmail-bridge";
+      };
     };
   };
 

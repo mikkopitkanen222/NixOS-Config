@@ -7,40 +7,42 @@
 }:
 let
   moduleOptions = {
-    options.nano = {
-      enable = lib.mkOption {
-        description = ''
-          Whether to enable nano.
-          Nano is enabled system-wide by default on NixOS,
-          so this option is not needed most of the time.
-        '';
-        type = lib.types.bool;
-        default = false;
-        example = true;
-      };
+    options = {
+      nano = {
+        enable = lib.mkOption {
+          description = ''
+            Whether to enable nano.
+            Nano is enabled system-wide by default on NixOS,
+            so this option is not needed most of the time.
+          '';
+          type = lib.types.bool;
+          default = false;
+          example = true;
+        };
 
-      package = lib.mkPackageOption pkgs "nano" { };
+        package = lib.mkPackageOption pkgs "nano" { };
 
-      syntaxHighlight = lib.mkOption {
-        description = ''
-          Whether to include syntax highlighting files.
-          The system-wide options include these by default.
-        '';
-        type = lib.types.bool;
-        default = false;
-        example = true;
-      };
+        syntaxHighlight = lib.mkOption {
+          description = ''
+            Whether to include syntax highlighting files.
+            The system-wide options include these by default.
+          '';
+          type = lib.types.bool;
+          default = false;
+          example = true;
+        };
 
-      usableDefaults = lib.mkEnableOption "usable nanorc defaults";
+        usableDefaults = lib.mkEnableOption "usable nanorc defaults";
 
-      extraConfig = lib.mkOption {
-        description = "Extra nanorc commands appended after default commands.";
-        type = lib.types.lines;
-        default = "";
-        example = ''
-          unset positionlog
-          set tabsize 4
-        '';
+        extraConfig = lib.mkOption {
+          description = "Extra nanorc commands appended after default commands.";
+          type = lib.types.lines;
+          default = "";
+          example = ''
+            unset positionlog
+            set tabsize 4
+          '';
+        };
       };
     };
   };

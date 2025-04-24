@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.protondrive = {
-      enable = lib.mkEnableOption "protondrive";
+    options = {
+      protondrive = {
+        enable = lib.mkEnableOption "protondrive";
+      };
     };
   };
 

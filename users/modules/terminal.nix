@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.terminal = {
-      enable = lib.mkEnableOption "terminal";
+    options = {
+      terminal = {
+        enable = lib.mkEnableOption "terminal";
 
-      package = lib.mkPackageOption pkgs "terminal" { default = [ "kitty" ]; };
+        package = lib.mkPackageOption pkgs "terminal" { default = [ "kitty" ]; };
+      };
     };
   };
 

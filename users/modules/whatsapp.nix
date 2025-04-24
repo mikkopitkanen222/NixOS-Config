@@ -7,10 +7,12 @@
 }:
 let
   moduleOptions = {
-    options.whatsapp = {
-      enable = lib.mkEnableOption "whatsapp";
+    options = {
+      whatsapp = {
+        enable = lib.mkEnableOption "whatsapp";
 
-      package = lib.mkPackageOption pkgs "whatsapp" { default = [ "whatsie" ]; };
+        package = lib.mkPackageOption pkgs "whatsapp" { default = [ "whatsie" ]; };
+      };
     };
   };
 

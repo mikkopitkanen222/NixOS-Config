@@ -7,18 +7,20 @@
 }:
 let
   moduleOptions = {
-    options.libreoffice = {
-      enable = lib.mkEnableOption "libreoffice";
+    options = {
+      libreoffice = {
+        enable = lib.mkEnableOption "libreoffice";
 
-      package = lib.mkPackageOption pkgs "libreoffice" { };
+        package = lib.mkPackageOption pkgs "libreoffice" { };
 
-      spellcheck.enable = lib.mkEnableOption "hunspell";
+        spellcheck.enable = lib.mkEnableOption "hunspell";
 
-      spellcheck.languages = lib.mkOption {
-        description = "List of enabled hunspell dictionaries.";
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-        example = [ "en_US" ];
+        spellcheck.languages = lib.mkOption {
+          description = "List of enabled hunspell dictionaries.";
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          example = [ "en_US" ];
+        };
       };
     };
   };

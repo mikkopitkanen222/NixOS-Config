@@ -66,39 +66,41 @@ let
       ct.text;
 
   moduleOptions = {
-    options.bash = {
-      usableDefaults = lib.mkEnableOption "usable bashrc defaults";
+    options = {
+      bash = {
+        usableDefaults = lib.mkEnableOption "usable bashrc defaults";
 
-      gitPrompt = lib.mkEnableOption "sourcing git completions and git prompt";
+        gitPrompt = lib.mkEnableOption "sourcing git completions and git prompt";
 
-      bashPrompt = lib.mkOption {
-        description = "24-bit colored bash prompt.";
-        type = lib.types.nullOr (lib.types.listOf (lib.types.submodule coloredText));
-        default = null;
-        example = [
-          {
-            foreground = {
-              r = 255;
-              b = 127;
-            };
-            text = "\\w ";
-          }
-        ];
-      };
+        bashPrompt = lib.mkOption {
+          description = "24-bit colored bash prompt.";
+          type = lib.types.nullOr (lib.types.listOf (lib.types.submodule coloredText));
+          default = null;
+          example = [
+            {
+              foreground = {
+                r = 255;
+                b = 127;
+              };
+              text = "\\w ";
+            }
+          ];
+        };
 
-      devshellPrompt = lib.mkOption {
-        description = "24-bit colored bash prompt when inside Nix devshell.";
-        type = lib.types.nullOr (lib.types.listOf (lib.types.submodule coloredText));
-        default = null;
-        example = [
-          {
-            foreground = {
-              r = 255;
-              b = 127;
-            };
-            text = "\\w ";
-          }
-        ];
+        devshellPrompt = lib.mkOption {
+          description = "24-bit colored bash prompt when inside Nix devshell.";
+          type = lib.types.nullOr (lib.types.listOf (lib.types.submodule coloredText));
+          default = null;
+          example = [
+            {
+              foreground = {
+                r = 255;
+                b = 127;
+              };
+              text = "\\w ";
+            }
+          ];
+        };
       };
     };
   };

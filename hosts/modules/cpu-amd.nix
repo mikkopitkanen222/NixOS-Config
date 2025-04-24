@@ -4,11 +4,13 @@ let
   cfg = config.build.host.cpu;
 in
 {
-  options.build.host.cpu = {
-    amd = lib.mkOption {
-      description = "Enable AMD CPU kernel modules";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.host.cpu = {
+      amd = lib.mkOption {
+        description = "Enable AMD CPU kernel modules";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

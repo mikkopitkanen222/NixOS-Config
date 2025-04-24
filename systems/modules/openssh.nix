@@ -4,11 +4,13 @@ let
   cfg = config.build.system.openssh;
 in
 {
-  options.build.system.openssh = {
-    enable = lib.mkOption {
-      description = "Enable OpenSSH logins";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.system.openssh = {
+      enable = lib.mkOption {
+        description = "Enable OpenSSH logins";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

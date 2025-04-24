@@ -4,11 +4,13 @@ let
   cfg = config.build.host.gpu;
 in
 {
-  options.build.host.gpu = {
-    amd = lib.mkOption {
-      description = "Enable AMD GPU driver";
-      type = lib.types.bool;
-      default = false;
+  options = {
+    build.host.gpu = {
+      amd = lib.mkOption {
+        description = "Enable AMD GPU driver";
+        type = lib.types.bool;
+        default = false;
+      };
     };
   };
 

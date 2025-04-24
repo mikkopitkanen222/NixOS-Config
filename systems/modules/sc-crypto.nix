@@ -10,17 +10,19 @@ let
   cfg = config.build.system.scCrypto;
 in
 {
-  options.build.system.scCrypto = {
-    enable = lib.mkOption {
-      description = "Enable PGP and SSH smartcard functionality";
-      type = lib.types.bool;
-      default = false;
-    };
+  options = {
+    build.system.scCrypto = {
+      enable = lib.mkOption {
+        description = "Enable PGP and SSH smartcard functionality";
+        type = lib.types.bool;
+        default = false;
+      };
 
-    pinentryPackage = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.pinentry-curses;
-      description = "Program used to enter the smartcard PIN.";
+      pinentryPackage = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pinentry-curses;
+        description = "Program used to enter the smartcard PIN.";
+      };
     };
   };
 

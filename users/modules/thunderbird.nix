@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.thunderbird = {
-      enable = lib.mkEnableOption "thunderbird";
+    options = {
+      thunderbird = {
+        enable = lib.mkEnableOption "thunderbird";
+      };
     };
   };
 

@@ -10,11 +10,13 @@
     ./wsl.nix
   ];
 
-  options.build = {
-    hostName = lib.mkOption {
-      description = "Name of the host configuration to build.";
-      type = lib.types.enum [ ];
-      example = "myDesktop";
+  options = {
+    build = {
+      hostName = lib.mkOption {
+        description = "Name of the host configuration to build.";
+        type = lib.types.enum [ ];
+        example = "myDesktop";
+      };
     };
   };
 }

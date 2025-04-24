@@ -7,8 +7,10 @@
 }:
 let
   moduleOptions = {
-    options.protonpass = {
-      enable = lib.mkEnableOption "protonpass";
+    options = {
+      protonpass = {
+        enable = lib.mkEnableOption "protonpass";
+      };
     };
   };
 
