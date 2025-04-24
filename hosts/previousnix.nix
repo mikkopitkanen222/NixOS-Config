@@ -34,9 +34,11 @@ let
         maker = "intel";
         updateMicrocode = true;
       };
+      gpu = {
+        maker = "nvidia";
+        openModules = false;
+      };
     };
-
-    build.host.gpu.nvidia = true;
 
     boot.loader = {
       systemd-boot.enable = true;

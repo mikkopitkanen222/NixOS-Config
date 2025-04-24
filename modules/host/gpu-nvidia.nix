@@ -8,15 +8,23 @@ in
 {
   options = {
     build.host.gpu = {
-      nvidia = lib.mkOption {
-        description = "Enable Nvidia GPU driver";
-        type = lib.types.bool;
-        default = false;
+      maker = lib.mkOption { type = lib.types.nullOr (lib.types.enum [ "nvidia" ]); };
+
+      driver = lib.mkOption {
+        description = "Nvidia GPU driver version.";
+        type = lib.types.str;
+        default = "stable";
+        example = "beta";
       };
+
+      openModules = lib.mkEnableOption (
+        "open source kernel modules. Enabling this may cause loss of output"
+        + " from GPU when waking from sleep"
+      );
     };
   };
 
-  config = lib.mkIf cfg.nvidia {
+  config = lib.mkIf (cfg.maker == "nvidia") {
     # Nvidia kernel modules require proprietary userspace libraries.
     unfree.allowedPackages = [
       "nvidia-x11"
@@ -30,21 +38,8 @@ in
     hardware.graphics.enable = true;
 
     hardware.nvidia = {
-      # Select driver version. Currently > 570.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-      # Enable kernel modesetting when using proprietary drivers.
-      # Wayland requires this and driver version >= 545.
-      # Enabled by default on driver versions >= 535.
-      modesetting.enable = true;
-
-      # RTX 2070 supports open source kernel modules,
-      # but there's no output from GPU when waking from sleep.
-      open = false;
-
-      # RTX 2070 supports the GPU System Processor, which is required
-      # (and enabled by default) when using open source kernel modules.
-      gsp.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
+      open = cfg.openModules;
 
       # Fix graphics corruption when waking from sleep.
       powerManagement.enable = true;

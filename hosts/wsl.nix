@@ -14,6 +14,7 @@ let
 
     build.host = {
       cpu.maker = null;
+      gpu.maker = null;
     };
 
     build.host.usbip = {

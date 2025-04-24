@@ -36,9 +36,12 @@ let
         maker = "amd";
         updateMicrocode = true;
       };
+      gpu = {
+        maker = "amd";
+        opencl.enable = true;
+        initrd.enable = true;
+      };
     };
-
-    build.host.gpu.amd = true;
 
     boot.loader = {
       systemd-boot.enable = true;

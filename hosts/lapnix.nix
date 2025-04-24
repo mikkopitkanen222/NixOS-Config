@@ -34,9 +34,9 @@ let
         maker = "amd";
         updateMicrocode = true;
       };
+      gpu.maker = "amd";
     };
 
-    build.host.gpu.amd = true;
     build.host.fprint.enable = true;
 
     boot.initrd.kernelModules = [
