@@ -12,6 +12,10 @@ let
       defaultUser = builtins.head config.build.userNames;
     };
 
+    build.host = {
+      cpu.maker = null;
+    };
+
     build.host.usbip = {
       enable = true;
       autoAttach = [

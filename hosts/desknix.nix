@@ -31,7 +31,13 @@ let
 
     hardware.keyboard.qmk.enable = true;
 
-    build.host.cpu.amd = true;
+    build.host = {
+      cpu = {
+        maker = "amd";
+        updateMicrocode = true;
+      };
+    };
+
     build.host.gpu.amd = true;
 
     boot.loader = {

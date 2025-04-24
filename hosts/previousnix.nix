@@ -29,7 +29,13 @@ let
     };
     hardware.bluetooth.enable = true;
 
-    build.host.cpu.intel = true;
+    build.host = {
+      cpu = {
+        maker = "intel";
+        updateMicrocode = true;
+      };
+    };
+
     build.host.gpu.nvidia = true;
 
     boot.loader = {

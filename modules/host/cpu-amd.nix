@@ -2,25 +2,22 @@
 { config, lib, ... }:
 let
   cfg = config.build.host.cpu;
+
+  defaultModules = [
+    "kvm-amd"
+    "k10temp"
+  ];
 in
 {
   options = {
     build.host.cpu = {
-      amd = lib.mkOption {
-        description = "Enable AMD CPU kernel modules";
-        type = lib.types.bool;
-        default = false;
-      };
+      maker = lib.mkOption { type = lib.types.nullOr (lib.types.enum [ "amd" ]); };
     };
   };
 
-  config = lib.mkIf cfg.amd {
-    boot.kernelModules = [
-      "kvm-amd"
-      "k10temp"
-    ];
-
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  config = lib.mkIf (cfg.maker == "amd") {
+    boot.kernelModules = (if cfg.modules != null then cfg.modules else defaultModules);
+    nixpkgs.hostPlatform = cfg.platform;
+    hardware.cpu.amd.updateMicrocode = cfg.updateMicrocode;
   };
 }
