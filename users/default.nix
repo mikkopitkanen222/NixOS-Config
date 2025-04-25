@@ -2,7 +2,6 @@
 { lib, ... }:
 {
   imports = [
-    ./modules
     ./mp
     ./wsl
   ];

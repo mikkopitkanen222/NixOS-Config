@@ -1,5 +1,10 @@
 # Import modules.
 { ... }:
 {
-  imports = [ ./unfree.nix ];
+  imports = [
+    ./host
+    ./system
+    ./user
+    ./unfree.nix
+  ];
 }

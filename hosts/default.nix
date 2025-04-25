@@ -3,7 +3,6 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ./modules
     ./desknix.nix
     ./lapnix.nix
     ./previousnix.nix
