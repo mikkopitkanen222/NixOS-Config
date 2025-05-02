@@ -11,16 +11,10 @@ in
 {
   options = {
     build.host.fprint = {
-      enable = lib.mkOption {
-        description = "Enable fingerprint reader";
-        type = lib.types.bool;
-        default = false;
-      };
+      enable = lib.mkEnableOption "fingerprint reader";
 
-      package = lib.mkOption {
-        description = "Fingerprint reader driver";
-        type = lib.types.package;
-        default = pkgs.libfprint-2-tod1-elan;
+      package = lib.mkPackageOption pkgs "fingerprint reader driver" {
+        default = [ "libfprint-2-tod1-elan" ];
       };
     };
   };

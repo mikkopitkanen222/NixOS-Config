@@ -35,9 +35,8 @@ let
         updateMicrocode = true;
       };
       gpu.maker = "amd";
+      fprint.enable = true;
     };
-
-    build.host.fprint.enable = true;
 
     boot.initrd.kernelModules = [
       "dm-snapshot"
