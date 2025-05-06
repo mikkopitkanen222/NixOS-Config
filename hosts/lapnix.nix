@@ -29,6 +29,8 @@ let
     };
     hardware.bluetooth.enable = true;
 
+    hardware.enableRedistributableFirmware = true;
+
     build.host = {
       cpu = {
         maker = "amd";

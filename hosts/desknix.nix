@@ -29,6 +29,7 @@ let
     };
     hardware.bluetooth.enable = true;
 
+    hardware.enableRedistributableFirmware = true;
     hardware.keyboard.qmk.enable = true;
 
     build.host = {
