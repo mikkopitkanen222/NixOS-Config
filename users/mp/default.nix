@@ -64,6 +64,7 @@ let
             jnoortheen.nix-ide
             ms-vscode.cmake-tools
             llvm-vs-code-extensions.vscode-clangd
+            wakatime.vscode-wakatime
           ];
         };
       };
