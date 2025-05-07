@@ -29,6 +29,7 @@ let
     build.system.steam.enable = true;
     build.system.systemDefaults.enable = true;
 
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = with pkgs; [ tree ];
   };
 in
