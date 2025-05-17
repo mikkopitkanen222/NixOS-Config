@@ -3,6 +3,7 @@
 {
   imports = [
     ./audio.nix
+    ./factorio.nix
     ./locale.nix
     ./openssh.nix
     ./pam.nix

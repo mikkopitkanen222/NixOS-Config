@@ -12,6 +12,7 @@ let
     services.vscode-server.enable = true;
 
     build.system.audio.enable = true;
+    build.system.factorio.enable = true;
     build.system.locale.enable = true;
     build.system.openssh.enable = true;
     build.system.pam.enable = true;
