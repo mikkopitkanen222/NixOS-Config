@@ -37,6 +37,7 @@
     ./look-feel.nix
     ./permissions.nix
     ./qt-support.nix
+    ./waybar.nix
     ./workspaces.nix
   ];
 }
