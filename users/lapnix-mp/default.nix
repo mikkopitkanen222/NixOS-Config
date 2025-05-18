@@ -55,5 +55,6 @@
     ./user-dirs.nix
     ./vesktop.nix
     ./vscode.nix
+    ./waybar.nix
   ];
 }

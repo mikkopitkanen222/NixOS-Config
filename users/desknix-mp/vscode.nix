@@ -16,7 +16,8 @@
         userSettings = {
           "editor.accessibilitySupport" = "off";
           "editor.emptySelectionClipboard" = false;
-          "editor.fontFamily" = "'Droid Sans Mono', 'monospace', monospace";
+          "editor.fontFamily" =
+            "'Droid Sans Mono', 'monospace', monospace, 'SpaceMono Nerd Font'";
           "editor.guides.bracketPairs" = "active";
           "editor.guides.highlightActiveBracketPair" = false;
           "editor.inlayHints.enabled" = "offUnlessPressed";
