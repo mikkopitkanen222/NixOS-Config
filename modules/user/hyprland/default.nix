@@ -33,6 +33,15 @@ let
         hyprpicker
         hyprpolkitagent
         hyprsysteminfo
+        #
+        mako
+        tofi
+        fira
+        font-awesome
+        icomoon-feather
+        nerd-fonts.space-mono
+        roboto
+        waybar
       ];
 
       xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
@@ -40,11 +49,15 @@ let
       xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
       xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
       xdg.configFile."hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+      xdg.configFile."waybar".source = ./waybar;
 
       xdg.portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
+
+      services.clipse.enable = true;
+      # Todo: File manager: nnn > lf
     };
 
   cfg = config.build.user;
