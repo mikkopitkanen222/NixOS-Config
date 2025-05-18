@@ -52,6 +52,7 @@
     ./proton-mail.nix
     ./resource-monitor.nix
     ./spotify.nix
+    (import ./status-bar.nix args)
     ./terminal.nix
     ./thunderbird.nix
     ./user-dirs.nix
