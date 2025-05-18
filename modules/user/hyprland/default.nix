@@ -24,6 +24,11 @@ let
 
       home.packages = with pkgs; [
         brightnessctl
+        fira
+        font-awesome
+        icomoon-feather
+        nerd-fonts.space-mono
+        roboto
         hypridle
         hyprland-qt-support
         hyprland-qtutils
@@ -32,12 +37,14 @@ let
         hyprpicker
         hyprpolkitagent
         hyprsysteminfo
+        waybar
       ];
 
       xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
       xdg.configFile."hypr/hypridle.conf".source = ./hypridle.conf;
       xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
       xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
+      xdg.configFile."waybar".source = ./waybar;
 
       xdg.portal = {
         enable = true;
