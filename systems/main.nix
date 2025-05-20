@@ -1,6 +1,7 @@
 # Configuration for system "main".
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -30,6 +31,7 @@ let
     build.system.steam.enable = true;
     build.system.systemDefaults.enable = true;
 
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = with pkgs; [ tree ];
   };

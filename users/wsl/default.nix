@@ -1,5 +1,10 @@
 # Configuration for user "wsl".
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   userName = "wsl";
 
@@ -16,6 +21,7 @@ let
         username = userName;
         homeDirectory = "/home/${userName}";
         stateVersion = "24.11";
+        packages = with pkgs; [ nixd ];
       };
 
       # Shortened script from github.com/sonowz/vscode-remote-wsl-nixos

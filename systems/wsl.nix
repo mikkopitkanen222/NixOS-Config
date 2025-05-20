@@ -1,6 +1,7 @@
 # Configuration for system "wsl".
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -13,6 +14,7 @@ let
     build.system.scCrypto.enable = true;
     build.system.systemDefaults.enable = true;
 
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     environment.systemPackages = with pkgs; [
       tree
       wget

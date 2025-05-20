@@ -25,6 +25,7 @@ let
         username = userName;
         homeDirectory = "/home/${userName}";
         stateVersion = "24.11";
+        packages = with pkgs; [ nixd ];
       };
 
       programs.git = {

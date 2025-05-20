@@ -30,5 +30,22 @@
   "security.workspace.trust.banner": "never",
   "security.workspace.trust.startupPrompt": "never",
   "security.workspace.trust.untrustedFiles": "open",
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "nix.enableLanguageServer": true,
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "nixpkgs": {
+        "expr": "import <nixpkgs> { }"
+      },
+      "options": {
+        "nixos": {
+          "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.desknix.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.desknix.options.home-manager.users.type.getSubOptions []"
+        }
+      }
+    }
+  }
 }
