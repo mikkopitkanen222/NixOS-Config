@@ -66,6 +66,7 @@ let
             llvm-vs-code-extensions.vscode-clangd
             wakatime.vscode-wakatime
           ];
+          userSettings = builtins.fromJSON (builtins.readFile ./vscode-settings.json);
         };
       };
     };
