@@ -35,6 +35,7 @@
   ];
 
   imports = [
+    ./hyprland
     ./bash.nix
     ./git.nix
     ./internet.nix
