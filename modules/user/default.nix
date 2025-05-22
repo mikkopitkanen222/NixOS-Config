@@ -2,6 +2,7 @@
 { ... }:
 {
   imports = [
+    ./hyprland
     ./bash.nix
     ./calculator.nix
     ./discord.nix
