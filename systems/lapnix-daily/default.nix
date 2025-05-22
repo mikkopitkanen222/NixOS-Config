@@ -42,7 +42,6 @@
     inputs.home-manager.nixosModules.home-manager
 
     # Packages requiring config are installed in modules imported here:
-    ./desktop.nix
     ./games.nix
     ./locale.nix
     ./pipewire.nix

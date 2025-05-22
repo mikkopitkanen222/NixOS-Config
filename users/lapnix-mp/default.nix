@@ -36,9 +36,11 @@
 
   # Packages requiring config are installed in modules imported here:
   imports = [
+    ./hyprland
     ./bash.nix
     ./chromium.nix
     ./git.nix
+    ./gtk.nix
     ./kitty.nix
     ./language.nix
     ./nano.nix
