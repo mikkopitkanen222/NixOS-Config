@@ -162,6 +162,7 @@ let
       };
       video-player.enable = true;
 
+      hyprland.enable = true;
       obsidian.enable = true;
       plasma-browser-integration.enable = true;
       protondrive.enable = true;
