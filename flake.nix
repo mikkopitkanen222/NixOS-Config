@@ -2,6 +2,7 @@
   description = "NixOS configurations";
 
   inputs = {
+    # Core inputs targeting the flake itself:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -12,6 +13,10 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Other inputs:
+    hyprland.url = "github:hyprwm/hyprland";
+    # Don't touch hyprland.inputs.nixpkgs, see https://wiki.hyprland.org/Nix/Cachix/.
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";

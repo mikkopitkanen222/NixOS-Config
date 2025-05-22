@@ -2,8 +2,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./desktop.nix
     ./games.nix
+    ./hyprland.nix
     ./pipewire.nix
     ./security.nix
     ../shared/common.nix
