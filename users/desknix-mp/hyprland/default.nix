@@ -91,6 +91,7 @@
   };
 
   imports = [
+    ./hypridle.nix
     ./hyprlock.nix
     ./input.nix
     ./keybinds.nix
