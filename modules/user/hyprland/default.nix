@@ -23,6 +23,8 @@ let
       home.sessionVariables.NIXOS_OZONE_WL = "1";
 
       home.packages = with pkgs; [
+        brightnessctl
+        hypridle
         hyprland-qt-support
         hyprland-qtutils
         hyprlock
@@ -33,6 +35,7 @@ let
       ];
 
       xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
+      xdg.configFile."hypr/hypridle.conf".source = ./hypridle.conf;
       xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
       xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
 
