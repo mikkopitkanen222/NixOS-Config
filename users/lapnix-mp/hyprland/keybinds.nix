@@ -22,6 +22,7 @@
         "$mainMod, F, togglefloating,"
         "$mainMod, J, togglesplit,"
         "$mainMod, T, exec, uwsm app -- kitty"
+        "$mainMod, L, exec, uwsm app -- hyprlock --immediate"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"

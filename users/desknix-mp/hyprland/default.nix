@@ -79,6 +79,7 @@
       permission = [
         "${lib.getExe pkgs.hyprpicker}, screencopy, allow"
         "${lib.getExe pkgs.xdg-desktop-portal-hyprland}, screencopy, allow"
+        "${lib.getExe pkgs.hyprlock}, screencopy, allow"
       ];
       windowrule = [
         # Ignore maximize requests from apps.
@@ -90,6 +91,7 @@
   };
 
   imports = [
+    ./hyprlock.nix
     ./input.nix
     ./keybinds.nix
     ./look-feel.nix
