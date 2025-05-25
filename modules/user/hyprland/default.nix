@@ -25,6 +25,7 @@ let
       home.packages = with pkgs; [
         hyprland-qt-support
         hyprland-qtutils
+        hyprlock
         hyprls
         hyprpicker
         hyprpolkitagent
@@ -33,6 +34,7 @@ let
 
       xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
       xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+      xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
 
       xdg.portal = {
         enable = true;
@@ -53,6 +55,7 @@ in
         enable = true;
         withUWSM = true;
       };
+      security.pam.services = lib.mkIf config.build.system.pam.enable { hyprlock.u2fAuth = true; };
     })
     { home-manager.users = builtins.mapAttrs moduleConfig cfg; }
   ];
