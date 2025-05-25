@@ -47,6 +47,7 @@
   };
 
   imports = [
+    ./idle-daemon.nix
     ./input.nix
     ./keybinds.nix
     ./look-feel.nix
