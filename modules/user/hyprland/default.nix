@@ -50,6 +50,8 @@ let
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
+
+      # Todo: mako, tofi, clipse, File manager: nnn > lf
     };
 
   cfg = config.build.user;
