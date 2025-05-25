@@ -26,6 +26,8 @@
       portalPackage = hyprPkgs.xdg-desktop-portal-hyprland;
     };
 
+  security.pam.services.hyprlock.u2fAuth = true;
+
   # Make sure to use the same version of Mesa as Hyprland does
   # to avoid performance problems.
   hardware.graphics =
