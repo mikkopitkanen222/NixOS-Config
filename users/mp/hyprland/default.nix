@@ -25,6 +25,7 @@
   home.packages = with pkgs; [
     hyprland-qt-support
     hyprland-qtutils
+    hyprlock
     hyprls
     hyprpicker
     hyprpolkitagent
@@ -33,6 +34,7 @@
 
   xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
   xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
+  xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
 
   xdg.portal = {
     enable = true;
