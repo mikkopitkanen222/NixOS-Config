@@ -19,7 +19,7 @@ let
     ];
 
     system.stateVersion = "25.05";
-    boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+    boot.kernelPackages = pkgs.linuxKernel.packageAliases.linux_latest;
 
     networking = {
       inherit hostName;
