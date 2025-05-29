@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,69 +24,81 @@
   };
 
   outputs =
-    {
-      nixpkgs,
-      systems,
-      treefmt-nix,
-      ...
-    }@inputs:
-    let
-      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-
-      treefmtEval = eachSystem (
-        pkgs:
-        treefmt-nix.lib.evalModule pkgs {
-          projectRootFile = ".git/config";
-          programs.nixfmt.enable = true;
-          programs.nixfmt.strict = true;
-        }
-      );
-
-      makeSystem =
-        system: buildConfig:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.nixos-wsl.nixosModules.wsl
-            inputs.vscode-server.nixosModules.default
-            ./hosts
-            ./modules
-            ./overlays
-            ./systems
-            ./users
-            buildConfig
-          ];
+    { ... }@inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      {
+        # config, inputs, lib, options
+        withSystem,
+        ...
+      }@top:
+      {
+        imports = [
+          #inputs.home-manager.flakeModules.home-manager
+          inputs.treefmt-nix.flakeModule
+        ];
+        systems = [ "x86_64-linux" ];
+        perSystem =
+          { ... }:
+          {
+            treefmt = {
+              projectRootFile = "flake.nix";
+              programs.nixfmt.enable = true;
+              programs.nixfmt.strict = true;
+            };
+          };
+        debug = true;
+        flake = {
+          #homeModules = [];
+          #homeConfigurations = {};
+          nixosConfigurations = {
+            desknix = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                inputs.home-manager.nixosModules.home-manager # Move to top level imports if other than flakeModules are allowed
+                inputs.vscode-server.nixosModules.default
+                ./modules
+                ./hosts/desknix
+                ./systems/main
+                ./users/mp
+              ];
+            };
+            previousnix = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                inputs.home-manager.nixosModules.home-manager
+                inputs.vscode-server.nixosModules.default
+                ./modules
+                ./hosts/previousnix
+                ./systems/main
+                ./users/mp
+              ];
+            };
+            lapnix = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                inputs.home-manager.nixosModules.home-manager
+                inputs.vscode-server.nixosModules.default
+                ./modules
+                ./hosts/lapnix
+                ./systems/main
+                ./users/mp
+              ];
+            };
+            wsl = inputs.nixpkgs.lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules = [
+                inputs.home-manager.nixosModules.home-manager
+                inputs.nixos-wsl.nixosModules.wsl
+                inputs.vscode-server.nixosModules.default # ?
+                ./modules
+                ./hosts/wsl
+                ./systems/wsl
+                ./users/wsl
+                { wsl.defaultUser = "wsl"; }
+              ];
+            };
+          };
         };
-    in
-    {
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-
-      nixosConfigurations = {
-        desknix = makeSystem "x86_64-linux" {
-          build.hostName = "desknix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
-        };
-
-        previousnix = makeSystem "x86_64-linux" {
-          build.hostName = "previousnix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
-        };
-
-        lapnix = makeSystem "x86_64-linux" {
-          build.hostName = "lapnix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
-        };
-
-        wsl = makeSystem "x86_64-linux" {
-          build.hostName = "wsl";
-          build.systemName = "wsl";
-          build.userNames = [ "wsl" ];
-        };
-      };
-    };
+      }
+    );
 }
