@@ -1,5 +1,5 @@
 # Import overlays.
-{ ... }:
+{ inputs, ... }:
 {
-  imports = [ ./nixpkgs-unstable.nix ];
+  nixpkgs-unstable = import ./nixpkgs-unstable.nix { inherit inputs; };
 }

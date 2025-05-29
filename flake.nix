@@ -1,5 +1,5 @@
 {
-  description = "Modular NixOS configurations";
+  description = "NixOS configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -40,51 +40,52 @@
           programs.nixfmt.strict = true;
         }
       );
-
-      makeSystem =
-        system: buildConfig:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            inputs.home-manager.nixosModules.home-manager
-            inputs.nixos-wsl.nixosModules.wsl
-            inputs.vscode-server.nixosModules.default
-            ./hosts
-            ./modules
-            ./overlays
-            ./systems
-            ./users
-            buildConfig
-          ];
-        };
     in
     {
+      # > nix fmt
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
 
+      # Modules and overlays used in configurations.
+      nixosModules = import ./modules { inherit inputs; };
+      overlays = import ./overlays { inherit inputs; };
+
+      # > nixos-rebuild ...
       nixosConfigurations = {
-        desknix = makeSystem "x86_64-linux" {
-          build.hostName = "desknix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
+        desknix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/desknix
+            ./systems/main
+            ./users/mp
+          ];
         };
 
-        previousnix = makeSystem "x86_64-linux" {
-          build.hostName = "previousnix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
+        previousnix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/previousnix
+            ./systems/main
+            ./users/mp
+          ];
         };
 
-        lapnix = makeSystem "x86_64-linux" {
-          build.hostName = "lapnix";
-          build.systemName = "main";
-          build.userNames = [ "mp" ];
+        lapnix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/lapnix
+            ./systems/main
+            ./users/mp
+          ];
         };
 
-        wsl = makeSystem "x86_64-linux" {
-          build.hostName = "wsl";
-          build.systemName = "wsl";
-          build.userNames = [ "wsl" ];
+        wsl = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/wsl
+            ./systems/wsl
+            ./users/wsl
+            { wsl.defaultUser = "wsl"; }
+          ];
         };
       };
     };
