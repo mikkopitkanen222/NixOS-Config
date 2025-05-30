@@ -37,6 +37,7 @@
     hyprpicker
     hyprpolkitagent
     hyprsysteminfo
+    tofi
     waybar
   ];
 
@@ -44,6 +45,7 @@
   xdg.configFile."hypr/hypridle.conf".source = ./hypridle.conf;
   xdg.configFile."hypr/hyprland.conf".source = ./hyprland.conf;
   xdg.configFile."hypr/hyprlock.conf".source = ./hyprlock.conf;
+  xdg.configFile."tofi/config".source = ./tofi-config;
   xdg.configFile."waybar".source = ./waybar;
 
   xdg.portal = {
