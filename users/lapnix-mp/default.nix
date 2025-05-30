@@ -50,6 +50,7 @@
     ./proton.nix
     ./spotify-player.nix
     ./thunderbird.nix
+    ./tofi.nix
     ./udiskie.nix
     ./user-dirs.nix
     ./vesktop.nix
