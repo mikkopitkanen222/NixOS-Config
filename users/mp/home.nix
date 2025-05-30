@@ -39,6 +39,7 @@
 
   imports = [
     (import ./hyprland args)
+    ./app-menu.nix
     ./automounter.nix
     ./bash.nix
     ./clipboard.nix
