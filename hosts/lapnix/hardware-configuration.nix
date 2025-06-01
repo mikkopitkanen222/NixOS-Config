@@ -77,7 +77,9 @@
     };
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/07e77238-58cc-4601-9202-681f975675ed"; } ];
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/07e77238-58cc-4601-9202-681f975675ed"; }
+  ];
 
   # AMD Ryzen 5 5500U:
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

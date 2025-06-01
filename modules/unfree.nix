@@ -21,6 +21,7 @@ in
   };
 
   config = {
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) cfg.allowedPackages;
+    nixpkgs.config.allowUnfreePredicate =
+      pkg: builtins.elem (lib.getName pkg) cfg.allowedPackages;
   };
 }

@@ -24,26 +24,25 @@
 
   outputs =
     {
+      self,
       nixpkgs,
-      systems,
       treefmt-nix,
       ...
     }@inputs:
     let
-      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-
-      treefmtEval = eachSystem (
-        pkgs:
-        treefmt-nix.lib.evalModule pkgs {
-          projectRootFile = ".git/config";
-          programs.nixfmt.enable = true;
-          programs.nixfmt.strict = true;
-        }
-      );
+      systems = [ "x86_64-linux" ];
+      eachSystem =
+        f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
     {
       # > nix fmt
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+
+      # > nix flake check
+      checks = eachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+      });
 
       # Modules and overlays used in configurations.
       nixosModules = import ./modules { inherit inputs; };
