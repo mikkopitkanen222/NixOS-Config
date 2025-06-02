@@ -2,6 +2,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./bluetooth.nix
     ./games.nix
     ./hyprland.nix
     ./pipewire.nix
