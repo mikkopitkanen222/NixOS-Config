@@ -9,7 +9,7 @@
   users.users.mp = {
     isNormalUser = true;
     extraGroups = [
-      "networkmanager"
+      "netdev"
       "wheel"
     ];
     openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];

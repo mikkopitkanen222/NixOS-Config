@@ -19,7 +19,6 @@
 
   networking = {
     hostName = "desknix";
-    networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };
 }

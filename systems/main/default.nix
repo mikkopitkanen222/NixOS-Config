@@ -6,6 +6,7 @@
     ./games.nix
     ./pipewire.nix
     ./security.nix
+    ./wlan.nix
     ../shared/common.nix
     ../shared/locale.nix
     ../shared/smartcard-crypto.nix
