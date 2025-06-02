@@ -45,6 +45,7 @@
     ./games.nix
     ./iwgtk.nix
     ./locale.nix
+    ./overskride.nix
     ./pipewire.nix
     ./security.nix
     ./smartcard-crypto.nix
