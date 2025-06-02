@@ -7,6 +7,7 @@
     ./hyprland.nix
     ./pipewire.nix
     ./security.nix
+    ./wireless.nix
     ../shared/common.nix
     ../shared/locale.nix
     ../shared/smartcard-crypto.nix
