@@ -3,7 +3,7 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
 
   boot.loader = {

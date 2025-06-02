@@ -6,7 +6,7 @@
   home = {
     username = "mp";
     homeDirectory = "/home/mp";
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 
   # Lone packages without further config:
