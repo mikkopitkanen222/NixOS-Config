@@ -24,7 +24,6 @@
 
   networking = {
     hostName = "lapnix";
-    networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };
 }

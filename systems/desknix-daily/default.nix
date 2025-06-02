@@ -43,6 +43,7 @@
 
     # Packages requiring config are installed in modules imported here:
     ./games.nix
+    ./iwgtk.nix
     ./locale.nix
     ./pipewire.nix
     ./security.nix
