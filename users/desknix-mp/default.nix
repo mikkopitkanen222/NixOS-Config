@@ -47,6 +47,7 @@
     ./hyprland
     ./bash.nix
     ./chromium.nix
+    ./clipse.nix
     ./git.nix
     ./gtk.nix
     ./kitty.nix
