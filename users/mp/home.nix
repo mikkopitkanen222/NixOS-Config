@@ -41,6 +41,7 @@
     (import ./hyprland args)
     ./automounter.nix
     ./bash.nix
+    ./clipboard.nix
     ./discord.nix
     ./git.nix
     ./internet.nix
