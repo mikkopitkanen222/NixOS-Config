@@ -6,6 +6,7 @@
     ./games.nix
     ./hyprland.nix
     ./pipewire.nix
+    ./plasma.nix
     ./security.nix
     ./wireless.nix
     ../shared/common.nix
