@@ -39,6 +39,7 @@
     hyprsysteminfo
     tofi
     waybar
+    wl-clipboard
   ];
 
   xdg.configFile."hypr/application-style.conf".source = ./application-style.conf;
@@ -51,5 +52,10 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+  services.clipse = {
+    enable = true;
+    imageDisplay.type = "kitty";
   };
 }
