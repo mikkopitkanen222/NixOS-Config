@@ -30,6 +30,7 @@
 
   imports = [
     # Monitors are configured in hosts.
+    ./clipse.nix
     ./hypridle.nix
     ./hyprlock.nix
     ./input.nix
