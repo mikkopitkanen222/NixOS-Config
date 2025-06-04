@@ -21,6 +21,7 @@
         "$mainMod, P, pseudo,"
         "$mainMod, F, togglefloating,"
         "$mainMod, J, togglesplit,"
+        "$mainMod, E, exec, kitty --class nnn -e 'nnn'"
         "$mainMod, T, exec, uwsm app -- kitty"
         "$mainMod, L, exec, uwsm app -- hyprlock --immediate"
         "$mainMod, V, exec, kitty --class clipse -e 'clipse'"

@@ -53,6 +53,7 @@
     ./kitty.nix
     ./language.nix
     ./nano.nix
+    ./nnn.nix
     ./proton.nix
     ./spotify-player.nix
     ./thunderbird.nix
