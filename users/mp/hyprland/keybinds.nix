@@ -16,6 +16,7 @@
       "$mainMod, M, exec, uwsm stop"
       "$mainMod, C, killactive,"
       "$mainMod SHIFT, C, forcekillactive,"
+      "$mainMod, E, exec, kitty --class nnn -e 'nnn'"
       "$mainMod, R, exec, tofi-drun"
       "$mainMod, T, exec, uwsm app -- kitty"
       "$mainMod, F, togglefloating,"
