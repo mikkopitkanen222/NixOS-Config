@@ -11,6 +11,8 @@
     fi
   '';
 
+  imports = [ ./file-manager.nix ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = false;
