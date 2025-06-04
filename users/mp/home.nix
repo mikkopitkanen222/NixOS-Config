@@ -43,6 +43,7 @@
     ./bash.nix
     ./clipboard.nix
     ./discord.nix
+    ./file-manager.nix
     ./git.nix
     ./internet.nix
     ./language.nix
