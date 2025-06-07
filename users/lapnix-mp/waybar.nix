@@ -21,6 +21,7 @@
           ];
           modules-center = [ "clock" ];
           modules-right = [
+            "custom/notifications"
             "tray"
             "bluetooth"
             "pulseaudio"
@@ -286,6 +287,27 @@
             window-rewrite-default = "";
             format-window-separator = " ";
           };
+
+          "custom/notifications" = {
+            tooltip = false;
+            format = "{} {icon}";
+            format-icons = {
+              notification = "<span foreground='red'><sup></sup></span>";
+              none = "";
+              dnd-notification = "<span foreground='red'><sup></sup></span>";
+              dnd-none = "";
+              inhibited-notification = "<span foreground='red'><sup></sup></span>";
+              inhibited-none = "";
+              dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+              dnd-inhibited-none = "";
+            };
+            return-type = "json";
+            exec-if = "which swaync-client";
+            exec = "swaync-client -swb";
+            on-click = "swaync-client -t -sw";
+            on-click-right = "swaync-client -d -sw";
+            escape = true;
+          };
         };
       };
 
@@ -390,7 +412,8 @@
         #pulseaudio,
         #temperature,
         #tray,
-        #workspaces {
+        #workspaces,
+        #custom-notifications {
           color: @module_color;
           background: @module_background;
           opacity: 0.7;
@@ -407,7 +430,8 @@
         #network:hover,
         #pulseaudio:hover,
         #temperature:hover,
-        #tray:hover {
+        #tray:hover,
+        #custom-notifications:hover {
           color: @module_hover_color;
           background: @module_hover_background;
           border: 2px solid @module_hover_border;
@@ -446,6 +470,10 @@
         }
         #workspaces button.active:hover {
           color: @button_active_hover_color;
+        }
+
+        #custom-notifications {
+          padding-right: 13px;
         }
 
         /*

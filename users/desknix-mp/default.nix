@@ -57,6 +57,7 @@
     ./nnn.nix
     ./proton.nix
     ./spotify-player.nix
+    ./swaync.nix
     ./thunderbird.nix
     ./tofi.nix
     ./udiskie.nix
