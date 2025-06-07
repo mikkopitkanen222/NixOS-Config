@@ -48,6 +48,7 @@
     ./git.nix
     ./internet.nix
     ./language.nix
+    ./notifications.nix
     ./proton-drive.nix
     ./proton-mail.nix
     ./resource-monitor.nix
