@@ -49,6 +49,7 @@
     ./language.nix
     ./proton-drive.nix
     ./proton-mail.nix
+    ./resource-monitor.nix
     ./spotify.nix
     ./terminal.nix
     ./thunderbird.nix
