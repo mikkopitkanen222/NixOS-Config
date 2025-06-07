@@ -38,6 +38,7 @@
   imports = [
     ./hyprland
     ./bash.nix
+    ./btop.nix
     ./chromium.nix
     ./clipse.nix
     ./git.nix
