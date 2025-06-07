@@ -7,6 +7,7 @@
     ./games.nix
     ./pipewire.nix
     ./security.nix
+    ./storage-manip.nix
     ./wlan.nix
     ../shared/common.nix
     ../shared/locale.nix

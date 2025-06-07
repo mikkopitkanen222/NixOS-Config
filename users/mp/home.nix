@@ -39,6 +39,7 @@
 
   imports = [
     (import ./hyprland args)
+    ./automounter.nix
     ./bash.nix
     ./discord.nix
     ./git.nix
