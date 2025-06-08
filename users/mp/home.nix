@@ -25,7 +25,6 @@
     # Work
     hunspell
     hunspellDicts.en_US
-    kitty # Conf through HM
     libreoffice-qt6-fresh
     nixd
     obsidian
@@ -40,6 +39,7 @@
     ./proton-drive.nix
     ./proton-mail.nix
     ./spotify.nix
+    ./terminal.nix
     ./thunderbird.nix
     ./user-dirs.nix
     ./vscode.nix
