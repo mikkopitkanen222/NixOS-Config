@@ -18,8 +18,6 @@
     shotcut
     # Image, Music & Video Viewers
     qimgv
-    spicetify-cli # Remove, see spotify
-    spotify # Switch to spotify-player & conf through HM
     vlc
     # Messengers
     vesktop # Conf through HM
@@ -41,6 +39,7 @@
     ./language.nix
     ./proton-drive.nix
     ./proton-mail.nix
+    ./spotify.nix
     ./thunderbird.nix
     ./user-dirs.nix
     ./vscode.nix
