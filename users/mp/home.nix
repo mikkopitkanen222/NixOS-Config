@@ -42,6 +42,7 @@
     ./proton-drive.nix
     ./proton-mail.nix
     ./thunderbird.nix
+    ./user-dirs.nix
     ./vscode.nix
   ];
 }
