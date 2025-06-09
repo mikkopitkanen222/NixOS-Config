@@ -15,5 +15,6 @@
   imports = [
     ./bash.nix
     ./git.nix
+    ./language.nix
   ];
 }

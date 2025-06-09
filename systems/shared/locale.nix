@@ -4,17 +4,9 @@
 { ... }:
 {
   time.timeZone = "Europe/Helsinki";
-  i18n = {
-    defaultLocale = "fi_FI.UTF-8";
-    extraLocaleSettings = {
-      LC_MESSAGES = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-    };
-  };
+  i18n.defaultLocale = "fi_FI.UTF-8";
+  # extraLocaleSettings set in Home Manager.
 
-  services.xserver.xkb = {
-    layout = "fi";
-    variant = "winkeys";
-  };
-  console.useXkbConfig = true;
+  console.keyMap = "fi";
+  # Keyboard config in Home Manager.
 }

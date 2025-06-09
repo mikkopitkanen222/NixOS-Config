@@ -38,6 +38,7 @@
     ./bash.nix
     ./git.nix
     ./internet.nix
+    ./language.nix
     ./proton-drive.nix
     ./proton-mail.nix
     ./thunderbird.nix
