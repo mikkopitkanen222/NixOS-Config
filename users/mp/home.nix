@@ -20,7 +20,6 @@
     qimgv
     vlc
     # Messengers
-    vesktop # Conf through HM
     whatsie
     # Work
     hunspell
@@ -33,6 +32,7 @@
 
   imports = [
     ./bash.nix
+    ./discord.nix
     ./git.nix
     ./internet.nix
     ./language.nix
