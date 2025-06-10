@@ -1,15 +1,17 @@
 # NixOS-Config
 This repository contains my NixOS configuration flake.
-The configs have three interchangeable components: host, system, and users.
+The flake is used to configure multiple machines and is composed of reusable components.
+There are three components in each configuration: `host`, `system`, and `users`.
 Each type of component resides in a separate sub-directory of this repo:
 
 - [Host configs](hosts) are specific to each physical (or virtual) machine.
-They configure options depending on the installed hardware, such as host platforms (e.g. x86_64-linux), file system mount options, and video drivers.
+They configure options depending on the installed hardware, such as host platforms (e.g. `x86_64-linux`), file system mount options, and video drivers.
 Host configs also set host specific options not dependent on installed hardware, such as kernel versions, boot loaders, and host names.
 Only one host config can be enabled per built NixOS config.
 
 - [System configs](systems) are specific to each workflow.
 They configure options depending on the use case, such as the desktop environment, programs, services, and settings.
+System configs install things required by their users, things which must be installed on the system level.
 System configs are shared by all users of the machine.
 Only one system config can be enabled per built NixOS config.
 
@@ -17,6 +19,9 @@ Only one system config can be enabled per built NixOS config.
 They configure options depending on the user, such as programs, services, and settings.
 User configs modify settings and install software only in the user's own profile.
 Multiple user configs can be enabled per built NixOS config.
+
+Anything which can be configured on the user level should be configured on the user level, using Home Manager if possible.
+Things should be configured on the system level only if they require changes to the system / outside user home directories.
 
 
 # Usage
@@ -45,4 +50,4 @@ Don't use this flake as is on your own machine. At least some modifications must
 - Change user names and emails.
 - Don't install my ssh keys or I will be able to log in on your machine.
 
-<b>You should craft your own flake for the best results.</b>
+<b>You should craft your own flake for the best results. This repo is overly complex if you have only one machine to configure.</b>
