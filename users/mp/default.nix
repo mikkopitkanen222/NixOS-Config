@@ -1,5 +1,10 @@
 # Configuration for user "mp".
-{ ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   users.users.mp = {
     isNormalUser = true;
@@ -10,7 +15,7 @@
     openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];
   };
 
-  home-manager.users.mp = ./home.nix;
+  home-manager.users.mp = import ./home.nix { inherit config lib pkgs; };
 
   unfree.allowedPackages = [
     "obsidian"
