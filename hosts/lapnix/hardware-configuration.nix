@@ -27,7 +27,7 @@
   ];
   boot.kernelModules = [
     "kvm-amd"
-    "zenpower"
+    "k10temp"
   ];
 
   boot.initrd.luks = {

@@ -17,7 +17,7 @@
   ];
   boot.kernelModules = [
     "kvm-amd"
-    "zenpower"
+    "k10temp"
   ];
 
   fileSystems = {
