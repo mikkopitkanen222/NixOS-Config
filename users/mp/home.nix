@@ -1,5 +1,5 @@
 # Home-manager configuration for user "mp".
-{ pkgs, ... }:
+{ pkgs, ... }@args:
 {
   programs.home-manager.enable = true;
 
@@ -7,6 +7,13 @@
     username = "mp";
     homeDirectory = "/home/mp";
     stateVersion = "25.05";
+  };
+
+  gtk = {
+    enable = true;
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
   };
 
   # Lone packages without further config:
@@ -31,6 +38,7 @@
   ];
 
   imports = [
+    (import ./hyprland args)
     ./bash.nix
     ./discord.nix
     ./git.nix

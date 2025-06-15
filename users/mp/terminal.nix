@@ -4,6 +4,10 @@
 # This module can be imported by user "mp" config.
 { ... }:
 {
+  wayland.windowManager.hyprland.settings.bind = [
+    "$mainMod, T, exec, uwsm app -- kitty"
+  ];
+
   programs.kitty = {
     enable = true;
     themeFile = "PaulMillr";

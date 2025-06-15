@@ -1,0 +1,23 @@
+# Configure Hyprland input methods.
+# https://wiki.hyprland.org/Configuring/Variables/
+#
+# This module can be imported by user "mp" Hyprland config.
+{ ... }:
+{
+  wayland.windowManager.hyprland.settings = {
+    input = {
+      kb_model = "pc105";
+      kb_layout = "fi";
+      kb_variant = "winkeys";
+      numlock_by_default = "true";
+      scroll_method = "on_button_down";
+      scroll_button = "274";
+      scroll_factor = "0.59";
+
+      touchpad = {
+        natural_scroll = "true";
+        drag_lock = "true";
+      };
+    };
+  };
+}
