@@ -53,5 +53,6 @@
     ./look-feel.nix
     (import ./monitors.nix args)
     ./screen-lock.nix
+    ./wallpapers.nix
   ];
 }
