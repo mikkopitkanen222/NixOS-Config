@@ -93,6 +93,7 @@
   imports = [
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
     ./input.nix
     ./keybinds.nix
     ./look-feel.nix
