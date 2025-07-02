@@ -59,15 +59,6 @@
           ];
         };
 
-        previousnix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/previousnix
-            ./systems/main
-            ./users/mp
-          ];
-        };
-
         lapnix = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
