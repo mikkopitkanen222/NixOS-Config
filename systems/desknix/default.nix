@@ -1,4 +1,4 @@
-# Configuration for system "main".
+# Configuration for system "desknix".
 { pkgs, ... }:
 {
   imports = [

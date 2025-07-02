@@ -54,7 +54,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/desknix
-            ./systems/main
+            ./systems/desknix
             ./users/mp
           ];
         };

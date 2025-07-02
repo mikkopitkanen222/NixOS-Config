@@ -1,6 +1,6 @@
 # Configure games and game lauchers.
 #
-# This module can be imported by system "main" config.
+# This module can be imported by system "desknix" config.
 {
   config,
   lib,
