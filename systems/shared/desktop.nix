@@ -1,6 +1,6 @@
 # Configure display manager and desktop environment.
 #
-# This module can be imported by system "main" config.
+# This module can be imported by all system configs.
 { pkgs, ... }:
 {
   services.displayManager.sddm = {

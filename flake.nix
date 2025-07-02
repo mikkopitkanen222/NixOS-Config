@@ -72,7 +72,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/lapnix
-            ./systems/main
+            ./systems/lapnix
             ./users/mp
           ];
         };

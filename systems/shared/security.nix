@@ -1,6 +1,6 @@
 # Configure security and remote access settings.
 #
-# This module can be imported by system "main" config.
+# This module can be imported by all system configs.
 { ... }:
 {
   security.pam.services = {

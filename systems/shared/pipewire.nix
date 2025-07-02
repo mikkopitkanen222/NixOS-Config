@@ -1,6 +1,6 @@
 # Configure audio and screen capture.
 #
-# This module can be imported by system "main" config.
+# This module can be imported by all system configs.
 { ... }:
 {
   security.rtkit.enable = true;
