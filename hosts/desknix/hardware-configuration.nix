@@ -1,4 +1,5 @@
-# Configuration options dependent on hardware, file systems, etc. installed in host "desknix".
+# nixos-config/hosts/desknix/hardware-configuration.nix
+# Configure hardware, file systems, etc. dependent options on host 'desknix'.
 {
   config,
   lib,
@@ -22,7 +23,7 @@
 
   fileSystems = {
     # nvme-Samsung_SSD_9100_PRO_2TB:
-    # (minus 500GiB partition for Windows (yuck!))
+    # (minus 500 GiB partition for Windows (yuck!))
     "/" = {
       device = "/dev/disk/by-uuid/20fc2412-5fd5-4a3b-a86d-2c9d8fcd32d3";
       fsType = "btrfs";

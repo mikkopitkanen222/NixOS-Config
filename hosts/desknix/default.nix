@@ -1,10 +1,11 @@
-# Configuration for host "desknix".
+# nixos-config/hosts/desknix/default.nix
+# Configure host 'desknix'.
 { lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
   system.stateVersion = "25.05";
-  boot.kernelPackages = pkgs.linuxKernel.packageAliases.linux_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader = {
     systemd-boot.enable = true;

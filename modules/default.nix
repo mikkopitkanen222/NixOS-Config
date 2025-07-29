@@ -1,5 +1,3 @@
+# nixos-config/modules/default.nix
 # Import modules.
-{ ... }:
-{
-  unfree = import ./unfree.nix;
-}
+{ ... }: { }

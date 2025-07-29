@@ -1,4 +1,5 @@
-# Configuration options dependent on hardware, file systems, etc. installed in host "lapnix".
+# nixos-config/hosts/lapnix/hardware-configuration.nix
+# Configure hardware, file systems, etc. dependent options on host 'lapnix'.
 # Lenovo IdeaPad 1 15ALC7
 {
   config,
@@ -103,5 +104,4 @@
       driver = pkgs.libfprint-2-tod1-elan;
     };
   };
-  unfree.allowedPackages = [ (lib.getName config.services.fprintd.tod.driver) ];
 }

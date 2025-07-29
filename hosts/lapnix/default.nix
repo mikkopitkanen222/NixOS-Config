@@ -1,10 +1,11 @@
-# Configuration for host "lapnix".
+# nixos-config/hosts/lapnix/default.nix
+# Configure host 'lapnix'.
 { lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
   system.stateVersion = "25.05";
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
 
   boot.loader = {
     grub = {

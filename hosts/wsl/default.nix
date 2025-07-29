@@ -1,4 +1,5 @@
-# Configuration for host "wsl".
+# nixos-config/hosts/wsl/default.nix
+# Configure host 'wsl'.
 { inputs, lib, ... }:
 {
   imports = [ inputs.nixos-wsl.nixosModules.wsl ];

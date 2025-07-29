@@ -1,3 +1,4 @@
+# nixos-config/treefmt.nix
 # Configure formatter options.
 { ... }:
 {

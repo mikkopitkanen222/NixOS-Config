@@ -1,7 +1,10 @@
+# nixos-config/flake.nix
+# Define the configuration flake.
 {
   description = "NixOS configurations";
 
   inputs = {
+    # Core inputs targeting the flake itself:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -12,6 +15,8 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Other inputs:
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +39,24 @@
       eachSystem =
         f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+
+      makeConfig =
+        {
+          host,
+          system,
+          users,
+          extraModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules =
+            [
+              (./. + "/hosts/${host}")
+              (./. + "/systems/${host}-${system}")
+            ]
+            ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
+            ++ extraModules;
+        };
     in
     {
       # > nix fmt
@@ -50,32 +73,23 @@
 
       # > nixos-rebuild ...
       nixosConfigurations = {
-        desknix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desknix
-            ./systems/main
-            ./users/mp
-          ];
+        desknix = makeConfig {
+          host = "desknix";
+          system = "daily";
+          users = [ "mp" ];
         };
 
-        lapnix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/lapnix
-            ./systems/main
-            ./users/mp
-          ];
+        lapnix = makeConfig {
+          host = "lapnix";
+          system = "daily";
+          users = [ "mp" ];
         };
 
-        wsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/wsl
-            ./systems/wsl
-            ./users/wsl
-            { wsl.defaultUser = "wsl"; }
-          ];
+        wsl = makeConfig {
+          host = "wsl";
+          system = "work";
+          users = [ "mp" ];
+          extraModules = [ { wsl.defaultUser = "mp"; } ];
         };
       };
     };
