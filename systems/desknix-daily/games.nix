@@ -6,7 +6,7 @@
 
   services.factorio = rec {
     enable = true;
-    package = pkgs.unstable.factorio-headless;
+    package = pkgs.factorio-headless;
     requireUserVerification = false;
     saveName = "SPAGEtti";
     openFirewall = true;

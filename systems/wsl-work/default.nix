@@ -37,7 +37,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     # Overlays output by our flake are enabled here:
-    overlays = [ inputs.self.outputs.overlays.nixpkgs-unstable ];
+    overlays = [ ];
   };
 
   imports = [

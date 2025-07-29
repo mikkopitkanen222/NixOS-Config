@@ -5,10 +5,9 @@
 
   inputs = {
     # Core inputs targeting the flake itself:
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix = {
@@ -49,13 +48,12 @@
         }:
         nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules =
-            [
-              (./. + "/hosts/${host}")
-              (./. + "/systems/${host}-${system}")
-            ]
-            ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
-            ++ extraModules;
+          modules = [
+            (./. + "/hosts/${host}")
+            (./. + "/systems/${host}-${system}")
+          ]
+          ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
+          ++ extraModules;
         };
     in
     {
