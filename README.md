@@ -1,6 +1,5 @@
 # NixOS-Config
-This repository contains my NixOS configuration flake.
-The flake is used to configure multiple machines and is composed of reusable components.
+This repository contains my NixOS configuration flake, used to configure multiple machines.
 There are three components in each configuration: `host`, `system`, and `users`.
 Each type of component resides in a separate sub-directory of this repo:
 
@@ -10,17 +9,17 @@ Host configs also set host specific options not dependent on installed hardware,
 Only one host config can be enabled per built NixOS config.
 
 - [System configs](systems) are specific to each workflow.
-They configure options depending on the use case, such as the desktop environment, programs, services, and settings.
+They configure options depending on the use case, such as desktop environments, programs, services, and settings.
 System configs install things required by their users, things which must be installed on the system level.
 System configs are shared by all users of the machine.
 Only one system config can be enabled per built NixOS config.
 
 - [User configs](users) are specific to each user.
-They configure options depending on the user, such as programs, services, and settings.
+They configure options depending on the user, such as home directories, programs, services, and settings.
 User configs modify settings and install software only in the user's own profile.
 Multiple user configs can be enabled per built NixOS config.
 
-Anything which can be configured on the user level should be configured on the user level, using Home Manager if possible.
+Anything that can be configured on the user level should be configured on the user level, using Home Manager if possible.
 Things should be configured on the system level only if they require changes to the system / outside user home directories.
 
 
@@ -36,7 +35,7 @@ sudo nixos-rebuild switch --flake .#
 
 Create a symlink `/etc/nixos/flake.nix` targeting the `flake.nix` file in this repository and you can omit the `--flake` option:
 ```sh
-# Same as above, when on host "desknix":
+# Build the config matching current hostname:
 sudo nixos-rebuild switch
 ```
 
@@ -50,4 +49,4 @@ Don't use this flake as is on your own machine. At least some modifications must
 - Change user names and emails.
 - Don't install my ssh keys or I will be able to log in on your machine.
 
-<b>You should craft your own flake for the best results. This repo is overly complex if you have only one machine to configure.</b>
+<b>For best results, you should craft your own flake. This repo structure is not optimal when you have only one machine to configure.</b>
