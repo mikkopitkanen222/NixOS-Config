@@ -34,7 +34,7 @@
   nixpkgs = {
     config.allowUnfree = true;
     # Overlays output by our flake are enabled here:
-    overlays = [ ];
+    overlays = [ inputs.self.outputs.overlays.spotify-player-fix ];
   };
 
   imports = [
