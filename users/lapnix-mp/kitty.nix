@@ -13,5 +13,10 @@
         tab_powerline_style = "angled";
       };
     };
+    xdg.configFile."kitty/quick-access-terminal.conf".text = ''
+      lines 20
+      background_opacity 0.8
+      focus_policy on-demand
+    '';
   };
 }

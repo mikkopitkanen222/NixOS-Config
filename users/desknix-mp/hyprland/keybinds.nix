@@ -20,6 +20,8 @@
         "$mainMod, E, exec, kitty --class nnn -e 'nnn'"
         "$mainMod, R, exec, tofi-drun"
         "$mainMod, T, exec, uwsm app -- kitty"
+        # Key 49 (§): below esc, above tab, left of 1
+        "$mainMod, code:49, exec, kitten quick-access-terminal"
         "$mainMod, L, exec, uwsm app -- hyprlock --immediate"
         "$mainMod, V, exec, kitty --class clipse -e 'clipse'"
 
