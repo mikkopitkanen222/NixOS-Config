@@ -36,7 +36,6 @@
         hunspellDicts.en_US
         libreoffice-qt6-fresh
         nixd
-        obsidian
         qalculate-qt
       ];
     };
@@ -55,6 +54,7 @@
     ./language.nix
     ./nano.nix
     ./nnn.nix
+    ./obsidian.nix
     ./proton.nix
     ./spotify-player.nix
     ./swaync.nix

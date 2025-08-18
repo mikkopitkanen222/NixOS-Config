@@ -28,7 +28,6 @@
         whatsie
         # Work
         nixd
-        obsidian
         qalculate-qt
       ];
     };
@@ -47,6 +46,7 @@
     ./language.nix
     ./nano.nix
     ./nnn.nix
+    ./obsidian.nix
     ./proton.nix
     ./spotify-player.nix
     ./swaync.nix
