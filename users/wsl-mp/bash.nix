@@ -14,9 +14,9 @@
         "exit"
       ];
       shellAliases = {
-        "ll" = "ls -l";
         ".." = "cd ..";
         "..." = "cd ../..";
+        "ll" = "ls -l";
       };
       # PS1: [green]user@host [cyan]pwd [red]git-prompt
       initExtra = ''

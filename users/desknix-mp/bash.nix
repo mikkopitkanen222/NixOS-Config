@@ -14,9 +14,10 @@
         "exit"
       ];
       shellAliases = {
-        "ll" = "ls -l";
         ".." = "cd ..";
         "..." = "cd ../..";
+        "ll" = "ls -l";
+        "code" = "codium";
       };
     };
 
