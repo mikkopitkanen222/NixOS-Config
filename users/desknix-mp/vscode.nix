@@ -8,8 +8,12 @@
       package = pkgs.vscodium;
       profiles.default = {
         extensions = with pkgs.vscode-extensions; [
-          jnoortheen.nix-ide
           ms-vscode.cmake-tools
+          yzhang.markdown-all-in-one
+          yzane.markdown-pdf
+          jnoortheen.nix-ide
+          tomoki1207.pdf
+          jebbs.plantuml
           llvm-vs-code-extensions.vscode-clangd
           wakatime.vscode-wakatime
         ];
