@@ -10,6 +10,7 @@
         "ghmbeldphafepmbegfdlkpapadhbakde" # Proton Pass
         "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+        "ghkdkllgoehcklnpajjjmfoaokabfdfm" # Remove Paywalls
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "ammjkodgmmoknidbanneddgankgfejfh" # 7TV
         "ajopnjidmegmdimjlfnijceegpefgped" # BetterTTV
