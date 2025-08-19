@@ -1,6 +1,6 @@
 # nixos-config/users/lapnix-mp/default.nix
 # Configure user 'mp' on host 'lapnix'.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   users.users.mp = {
     isNormalUser = true;
@@ -8,8 +8,15 @@
       "netdev"
       "wheel"
     ];
-    openssh.authorizedKeys.keyFiles = [ ./key/yubikey.pub ];
+    # openssh.authorizedKeys.keys copied at activation time.
   };
+
+  sops.secrets."openssh_mp" = { };
+  system.activationScripts."cp-authorizedKeys-mp".text = ''
+    mkdir -p "/etc/ssh/authorized_keys.d";
+    cp "${config.sops.secrets."openssh_mp".path}" "/etc/ssh/authorized_keys.d/mp";
+    chmod +r "/etc/ssh/authorized_keys.d/mp"
+  '';
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;
