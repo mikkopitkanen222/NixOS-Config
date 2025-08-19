@@ -47,6 +47,7 @@
     # Packages requiring config are installed in modules imported here:
     ./locale.nix
     ./smartcard-crypto.nix
+    ./sops.nix
     ./vscode-server.nix
   ];
 }

@@ -49,6 +49,7 @@
     ./pipewire.nix
     ./security.nix
     ./smartcard-crypto.nix
+    ./sops.nix
     ./vscode-server.nix
   ];
 }

@@ -384,6 +384,23 @@
         "type": "github"
       }
     },
+    "nixos-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755772050,
+        "narHash": "sha256-vDFX3A9vWWIOmlhT4CoRFq2Q5ypmZUz2w9j0V/N/2hA=",
+        "ref": "refs/heads/master",
+        "rev": "6a0c6a1bcf7924cf72574e9309ffebf102f01a54",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/mikkopitkanen222/nixos-secrets.git"
+      },
+      "original": {
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/mikkopitkanen222/nixos-secrets.git"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -464,10 +481,32 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "nixos-secrets": "nixos-secrets",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
+        "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix",
         "vscode-server": "vscode-server"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754988908,
+        "narHash": "sha256-t+voe2961vCgrzPFtZxha0/kmFSHFobzF00sT8p9h0U=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "3223c7a92724b5d804e9988c6b447a0d09017d48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
