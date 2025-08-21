@@ -28,6 +28,9 @@
     useUserPackages = true;
   };
 
+  # Deterministic, declarative user configuration.
+  users.mutableUsers = false;
+
   # Lone packages without further config are installed here:
   environment.systemPackages = with pkgs; [ tree ];
 

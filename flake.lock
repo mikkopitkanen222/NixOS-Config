@@ -387,10 +387,10 @@
     "nixos-secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1755772156,
-        "narHash": "sha256-J82hjdEABPtO45uS3W5uy72nDZsR8/n0ESbUtHgL4zU=",
+        "lastModified": 1755777899,
+        "narHash": "sha256-wakqZLGeRe0qAC3MOz2275a7ed7ORKIU8D/vuhxhZPM=",
         "ref": "refs/heads/master",
-        "rev": "447d92194916a69b52ed07419c63a4a2b7f81604",
+        "rev": "75e8ef118bc85b7ff61d4ec787c33d7ecaf46009",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/mikkopitkanen222/nixos-secrets.git"

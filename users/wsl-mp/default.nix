@@ -1,11 +1,13 @@
 # nixos-config/users/wsl-mp/default.nix
 # Configure user 'mp' on host 'wsl'.
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   users.users.mp = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    hashedPasswordFile = config.sops.secrets."passwd_mp".path;
   };
+  sops.secrets."passwd_mp".neededForUsers = true;
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;

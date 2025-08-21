@@ -8,8 +8,10 @@
       "netdev"
       "wheel"
     ];
+    hashedPasswordFile = config.sops.secrets."passwd_mp".path;
     # openssh.authorizedKeys.keys copied at activation time.
   };
+  sops.secrets."passwd_mp".neededForUsers = true;
 
   sops.secrets."openssh_mp" = { };
   system.activationScripts."cp-authorizedKeys-mp".text = ''
