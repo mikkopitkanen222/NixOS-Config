@@ -1,59 +1,68 @@
 # nixos-config/users/desknix-mp/proton.nix
 # Configure Proton software suite for user 'mp' on host 'desknix'.
-{ pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   home-manager.users.mp = {
     home.packages = with pkgs; [
       proton-pass
-      protonmail-bridge
       protonvpn-gui
     ];
 
-    systemd.user.services.protonmail-bridge = {
-      Unit = {
-        Description = "Protonmail Bridge";
-        After = [ "network-online.target" ];
-      };
-      Service = {
-        Restart = "always";
-        ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge -n";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-    };
+    services.protonmail-bridge.enable = true;
 
-    # rclone.conf must be created imperatively due to 2FA.
-    # Todo: Use (sops-nix, agenix, ?) etc. and create it here declaratively.
     programs.rclone = {
       enable = true;
-      #  remotes.proton = {
-      #    config = {
-      #      type = "protondrive";
-      #      username = "foobar";
-      #      enable_caching = false;
-      #    };
-      #    secrets = {
-      #      password = "/run/secrets/proton2";
-      #      "2fa" = "/run/secrets/proton3";
-      #    };
-      #  };
-    };
-
-    systemd.user.services.protondrive-mount = {
-      Unit = {
-        Description = "Mount Proton Drive";
-        After = [ "network-online.target" ];
-      };
-      Service = {
-        Type = "notify";
-        ExecStartPre = "/usr/bin/env mkdir -p /persist/proton";
-        ExecStart = "${pkgs.rclone}/bin/rclone --config=/persist/secrets/rclone.conf --vfs-cache-mode writes --ignore-checksum mount proton: /persist/proton";
-        ExecStop = "/bin/fusermount -u /persist/proton/%i";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
+      remotes.proton = {
+        config = {
+          type = "protondrive";
+          enable_caching = false;
+        };
+        mounts."" = {
+          enable = true;
+          mountPoint = "/persist/proton";
+          options = {
+            dir-cache-time = "732h";
+            dir-perms = "700";
+            file-perms = "600";
+            link-perms = "600";
+            vfs-cache-mode = "writes";
+          };
+        };
+        secrets = {
+          username = config.sops.secrets."protondrive/username".path;
+          password = config.sops.secrets."protondrive/password".path;
+          "2fa" = config.sops.secrets."protondrive/2fa".path;
+          client_uid = config.sops.secrets."protondrive/client_uid".path;
+          client_access_token =
+            config.sops.secrets."protondrive/client_access_token".path;
+          client_refresh_token =
+            config.sops.secrets."protondrive/client_refresh_token".path;
+          client_salted_key_pass =
+            config.sops.secrets."protondrive/client_salted_key_pass".path;
+        };
       };
     };
   };
+
+  sops.secrets =
+    let
+      proton-sops = {
+        sopsFile = "${inputs.nixos-secrets}/desknix-proton.yaml";
+        owner = config.users.users.mp.name;
+      };
+    in
+    {
+      "protondrive/username" = proton-sops;
+      "protondrive/password" = proton-sops;
+      "protondrive/2fa" = proton-sops;
+      "protondrive/client_uid" = proton-sops;
+      "protondrive/client_access_token" = proton-sops;
+      "protondrive/client_refresh_token" = proton-sops;
+      "protondrive/client_salted_key_pass" = proton-sops;
+    };
 }
