@@ -28,6 +28,7 @@
             "network"
             "battery"
             "group/resources"
+            "idle_inhibitor"
           ];
 
           "group/resources" = {
@@ -148,6 +149,15 @@
               high = 50;
               full = 75;
             };
+          };
+
+          idle_inhibitor = {
+            format = "{icon}";
+            format-icons = {
+              activated = "";
+              deactivated = "";
+            };
+            timeout = 1.0 * 60;
           };
 
           memory = {
@@ -406,6 +416,7 @@
         #bluetooth,
         #clock,
         #cpu,
+        #idle_inhibitor,
         #memory,
         #mpris,
         #network,
@@ -425,6 +436,7 @@
         #bluetooth:hover,
         #clock:hover,
         #cpu:hover,
+        #idle_inhibitor:hover,
         #memory:hover,
         #mpris:hover,
         #network:hover,
@@ -435,6 +447,10 @@
           color: @module_hover_color;
           background: @module_hover_background;
           border: 2px solid @module_hover_border;
+        }
+
+        #idle_inhibitor {
+          padding-right: 17px;
         }
 
         #tray menu {
@@ -481,6 +497,7 @@
          */
         #battery.full,
         #cpu.low,
+        #idle_inhibitor.deactivated,
         #memory.low,
         #network.ethernet,
         #network.wifi,
@@ -496,6 +513,7 @@
          */
         #battery.full:hover,
         #cpu.low:hover,
+        #idle_inhibitor.deactivated:hover,
         #memory.low:hover,
         #network.ethernet:hover,
         #network.wifi:hover,
@@ -563,6 +581,7 @@
          */
         #battery.low,
         #cpu.full,
+        #idle_inhibitor.activated,
         #memory.full,
         #network.linked,
         #pulseaudio.full,
@@ -577,6 +596,7 @@
          */
         #battery.low:hover,
         #cpu.full:hover,
+        #idle_inhibitor.activated:hover,
         #memory.full:hover,
         #network.linked:hover,
         #pulseaudio.full:hover,
