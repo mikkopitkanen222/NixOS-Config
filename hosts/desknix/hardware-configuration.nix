@@ -132,9 +132,11 @@
     # Fix archaic image resolution (640x480) during boot:
     initrd.enable = true;
     opencl.enable = true;
+    overdrive.enable = config.services.lact.enable;
     amdvlk = {
       enable = true;
       support32Bit.enable = true;
     };
   };
+  services.lact.enable = true;
 }
