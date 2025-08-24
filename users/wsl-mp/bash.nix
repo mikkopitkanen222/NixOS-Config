@@ -18,6 +18,9 @@
         "..." = "cd ../..";
         "ll" = "ls -l";
       };
+      initExtra = ''
+        tabs -2
+      '';
     };
 
     programs.powerline-go = {

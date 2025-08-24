@@ -19,6 +19,9 @@
         "ll" = "ls -l";
         "code" = "codium";
       };
+      initExtra = ''
+        tabs -2
+      '';
     };
 
     programs.powerline-go = {
