@@ -66,11 +66,11 @@
       vaults = {
         Notes = {
           enable = true;
-          target = "obsidian-vaults/Notes";
+          target = "obsidian-vaults/notes";
         };
         Work = {
           enable = true;
-          target = "obsidian-vaults/Work";
+          target = "obsidian-vaults/work";
         };
       };
     };
