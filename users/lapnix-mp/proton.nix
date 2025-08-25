@@ -47,6 +47,19 @@
         };
       };
     };
+
+    systemd.user.services."rclone-mount:@proton" = {
+      # Stop trying to mount proton: after a couple failed tries.
+      # Otherwise 10 attempts in a row are fired off right at boot,
+      # causing invalidation of saved protondrive credentials.
+      Unit = {
+        StartLimitIntervalSec = 150;
+        StartLimitBurst = 2;
+      };
+      Service = {
+        RestartSec = 60;
+      };
+    };
   };
 
   sops.secrets =
