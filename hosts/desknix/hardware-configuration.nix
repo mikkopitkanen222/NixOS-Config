@@ -74,7 +74,6 @@
     fileSystems = [ "/" ];
   };
   services.snapper = {
-    persistentTimer = true;
     snapshotInterval = "hourly";
     cleanupInterval = "1h";
     configs = {
