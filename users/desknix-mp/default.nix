@@ -32,6 +32,7 @@
       packages = with pkgs; [
         # Downtime
         bolt-launcher
+        bs-manager
         # Image, Music & Video Editors
         gimp-with-plugins
         shotcut
