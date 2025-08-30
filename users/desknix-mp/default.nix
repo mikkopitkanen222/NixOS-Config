@@ -40,7 +40,9 @@
         qimgv
         vlc
         # Messengers
-        whatsie
+        # Disable whatsie, as it depends on qt webengine 5.15, which is insecure and fails config eval.
+        # Wait until whatsie migrates to qt webengine 6, or look for alternatives.
+        # whatsie
         # Work
         hunspell
         hunspellDicts.en_US
