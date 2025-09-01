@@ -114,6 +114,11 @@
           specialArgs = { inherit inputs; };
           modules = [ ./systems/wsl ];
         };
+
+        qdev = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./systems/qdev ];
+        };
       };
     };
 }
