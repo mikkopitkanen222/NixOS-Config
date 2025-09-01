@@ -11,9 +11,7 @@
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
     # openssh.authorizedKeys.keys copied at activation time.
   };
-  sops.secrets."passwd_mp".neededForUsers = true;
 
-  sops.secrets."openssh_mp" = { };
   system.activationScripts."cp-authorizedKeys-mp".text = ''
     mkdir -p "/etc/ssh/authorized_keys.d";
     cp "${config.sops.secrets."openssh_mp".path}" "/etc/ssh/authorized_keys.d/mp";

@@ -17,10 +17,6 @@
     };
   };
 
-  # u2f keys are configured on the system level, so they shouldn't be owner by any specific user.
-  # Make u2f keys readable by everyone, so user level things, like hyprlock, can also read them.
-  sops.secrets."u2f_keys".mode = "0444";
-
   services.openssh = {
     enable = true;
     settings = {

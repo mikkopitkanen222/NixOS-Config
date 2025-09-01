@@ -13,7 +13,6 @@
     };
   };
 
-  sops.secrets."work_email" = { };
   sops.templates."secret-gitconfig" = {
     content = ''
       [user]

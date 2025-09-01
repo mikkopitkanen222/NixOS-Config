@@ -7,7 +7,6 @@
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
   };
-  sops.secrets."passwd_mp".neededForUsers = true;
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;
