@@ -99,6 +99,12 @@
           users = [ "mp" ];
           extraModules = [ { wsl.defaultUser = "mp"; } ];
         };
+
+        qdev = makeConfig {
+          host = "qdev";
+          system = "work";
+          users = [ "mp" ];
+        };
       };
     };
 }
