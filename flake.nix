@@ -34,6 +34,7 @@
       url = "github:nix-community/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wrapper-manager.url = "github:viperML/wrapper-manager";
   };
 
   outputs =
