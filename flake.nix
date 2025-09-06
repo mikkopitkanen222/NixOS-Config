@@ -4,12 +4,13 @@
   description = "NixOS configurations";
 
   inputs = {
-    # Core inputs targeting the flake itself:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-secrets = {
       url = "git+ssh://git@github.com/mikkopitkanen222/nixos-secrets.git?shallow=1";
       flake = false;
@@ -18,14 +19,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Other inputs:
     hyprland.url = "github:hyprwm/hyprland";
-    # Don't touch hyprland.inputs.nixpkgs, see https://wiki.hyprland.org/Nix/Cachix/.
+    # Don't touch hyprland.inputs, see https://wiki.hyprland.org/Nix/Cachix/.
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,17 +37,17 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      treefmt-nix,
-      ...
-    }@inputs:
+    inputs:
     let
       systems = [ "x86_64-linux" ];
       eachSystem =
-        f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
-      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+        fn:
+        inputs.nixpkgs.lib.genAttrs systems (
+          system: fn inputs.nixpkgs.legacyPackages.${system}
+        );
+      treefmtEval = eachSystem (
+        pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix
+      );
 
       makeConfig =
         {
@@ -56,13 +56,13 @@
           users,
           extraModules ? [ ],
         }:
-        nixpkgs.lib.nixosSystem {
+        inputs.nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             (./. + "/hosts/${host}")
             (./. + "/systems/${host}-${system}")
           ]
-          ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
+          ++ (inputs.nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
           ++ extraModules;
         };
     in
@@ -72,7 +72,7 @@
 
       # > nix flake check
       checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+        formatting = treefmtEval.${pkgs.system}.config.build.check inputs.self;
       });
 
       # Modules and overlays used in configurations.
