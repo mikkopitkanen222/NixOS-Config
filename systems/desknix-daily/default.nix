@@ -48,6 +48,7 @@
     ./games.nix
     ./iwgtk.nix
     ./locale.nix
+    ./nano.nix
     ./overskride.nix
     ./pipewire.nix
     ./security.nix
