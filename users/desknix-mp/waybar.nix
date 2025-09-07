@@ -5,6 +5,7 @@
 {
   home-manager.users.mp = {
     home.packages = with pkgs; [
+      helvum
       nerd-fonts.hack
       nerd-fonts.space-mono
       font-awesome
@@ -24,7 +25,7 @@
             "custom/notifications"
             "tray"
             "bluetooth"
-            "pulseaudio"
+            "wireplumber"
             "network"
             "group/resources"
             "idle_inhibitor"
@@ -167,37 +168,21 @@
             tooltip-format-disconnected = "Disconnected";
           };
 
-          pulseaudio = {
-            format = "{icon} {volume}% {format_source}";
-            format-muted = "{icon}  {format_source}";
-            format-source = " {volume}%";
-            format-source-muted = "";
-            format-icons = {
-              headphone = "";
-              headphone-muted = "󰟎";
-              hands-free = "󰋎";
-              hands-free-muted = "󰋐";
-              headset = "󰋎";
-              headset-muted = "󰋐";
-              phone = "";
-              phone-muted = "";
-              portable = "";
-              portable-muted = "";
-              car = "";
-              car-muted = "󰸜";
-              default = [
-                ""
-                ""
-                ""
-              ];
-              default-muted = "";
-            };
+          wireplumber = {
+            format = "{icon} {volume}%";
+            format-muted = " ";
+            format-icons = [
+              ""
+              ""
+              ""
+            ];
             states = {
-              full = 100;
-              high = 85;
-              mid = 70;
-              low = 55;
+              full = 81;
+              high = 61;
+              mid = 41;
+              low = 0;
             };
+            on-click = "helvum";
           };
 
           temperature = {
@@ -366,7 +351,7 @@
         #memory,
         #mpris,
         #network,
-        #pulseaudio,
+        #wireplumber,
         #temperature,
         #tray,
         #workspaces,
@@ -385,7 +370,7 @@
         #memory:hover,
         #mpris:hover,
         #network:hover,
-        #pulseaudio:hover,
+        #wireplumber:hover,
         #temperature:hover,
         #tray:hover,
         #custom-notifications:hover {
@@ -445,7 +430,7 @@
         #memory.low,
         #network.ethernet,
         #network.wifi,
-        #pulseaudio.low,
+        #wireplumber.low,
         #temperature {
           color: @severity1_color;
           background: @severity1_background;
@@ -460,7 +445,7 @@
         #memory.low:hover,
         #network.ethernet:hover,
         #network.wifi:hover,
-        #pulseaudio.low:hover,
+        #wireplumber.low:hover,
         #temperature:hover {
           color: @severity1_hover_color;
           background: @severity1_hover_background;
@@ -473,7 +458,7 @@
         #cpu.mid,
         #memory.mid,
         #network.disconnected,
-        #pulseaudio.mid {
+        #wireplumber.mid {
           color: @severity2_color;
           background: @severity2_background;
           border: 2px solid @severity2_border;
@@ -485,7 +470,7 @@
         #cpu.mid:hover,
         #memory.mid:hover,
         #network.disconnected:hover,
-        #pulseaudio.mid:hover {
+        #wireplumber.mid:hover {
           color: @severity2_hover_color;
           background: @severity2_hover_background;
           border: 2px solid @severity2_hover_border;
@@ -497,7 +482,7 @@
         #cpu.high,
         #memory.high,
         #network.disabled,
-        #pulseaudio.high {
+        #wireplumber.high {
           color: @severity3_color;
           background: @severity3_background;
           border: 2px solid @severity3_border;
@@ -509,7 +494,7 @@
         #cpu.high:hover,
         #memory.high:hover,
         #network.disabled:hover,
-        #pulseaudio.high:hover {
+        #wireplumber.high:hover {
           color: @severity3_hover_color;
           background: @severity3_hover_background;
           border: 2px solid @severity3_hover_border;
@@ -522,7 +507,7 @@
         #idle_inhibitor.activated,
         #memory.full,
         #network.linked,
-        #pulseaudio.full,
+        #wireplumber.full,
         #temperature.critical {
           color: @severity4_color;
           background: @severity4_background;
@@ -536,7 +521,7 @@
         #idle_inhibitor.activated:hover,
         #memory.full:hover,
         #network.linked:hover,
-        #pulseaudio.full:hover,
+        #wireplumber.full:hover,
         #temperature.critical:hover {
           color: @severity4_hover_color;
           background: @severity4_hover_background;
