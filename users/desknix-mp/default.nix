@@ -61,7 +61,6 @@
     ./git.nix
     ./gtk.nix
     ./kitty.nix
-    ./language.nix
     ./nnn.nix
     ./obsidian.nix
     ./proton.nix
