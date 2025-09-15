@@ -132,11 +132,6 @@
     initrd.enable = true;
     opencl.enable = true;
     overdrive.enable = config.services.lact.enable;
-    amdvlk = {
-      # SteamVR does not like AMDVLK. Let's use RADV/Mesa instead, for now.
-      enable = false;
-      support32Bit.enable = false;
-    };
   };
   services.lact.enable = true;
 }

@@ -90,10 +90,6 @@
   hardware.amdgpu = {
     # Fix archaic image resolution (640x480) during boot:
     initrd.enable = true;
-    amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
-    };
   };
 
   # Fingerprint sensor:
