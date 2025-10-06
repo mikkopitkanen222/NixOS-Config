@@ -58,6 +58,7 @@
     ./btop.nix
     ./chromium.nix
     ./clipse.nix
+    ./direnv.nix
     ./git.nix
     ./gtk.nix
     ./kitty.nix
