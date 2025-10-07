@@ -29,11 +29,7 @@
       # Lone packages without further config are installed here:
       packages = with pkgs; [
         # Downtime
-        bolt-launcher
         bs-manager
-        # Image, Music & Video Editors
-        gimp-with-plugins
-        shotcut
         # Image, Music & Video Viewers
         qimgv
         vlc
@@ -42,9 +38,6 @@
         # Wait until whatsie migrates to qt webengine 6, or look for alternatives.
         # whatsie
         # Work
-        hunspell
-        hunspellDicts.en_US
-        libreoffice-qt6-fresh
         nixd
         qalculate-qt
       ];
