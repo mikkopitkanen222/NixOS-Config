@@ -24,8 +24,6 @@
     };
 
     # Other inputs:
-    hyprland.url = "github:hyprwm/hyprland";
-    # Don't touch hyprland.inputs.nixpkgs, see https://wiki.hyprland.org/Nix/Cachix/.
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
