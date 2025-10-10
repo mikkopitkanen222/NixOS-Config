@@ -14,7 +14,9 @@
           position = "auto";
           scale = "auto";
           bitdepth = "10";
-          cm = "auto";
+          cm = "hdr";
+          sdrbrightness = "1.25";
+          sdrsaturation = "1.25";
           vrr = "2";
         }
         # Secondary monitor (KG241 P, 1920x1080@144):
