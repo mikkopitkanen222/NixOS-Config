@@ -1,29 +1,41 @@
 # nixos-config/systems/desknix/games.nix
-# Configure games and game lauchers on host 'desknix'.
-{ config, pkgs, ... }:
+# Configure games and game launchers on host 'desknix'.
 {
-  programs.steam.enable = true;
-
-  services.factorio = rec {
-    enable = true;
-    package = pkgs.factorio-headless;
-    requireUserVerification = false;
-    saveName = "SPAGEtti";
-    openFirewall = true;
-    nonBlockingSaving = true;
-    loadLatestSave = true;
-    game-name = "SPAGEtti";
-    extraSettingsFile = "/var/lib/${config.services.factorio.stateDirName}/${game-name}-settings";
-    extraSettings = {
-      max_players = 2;
-    };
-    description = "foofoo";
-    autosave-interval = 3;
-    admins = [
-      "Mikkeli222"
-      "Valdos"
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  options.mp222 = {
+    enableFactorio = lib.mkEnableOption "the headless Factorio service";
   };
 
-  environment.systemPackages = [ config.services.factorio.package ];
+  config = lib.mkMerge [
+    { programs.steam.enable = true; }
+    (lib.mkIf config.mp222.enableFactorio {
+      services.factorio = rec {
+        enable = true;
+        package = pkgs.factorio-headless;
+        requireUserVerification = false;
+        saveName = "SPAGEtti";
+        openFirewall = true;
+        nonBlockingSaving = true;
+        loadLatestSave = true;
+        game-name = "SPAGEtti";
+        extraSettingsFile = "/var/lib/${config.services.factorio.stateDirName}/${game-name}-settings";
+        extraSettings = {
+          max_players = 2;
+        };
+        description = "foofoo";
+        autosave-interval = 3;
+        admins = [
+          "Mikkeli222"
+          "Valdos"
+        ];
+      };
+
+      environment.systemPackages = [ config.services.factorio.package ];
+    })
+  ];
 }
