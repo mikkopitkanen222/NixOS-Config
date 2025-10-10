@@ -2,10 +2,9 @@
 {
   imports = [ inputs.nixos-wsl.nixosModules.wsl ];
 
-  wsl = {
-    enable = true;
-    wslConf.network.hostname = "wsl";
-  };
+  wsl.enable = true;
+
+  networking.hostName = "wsl";
 
   system.stateVersion = "25.05";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

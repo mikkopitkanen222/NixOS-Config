@@ -4,7 +4,7 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = "${inputs.nixos-secrets}/desknix.yaml";
+    defaultSopsFile = "${inputs.nixos-secrets}/${config.networking.hostName}.yaml";
     defaultSopsFormat = "yaml";
     age = {
       generateKey = false;
@@ -13,14 +13,6 @@
     gnupg = {
       home = "/var/lib/sops";
       sshKeyPaths = [ ];
-    };
-    secrets = {
-      "passwd_mp".neededForUsers = true;
-      "openssh_mp" = { };
-      "u2f_keys" = {
-        group = config.users.users.mp.group;
-        mode = "0440";
-      };
     };
   };
 }
