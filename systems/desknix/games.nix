@@ -1,5 +1,5 @@
-# nixos-config/systems/desknix-daily/games.nix
-# Configure games and game lauchers for system 'daily' on host 'desknix'.
+# nixos-config/systems/desknix/games.nix
+# Configure games and game lauchers on host 'desknix'.
 { config, pkgs, ... }:
 {
   programs.steam.enable = true;

@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/security.nix
-# Configure local and remote access for system 'daily' on host 'lapnix'.
+# nixos-config/systems/lapnix/security.nix
+# Configure local and remote access on host 'lapnix'.
 { config, ... }:
 {
   security.pam = {

@@ -1,5 +1,5 @@
-# nixos-config/systems/desknix-daily/security.nix
-# Configure local and remote access for system 'daily' on host 'desknix'.
+# nixos-config/systems/desknix/security.nix
+# Configure local and remote access on host 'desknix'.
 { config, ... }:
 {
   security.pam = {

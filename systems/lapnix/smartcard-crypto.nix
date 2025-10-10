@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/smartcard-crypto.nix
-# Configure Yubikey based authentication, encryption, and signing for system 'daily' on host 'lapnix'.
+# nixos-config/systems/lapnix/smartcard-crypto.nix
+# Configure Yubikey based authentication, encryption, and signing on host 'lapnix'.
 # https://nixos.wiki/wiki/Yubikey
 # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
 { pkgs, ... }:

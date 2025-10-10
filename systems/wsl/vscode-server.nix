@@ -1,5 +1,5 @@
-# nixos-config/systems/wsl-work/vscode-server.nix
-# Patch the VSCode server NodeJS binary for system 'work' on host 'wsl'.
+# nixos-config/systems/wsl/vscode-server.nix
+# Patch the VSCode server NodeJS binary on host 'wsl'.
 # https://github.com/nix-community/nixos-vscode-server
 { inputs, ... }:
 {

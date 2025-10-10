@@ -58,7 +58,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             (./. + "/hosts/${host}")
-            (./. + "/systems/${host}-${system}")
+            (./. + "/systems/${system}")
           ]
           ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
           ++ extraModules;
@@ -81,19 +81,19 @@
       nixosConfigurations = {
         desknix = makeConfig {
           host = "desknix";
-          system = "daily";
+          system = "desknix";
           users = [ "mp" ];
         };
 
         lapnix = makeConfig {
           host = "lapnix";
-          system = "daily";
+          system = "lapnix";
           users = [ "mp" ];
         };
 
         wsl = makeConfig {
           host = "wsl";
-          system = "work";
+          system = "wsl";
           users = [ "mp" ];
           extraModules = [ { wsl.defaultUser = "mp"; } ];
         };

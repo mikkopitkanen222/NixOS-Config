@@ -1,5 +1,5 @@
-# nixos-config/systems/desknix-daily/pipewire.nix
-# Configure audio and screen capture for system 'daily' on host 'desknix'.
+# nixos-config/systems/lapnix/pipewire.nix
+# Configure audio and screen capture on host 'lapnix'.
 { ... }:
 {
   security.rtkit.enable = true;

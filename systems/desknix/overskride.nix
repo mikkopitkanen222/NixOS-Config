@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/overskride.nix
-# Configure overskride for system 'daily' on host 'lapnix'.
+# nixos-config/systems/desknix/overskride.nix
+# Configure overskride on host 'desknix'.
 # https://github.com/kaii-lb/overskride
 { pkgs, ... }:
 {

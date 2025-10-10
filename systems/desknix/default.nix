@@ -1,5 +1,5 @@
-# nixos-config/systems/desknix-daily/default.nix
-# Configure system 'daily' on host 'desknix'.
+# nixos-config/systems/desknix/default.nix
+# Configure system on host 'desknix'.
 { inputs, pkgs, ... }:
 {
   nix = {

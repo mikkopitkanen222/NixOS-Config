@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/vscode-server.nix
-# Patch the VSCode server NodeJS binary for system 'daily' on host 'lapnix'.
+# nixos-config/systems/desknix/vscode-server.nix
+# Patch the VSCode server NodeJS binary on host 'desknix'.
 # https://github.com/nix-community/nixos-vscode-server
 { inputs, ... }:
 {

@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/locale.nix
-# Configure locale for system 'daily' on host 'lapnix'.
+# nixos-config/systems/desknix/locale.nix
+# Configure locale on host 'desknix'.
 { ... }:
 {
   time.timeZone = "Europe/Helsinki";

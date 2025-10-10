@@ -1,12 +1,12 @@
-# nixos-config/systems/lapnix-daily/sops.nix
-# Configure sops for system 'daily' on host 'lapnix'.
+# nixos-config/systems/desknix/sops.nix
+# Configure sops on host 'desknix'.
 # https://github.com/Mic92/sops-nix
 { config, inputs, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = "${inputs.nixos-secrets}/lapnix.yaml";
+    defaultSopsFile = "${inputs.nixos-secrets}/desknix.yaml";
     defaultSopsFormat = "yaml";
     age = {
       generateKey = false;

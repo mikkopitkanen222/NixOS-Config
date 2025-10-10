@@ -1,5 +1,5 @@
-# nixos-config/systems/lapnix-daily/default.nix
-# Configure system 'daily' on host 'lapnix'.
+# nixos-config/systems/wsl/default.nix
+# Configure system on host 'wsl'.
 { inputs, pkgs, ... }:
 {
   nix = {
@@ -32,7 +32,10 @@
   users.mutableUsers = false;
 
   # Lone packages without further config are installed here:
-  environment.systemPackages = with pkgs; [ tree ];
+  environment.systemPackages = with pkgs; [
+    tree
+    wget
+  ];
 
   nixpkgs = {
     config.allowUnfree = true;
@@ -45,12 +48,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     # Packages requiring config are installed in modules imported here:
-    ./games.nix
-    ./iwgtk.nix
     ./locale.nix
-    ./overskride.nix
-    ./pipewire.nix
-    ./security.nix
     ./smartcard-crypto.nix
     ./sops.nix
     ./vscode-server.nix

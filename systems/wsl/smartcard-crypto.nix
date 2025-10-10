@@ -1,5 +1,5 @@
-# nixos-config/systems/desknix-daily/smartcard-crypto.nix
-# Configure Yubikey based authentication, encryption, and signing for system 'daily' on host 'desknix'.
+# nixos-config/systems/wsl/smartcard-crypto.nix
+# Configure Yubikey based authentication, encryption, and signing on host 'wsl'.
 # https://nixos.wiki/wiki/Yubikey
 # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
 { pkgs, ... }:
