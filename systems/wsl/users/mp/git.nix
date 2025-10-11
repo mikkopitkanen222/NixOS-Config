@@ -1,14 +1,11 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
-  home-manager.users.mp = {
-    programs.git = {
-      enable = true;
-      userName = "Mikko Pitkänen";
-      extraConfig = {
-        core.pager = "less -x2";
-      };
-      includes = [ { path = config.sops.templates."secret-gitconfig".path; } ];
-    };
+  imports = [ ../../../desknix/users/mp/git.nix ];
+
+  home-manager.users.mp.programs.git = {
+    signing.signByDefault = lib.mkForce false;
+    extraConfig.init.defaultBranch = lib.mkForce "main";
+    includes = [ { path = config.sops.templates."secret-gitconfig".path; } ];
   };
 
   sops.templates."secret-gitconfig" = {

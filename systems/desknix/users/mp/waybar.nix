@@ -342,6 +342,7 @@
           color: @module_color;
         }
 
+        #battery,
         #bluetooth,
         #clock,
         #cpu,
@@ -361,6 +362,7 @@
           padding: 2px 10px 1px;
           margin: 0 3px;
         }
+        #battery:hover,
         #bluetooth:hover,
         #clock:hover,
         #cpu:hover,
@@ -423,6 +425,7 @@
         /*
          * Severity 1 styles
          */
+        #battery.full,
         #cpu.low,
         #idle_inhibitor.deactivated,
         #memory.low,
@@ -438,6 +441,7 @@
         /*
          * Severity 1 hover styles
          */
+        #battery.full:hover,
         #cpu.low:hover,
         #idle_inhibitor.deactivated:hover,
         #memory.low:hover,
@@ -453,6 +457,7 @@
         /*
          * Severity 2 styles
          */
+        #battery.high,
         #cpu.mid,
         #memory.mid,
         #network.disconnected,
@@ -465,6 +470,7 @@
         /*
          * Severity 2 hover styles
          */
+        #battery.high:hover,
         #cpu.mid:hover,
         #memory.mid:hover,
         #network.disconnected:hover,
@@ -477,6 +483,7 @@
         /*
          * Severity 3 styles
          */
+        #battery.mid,
         #cpu.high,
         #memory.high,
         #network.disabled,
@@ -489,6 +496,7 @@
         /*
          * Severity 3 hover styles
          */
+        #battery.mid:hover,
         #cpu.high:hover,
         #memory.high:hover,
         #network.disabled:hover,
@@ -501,6 +509,7 @@
         /*
          * Severity 4 styles
          */
+        #battery.low,
         #cpu.full,
         #idle_inhibitor.activated,
         #memory.full,
@@ -515,6 +524,7 @@
         /*
          * Severity 4 hover styles
          */
+        #battery.low:hover,
         #cpu.full:hover,
         #idle_inhibitor.activated:hover,
         #memory.full:hover,
