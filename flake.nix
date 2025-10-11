@@ -58,7 +58,7 @@
             (./. + "/hosts/${host}")
             (./. + "/systems/${system}")
           ]
-          ++ (nixpkgs.lib.map (user: ./. + "/users/${host}-${user}") users)
+          ++ (nixpkgs.lib.map (user: ./. + "/systems/${system}/users/${user}") users)
           ++ extraModules;
         };
     in
