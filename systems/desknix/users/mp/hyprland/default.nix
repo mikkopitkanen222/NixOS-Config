@@ -2,6 +2,16 @@
 # https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/
 { lib, pkgs, ... }:
 {
+  imports = [
+    ./hypridle.nix
+    ./hyprlock.nix
+    ./hyprpaper.nix
+    ./input.nix
+    ./keybinds.nix
+    ./look-feel.nix
+    ./monitors.nix
+  ];
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -53,14 +63,4 @@
       ];
     };
   };
-
-  imports = [
-    ./hypridle.nix
-    ./hyprlock.nix
-    ./hyprpaper.nix
-    ./input.nix
-    ./keybinds.nix
-    ./look-feel.nix
-    ./monitors.nix
-  ];
 }

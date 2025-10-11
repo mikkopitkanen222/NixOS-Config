@@ -10,7 +10,7 @@
         color_theme = "horizon";
         theme_background = false;
         shown_boxes = "cpu mem net proc gpu0";
-        update_ms = 2000;
+        update_ms = 1000;
         clock_format = "20%y-%m-%d %X";
         cpu_graph_upper = "total";
         cpu_single_graph = true;

@@ -1,7 +1,9 @@
 # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/
-{ ... }:
+{ pkgs, ... }:
 {
   home-manager.users.mp = {
+    home.packages = with pkgs; [ brightnessctl ];
+
     services.hypridle = {
       enable = true;
       settings = {
@@ -12,6 +14,12 @@
         };
 
         listener = [
+          # Dim display after inactivity.
+          {
+            timeout = builtins.toString (9 * 60);
+            on-timeout = "brightnessctl -s set 10";
+            on-resume = "brightnessctl -r";
+          }
           # Lock screen after inactivity.
           {
             timeout = builtins.toString (10 * 60);
@@ -21,7 +29,7 @@
           {
             timeout = builtins.toString (30 + 10 * 60);
             on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
+            on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
           }
           # Suspend machine after inactivity.
           {

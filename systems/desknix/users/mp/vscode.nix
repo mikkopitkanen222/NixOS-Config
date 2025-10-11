@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home-manager.users.mp = {
     programs.vscode = {
@@ -60,11 +60,11 @@
               "options" = {
                 "nixos" = {
                   "expr" =
-                    "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.desknix.options";
+                    "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${config.networking.hostName}.options";
                 };
                 "home-manager" = {
                   "expr" =
-                    "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.desknix.options.home-manager.users.type.getSubOptions []";
+                    "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${config.networking.hostName}.options.home-manager.users.type.getSubOptions []";
                 };
               };
             };

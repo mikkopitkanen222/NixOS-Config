@@ -25,8 +25,9 @@
   # Packages requiring config are installed in modules imported here:
   imports = [
     ./bash.nix
+    ../../../desknix/users/mp/direnv.nix
     ./git.nix
-    ./language.nix
-    ./nano.nix
+    ../../../desknix/users/mp/language.nix
+    ../../../desknix/users/mp/nano.nix
   ];
 }
