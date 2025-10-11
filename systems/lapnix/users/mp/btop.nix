@@ -1,23 +1,14 @@
 # https://github.com/aristocratos/btop
-{ ... }:
+{ lib, pkgs, ... }:
 {
-  home-manager.users.mp = {
-    programs.btop = {
-      enable = true;
-      # Below are just the changes to default btop settings.
-      settings = {
-        color_theme = "horizon";
-        theme_background = false;
-        update_ms = 2000;
-        clock_format = "20%y-%m-%d %X";
-        cpu_graph_upper = "total";
-        cpu_single_graph = true;
-        cpu_sensor = "k10temp/Tctl";
-        io_mode = true;
-        proc_left = true;
-        proc_sorting = "cpu lazy";
-        proc_per_core = true;
-      };
+  imports = [ ../../../desknix/users/mp/btop.nix ];
+
+  home-manager.users.mp.programs.btop = {
+    package = lib.mkForce pkgs.btop;
+    settings = {
+      shown_boxes = lib.mkForce "cpu mem net proc";
+      update_ms = lib.mkForce 2500;
+      custom_gpu_name0 = lib.mkForce "";
     };
   };
 }

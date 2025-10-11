@@ -43,26 +43,27 @@
   # Packages requiring config are installed in modules imported here:
   imports = [
     ./hyprland
-    ./bash.nix
+    ../../../desknix/users/mp/bash.nix
     ./btop.nix
-    ./chromium.nix
-    ./clipse.nix
-    ./git.nix
-    ./gtk.nix
-    ./kitty.nix
-    ./language.nix
-    ./nano.nix
-    ./nnn.nix
-    ./obsidian.nix
-    ./proton.nix
-    ./spotify-player.nix
-    ./swaync.nix
-    ./thunderbird.nix
+    ../../../desknix/users/mp/chromium.nix
+    ../../../desknix/users/mp/clipse.nix
+    ../../../desknix/users/mp/direnv.nix
+    ../../../desknix/users/mp/git.nix
+    ../../../desknix/users/mp/gtk.nix
+    ../../../desknix/users/mp/kitty.nix
+    ../../../desknix/users/mp/language.nix
+    ../../../desknix/users/mp/nano.nix
+    ../../../desknix/users/mp/nnn.nix
+    ../../../desknix/users/mp/obsidian.nix
+    ../../../desknix/users/mp/proton.nix
+    ../../../desknix/users/mp/spotify-player.nix
+    ../../../desknix/users/mp/swaync.nix
+    ../../../desknix/users/mp/thunderbird.nix
     ./tofi.nix
-    ./udiskie.nix
-    ./user-dirs.nix
-    ./vesktop.nix
-    ./vscode.nix
+    ../../../desknix/users/mp/udiskie.nix
+    ../../../desknix/users/mp/user-dirs.nix
+    ../../../desknix/users/mp/vesktop.nix
+    ../../../desknix/users/mp/vscode.nix
     ./waybar.nix
   ];
 }
