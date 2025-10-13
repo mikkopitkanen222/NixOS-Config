@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/nnn.nix
-# Configure N^3 for user 'mp' on host 'desknix'.
 # https://github.com/jarun/nnn
 { pkgs, ... }:
 {

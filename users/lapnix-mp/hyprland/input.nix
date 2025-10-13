@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/input.nix
-# Configure Hyprland input methods for user 'mp' on host 'lapnix'.
 # https://wiki.hyprland.org/Configuring/Variables/
 { ... }:
 {

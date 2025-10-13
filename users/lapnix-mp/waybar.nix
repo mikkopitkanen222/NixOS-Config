@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/waybar.nix
-# Configure Waybar for user 'mp' on host 'lapnix'.
 # https://github.com/Alexays/Waybar
 { lib, pkgs, ... }:
 {

@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/bash.nix
-# Configure Bash shell for user 'mp' on host 'desknix'.
 { ... }:
 {
   home-manager.users.mp = {

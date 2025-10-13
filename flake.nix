@@ -1,5 +1,3 @@
-# nixos-config/flake.nix
-# Define the configuration flake.
 {
   description = "NixOS configurations";
 

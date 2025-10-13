@@ -1,5 +1,3 @@
-# nixos-config/hosts/desknix/hardware-configuration.nix
-# Configure hardware, file systems, etc. dependent options on host 'desknix'.
 {
   config,
   lib,

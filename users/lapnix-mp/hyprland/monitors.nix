@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/monitors.nix
-# Configure Hyprland outputs for user 'mp' on host 'lapnix'.
 # https://wiki.hypr.land/Configuring/Monitors/
 { ... }:
 {

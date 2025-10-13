@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/chromium.nix
-# Configure Chromium browser for user 'mp' on host 'lapnix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

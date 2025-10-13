@@ -1,5 +1,3 @@
-# nixos-config/systems/desknix-daily/sops.nix
-# Configure sops for system 'daily' on host 'desknix'.
 # https://github.com/Mic92/sops-nix
 { config, inputs, ... }:
 {

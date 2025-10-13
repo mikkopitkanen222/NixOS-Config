@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/language.nix
-# Configure languages for user 'mp' on host 'desknix'.
 { ... }:
 {
   home-manager.users.mp = {

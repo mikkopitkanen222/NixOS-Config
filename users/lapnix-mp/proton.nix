@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/proton.nix
-# Configure Proton software suite for user 'mp' on host 'lapnix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

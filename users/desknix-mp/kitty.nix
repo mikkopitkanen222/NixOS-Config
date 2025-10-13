@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/kitty.nix
-# Configure Kitty terminal for user 'mp' on host 'desknix'.
 # https://github.com/kovidgoyal/kitty
 {
   config,

@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/swaync.nix
-# Configure Swaync for user 'mp' on host 'lapnix'.
 # https://github.com/ErikReider/SwayNotificationCenter
 { ... }:
 {

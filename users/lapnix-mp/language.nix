@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/language.nix
-# Configure languages for user 'mp' on host 'lapnix'.
 { ... }:
 {
   home-manager.users.mp = {

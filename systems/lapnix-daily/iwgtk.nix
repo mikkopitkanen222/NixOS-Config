@@ -1,5 +1,3 @@
-# nixos-config/systems/lapnix-daily/iwgtk.nix
-# Configure iwgtk for system 'daily' on host 'lapnix'.
 # https://github.com/j-lentz/iwgtk
 { pkgs, ... }:
 {

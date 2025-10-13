@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/vesktop.nix
-# Configure Vesktop for user 'mp' on host 'desknix'.
 # https://github.com/Vencord/Vesktop
 { ... }:
 {

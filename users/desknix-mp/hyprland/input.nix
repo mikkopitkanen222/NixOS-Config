@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/input.nix
-# Configure Hyprland input methods for user 'mp' on host 'desknix'.
 # https://wiki.hyprland.org/Configuring/Variables/
 { ... }:
 {

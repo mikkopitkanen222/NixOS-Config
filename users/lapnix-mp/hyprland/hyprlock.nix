@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/hyprlock.nix
-# Configure Hyprlock for user 'mp' on host 'lapnix'.
 # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/
 { ... }:
 {

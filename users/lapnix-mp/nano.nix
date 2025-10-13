@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/nano.nix
-# Configure Nano editor for user 'mp' on host 'lapnix'.
 { ... }:
 {
   home-manager.users.mp = {

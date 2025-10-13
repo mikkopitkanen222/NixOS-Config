@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/swaync.nix
-# Configure Swaync for user 'mp' on host 'desknix'.
 # https://github.com/ErikReider/SwayNotificationCenter
 { ... }:
 {

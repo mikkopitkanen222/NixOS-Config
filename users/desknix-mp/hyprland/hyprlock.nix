@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/hyprlock.nix
-# Configure Hyprlock for user 'mp' on host 'desknix'.
 # https://wiki.hyprland.org/Hypr-Ecosystem/hyprlock/
 { ... }:
 {

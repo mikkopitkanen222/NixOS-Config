@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/hypridle.nix
-# Configure Hypridle for user 'mp' on host 'lapnix'.
 # https://wiki.hyprland.org/Hypr-Ecosystem/hypridle/
 
 { pkgs, ... }:

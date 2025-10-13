@@ -1,5 +1,3 @@
-# nixos-config/systems/wsl-work/default.nix
-# Configure system 'work' on host 'wsl'.
 { inputs, pkgs, ... }:
 {
   nix = {

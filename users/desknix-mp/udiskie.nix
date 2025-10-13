@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/udiskie.nix
-# Configure udiskie for user 'mp' on host 'desknix'.
 # https://github.com/coldfix/udiskie
 { ... }:
 {

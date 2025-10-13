@@ -1,5 +1,3 @@
-# nixos-config/hosts/lapnix/hardware-configuration.nix
-# Configure hardware, file systems, etc. dependent options on host 'lapnix'.
 # Lenovo IdeaPad 1 15ALC7
 {
   config,

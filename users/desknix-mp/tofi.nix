@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/tofi.nix
-# Configure Tofi for user 'mp' on host 'desknix'.
 # https://github.com/philj56/tofi
 { pkgs, ... }:
 {

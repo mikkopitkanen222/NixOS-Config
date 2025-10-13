@@ -1,5 +1,3 @@
-# nixos-config/systems/wsl-work/sops.nix
-# Configure sops for system 'work' on host 'wsl'.
 # https://github.com/Mic92/sops-nix
 { inputs, ... }:
 {

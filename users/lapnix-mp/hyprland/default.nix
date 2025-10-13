@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/default.nix
-# Install Hyprland on system level and configure it for user 'mp' on host 'lapnix'.
 # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
 # https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/
 { lib, pkgs, ... }:

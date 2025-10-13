@@ -1,5 +1,3 @@
-# nixos-config/systems/lapnix-daily/default.nix
-# Configure system 'daily' on host 'lapnix'.
 { inputs, pkgs, ... }:
 {
   nix = {

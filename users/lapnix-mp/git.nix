@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/git.nix
-# Configure Git for user 'mp' on host 'lapnix'.
 { ... }:
 {
   home-manager.users.mp = {

@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/git.nix
-# Configure Git for user 'mp' on host 'desknix'.
 { ... }:
 {
   home-manager.users.mp = {

@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/obsidian.nix
-# Configure Obsidian for user 'mp' on host 'lapnix'.
 { ... }:
 {
   home-manager.users.mp = {

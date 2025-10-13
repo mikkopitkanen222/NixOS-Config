@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/nnn.nix
-# Configure N^3 for user 'mp' on host 'lapnix'.
 # https://github.com/jarun/nnn
 { pkgs, ... }:
 {

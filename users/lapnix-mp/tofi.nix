@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/tofi.nix
-# Configure Tofi for user 'mp' on host 'lapnix'.
 # https://github.com/philj56/tofi
 { pkgs, ... }:
 {

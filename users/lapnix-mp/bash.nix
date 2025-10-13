@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/bash.nix
-# Configure Bash shell for user 'mp' on host 'lapnix'.
 { ... }:
 {
   home-manager.users.mp = {
