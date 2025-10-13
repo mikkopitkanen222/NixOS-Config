@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/hyprland/keybinds.nix
-# Configure Hyprland keybindings for user 'mp' on host 'lapnix'.
 # https://wiki.hyprland.org/Configuring/Binds/
 { pkgs, ... }:
 {

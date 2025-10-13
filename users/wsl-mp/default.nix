@@ -1,5 +1,3 @@
-# nixos-config/users/wsl-mp/default.nix
-# Configure user 'mp' on host 'wsl'.
 { config, pkgs, ... }:
 {
   users.users.mp = {

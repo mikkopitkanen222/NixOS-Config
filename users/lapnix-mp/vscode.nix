@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/vscode.nix
-# Configure VSCode for user 'mp' on host 'lapnix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/kitty.nix
-# Configure Kitty terminal for user 'mp' on host 'lapnix'.
 # https://github.com/kovidgoyal/kitty
 {
   config,

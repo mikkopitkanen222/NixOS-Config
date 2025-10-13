@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/user-dirs.nix
-# Configure XDG user directories for user 'mp' on host 'desknix'.
 { config, ... }:
 {
   home-manager.users.mp = {

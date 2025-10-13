@@ -1,5 +1,3 @@
-# nixos-config/users/wsl-mp/nano.nix
-# Configure Nano editor for user 'mp' on host 'wsl'.
 { ... }:
 {
   home-manager.users.mp = {

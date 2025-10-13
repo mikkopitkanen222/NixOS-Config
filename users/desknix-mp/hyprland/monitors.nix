@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/monitors.nix
-# Configure Hyprland outputs for user 'mp' on host 'desknix'.
 # https://wiki.hypr.land/Configuring/Monitors/
 { ... }:
 {

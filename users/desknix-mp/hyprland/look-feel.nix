@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/look-feel.nix
-# Configure Hyprland look and feel for user 'mp' on host 'desknix'.
 # https://wiki.hyprland.org/Configuring/Variables/
 { pkgs, ... }:
 {

@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/user-dirs.nix
-# Configure XDG user directories for user 'mp' on host 'lapnix'.
 { config, ... }:
 {
   home-manager.users.mp = {

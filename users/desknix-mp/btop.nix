@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/btop.nix
-# Configure Btop for user 'mp' on host 'desknix'.
 # https://github.com/aristocratos/btop
 { pkgs, ... }:
 {

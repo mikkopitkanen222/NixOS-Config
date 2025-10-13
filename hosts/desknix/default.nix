@@ -1,5 +1,3 @@
-# nixos-config/hosts/desknix/default.nix
-# Configure host 'desknix'.
 { lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];

@@ -1,5 +1,3 @@
-# nixos-config/systems/lapnix-daily/sops.nix
-# Configure sops for system 'daily' on host 'lapnix'.
 # https://github.com/Mic92/sops-nix
 { config, inputs, ... }:
 {

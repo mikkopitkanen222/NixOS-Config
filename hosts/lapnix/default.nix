@@ -1,5 +1,3 @@
-# nixos-config/hosts/lapnix/default.nix
-# Configure host 'lapnix'.
 { lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];

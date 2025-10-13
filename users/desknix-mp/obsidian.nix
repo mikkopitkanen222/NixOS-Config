@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/obsidian.nix
-# Configure Obsidian for user 'mp' on host 'desknix'.
 { ... }:
 {
   home-manager.users.mp = {

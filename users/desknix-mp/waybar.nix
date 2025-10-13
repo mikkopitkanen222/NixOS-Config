@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/waybar.nix
-# Configure Waybar for user 'mp' on host 'desknix'.
 # https://github.com/Alexays/Waybar
 { lib, pkgs, ... }:
 {

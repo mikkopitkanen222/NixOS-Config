@@ -1,5 +1,3 @@
-# nixos-config/treefmt.nix
-# Configure formatter options.
 { ... }:
 {
   projectRootFile = "flake.nix";

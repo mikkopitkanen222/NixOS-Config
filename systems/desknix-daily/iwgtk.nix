@@ -1,5 +1,3 @@
-# nixos-config/systems/desknix-daily/iwgtk.nix
-# Configure iwgtk for system 'daily' on host 'desknix'.
 # https://github.com/j-lentz/iwgtk
 { pkgs, ... }:
 {

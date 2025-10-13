@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/chromium.nix
-# Configure Chromium browser for user 'mp' on host 'desknix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

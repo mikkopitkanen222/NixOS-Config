@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/clipse.nix
-# Configure Clipse for user 'mp' on host 'lapnix'.
 # https://github.com/savedra1/clipse
 { pkgs, ... }:
 {

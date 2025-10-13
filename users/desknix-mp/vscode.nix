@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/vscode.nix
-# Configure VSCode for user 'mp' on host 'desknix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

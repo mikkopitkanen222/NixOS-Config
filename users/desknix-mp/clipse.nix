@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/clipse.nix
-# Configure Clipse for user 'mp' on host 'desknix'.
 # https://github.com/savedra1/clipse
 { pkgs, ... }:
 {

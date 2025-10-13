@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/proton.nix
-# Configure Proton software suite for user 'mp' on host 'desknix'.
 { pkgs, ... }:
 {
   home-manager.users.mp = {

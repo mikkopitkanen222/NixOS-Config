@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/hyprpaper.nix
-# Configure Hyprpaper for user 'mp' on host 'desknix'.
 # https://github.com/hyprwm/hyprpaper
 { pkgs, ... }:
 {

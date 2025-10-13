@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/btop.nix
-# Configure Btop for user 'mp' on host 'lapnix'.
 # https://github.com/aristocratos/btop
 { ... }:
 {

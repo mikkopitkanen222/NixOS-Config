@@ -1,5 +1,3 @@
-# nixos-config/users/wsl-mp/bash.nix
-# Configure Bash shell for user 'mp' on host 'wsl'.
 { ... }:
 {
   home-manager.users.mp = {

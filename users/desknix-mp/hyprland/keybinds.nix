@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/hyprland/keybinds.nix
-# Configure Hyprland keybindings for user 'mp' on host 'desknix'.
 # https://wiki.hyprland.org/Configuring/Binds/
 { ... }:
 {

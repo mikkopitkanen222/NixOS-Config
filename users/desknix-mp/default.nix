@@ -1,5 +1,3 @@
-# nixos-config/users/desknix-mp/default.nix
-# Configure user 'mp' on host 'desknix'.
 { config, pkgs, ... }:
 {
   users.users.mp = {

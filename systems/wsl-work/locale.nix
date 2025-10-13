@@ -1,5 +1,3 @@
-# nixos-config/systems/wsl-work/locale.nix
-# Configure locale for system 'work' on host 'wsl'.
 { ... }:
 {
   time.timeZone = "Europe/Helsinki";

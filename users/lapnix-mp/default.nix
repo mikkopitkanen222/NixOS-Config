@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/default.nix
-# Configure user 'mp' on host 'lapnix'.
 { config, pkgs, ... }:
 {
   users.users.mp = {

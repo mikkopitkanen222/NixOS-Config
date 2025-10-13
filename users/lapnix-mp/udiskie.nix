@@ -1,5 +1,3 @@
-# nixos-config/users/lapnix-mp/udiskie.nix
-# Configure udiskie for user 'mp' on host 'lapnix'.
 # https://github.com/coldfix/udiskie
 { ... }:
 {
