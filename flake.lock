@@ -116,7 +116,8 @@
         "nixpkgs": "nixpkgs",
         "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix",
-        "vscode-server": "vscode-server"
+        "vscode-server": "vscode-server",
+        "wrapper-manager": "wrapper-manager"
       }
     },
     "sops-nix": {
@@ -192,6 +193,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixos-vscode-server",
+        "type": "github"
+      }
+    },
+    "wrapper-manager": {
+      "locked": {
+        "lastModified": 1757156862,
+        "narHash": "sha256-OGXsTE5jWhGiFfK6OwMvjksrYSobsIFUSUzKsexCDxY=",
+        "owner": "viperml",
+        "repo": "wrapper-manager",
+        "rev": "801dd9c876fcada046af45543e8c7e0bbccf20ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "viperml",
+        "repo": "wrapper-manager",
         "type": "github"
       }
     }

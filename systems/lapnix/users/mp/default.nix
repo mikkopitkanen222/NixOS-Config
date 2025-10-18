@@ -1,4 +1,19 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  wm-eval = inputs.wrapper-manager.lib {
+    inherit pkgs;
+    modules = [
+      inputs.self.wrappers.mp
+      { _module.args.systemConfig = config; }
+      { mp222 = { }; }
+    ];
+  };
+in
 {
   users.users.mp = {
     isNormalUser = true;
@@ -7,7 +22,7 @@
       "wheel"
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
-    # openssh.authorizedKeys.keys copied at activation time.
+    packages = builtins.attrValues wm-eval.config.build.packages;
   };
 
   system.activationScripts."cp-authorizedKeys-mp".text = ''
@@ -18,13 +33,10 @@
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;
-
     home = {
       username = "mp";
       homeDirectory = "/home/mp";
       stateVersion = "25.05";
-
-      # Lone packages without further config are installed here:
       packages = with pkgs; [
         # Image, Music & Video Viewers
         qimgv
@@ -40,7 +52,6 @@
     };
   };
 
-  # Packages requiring config are installed in modules imported here:
   imports = [
     ./hyprland
     ../../../desknix/users/mp/bash.nix
