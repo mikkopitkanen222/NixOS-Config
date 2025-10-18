@@ -1,20 +1,32 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  wm-eval = inputs.wrapper-manager.lib {
+    inherit pkgs;
+    modules = [
+      inputs.self.wrappers.mp
+      { mp222 = { }; }
+    ];
+  };
+in
 {
   users.users.mp = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
+    packages = builtins.attrValues wm-eval.config.build.packages;
   };
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;
-
     home = {
       username = "mp";
       homeDirectory = "/home/mp";
       stateVersion = "25.05";
-
-      # Lone packages without further config are installed here:
       packages = with pkgs; [
         # Work
         nixd
@@ -22,7 +34,6 @@
     };
   };
 
-  # Packages requiring config are installed in modules imported here:
   imports = [
     ./bash.nix
     ../../../desknix/users/mp/direnv.nix
