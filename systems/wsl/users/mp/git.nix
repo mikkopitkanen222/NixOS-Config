@@ -4,7 +4,7 @@
 
   home-manager.users.mp.programs.git = {
     signing.signByDefault = lib.mkForce false;
-    extraConfig.init.defaultBranch = lib.mkForce "main";
+    settings.init.defaultBranch = lib.mkForce "main";
     includes = [ { path = config.sops.templates."secret-gitconfig".path; } ];
   };
 
