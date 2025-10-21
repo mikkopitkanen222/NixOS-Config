@@ -21,30 +21,5 @@
         tabs -2
       '';
     };
-
-    programs.powerline-go = {
-      enable = true;
-      settings = {
-        hostname-only-if-ssh = true;
-        numeric-exit-codes = true;
-      };
-      extraUpdatePS1 = ''
-        PS1="\n$PS1"
-      '';
-      newline = true;
-      modules = [
-        "nix-shell"
-        "venv"
-        "user"
-        "host"
-        "ssh"
-        "cwd"
-        "perms"
-        "git"
-        "hg"
-        "jobs"
-        "exit"
-      ];
-    };
   };
 }

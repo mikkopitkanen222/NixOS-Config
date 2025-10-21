@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -10,7 +11,11 @@ let
     modules = [
       inputs.self.wrappers.mp
       { _module.args.systemConfig = config; }
-      { mp222 = { }; }
+      {
+        mp222 = {
+          starship.enable = true;
+        };
+      }
     ];
   };
 in
@@ -42,4 +47,13 @@ in
     ../../../desknix/users/mp/language.nix
     ../../../desknix/users/mp/nano.nix
   ];
+
+  # TODO: Move this to bash wrapper when bash is configured using WM.
+  # This must be here for now, because wm-eval is not available in other modules.
+  # In wrapper modules it is "implicitly" available: config.build.packages.starship works.
+  home-manager.users.mp.programs.bash.initExtra = ''
+    if [[ $TERM != "dumb" ]]; then
+      eval "$(${lib.getExe wm-eval.config.build.packages.starship} init bash --print-full-init)"
+    fi
+  '';
 }
