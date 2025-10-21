@@ -13,7 +13,5 @@ in
       in
       lib.removeAttrs aliases [ "code" ]
     );
-
-    powerline-go.settings.mode = "flat";
   };
 }
