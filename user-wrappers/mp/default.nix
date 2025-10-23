@@ -1,4 +1,7 @@
 { ... }:
 {
-  imports = [ ./prompt.nix ];
+  imports = [
+    ./git.nix
+    ./prompt.nix
+  ];
 }

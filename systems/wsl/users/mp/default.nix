@@ -13,6 +13,13 @@ let
       { _module.args.systemConfig = config; }
       {
         mp222 = {
+          git = {
+            enable = true;
+            includes = ''
+              [include]
+                path = ${config.sops.templates."secret-gitconfig".path}
+            '';
+          };
           starship.enable = true;
         };
       }
@@ -43,10 +50,17 @@ in
   imports = [
     ./bash.nix
     ../../../desknix/users/mp/direnv.nix
-    ./git.nix
     ../../../desknix/users/mp/language.nix
     ../../../desknix/users/mp/nano.nix
   ];
+
+  sops.templates."secret-gitconfig" = {
+    content = ''
+      [user]
+        email = "${config.sops.placeholder."work_email"}"
+    '';
+    owner = config.users.users.mp.name;
+  };
 
   # TODO: Move this to bash wrapper when bash is configured using WM.
   # This must be here for now, because wm-eval is not available in other modules.
