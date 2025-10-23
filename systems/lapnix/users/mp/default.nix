@@ -12,6 +12,7 @@ let
       inputs.self.wrappers.mp
       {
         mp222 = {
+          git.enable = true;
           starship.enable = true;
         };
       }
@@ -63,7 +64,6 @@ in
     ../../../desknix/users/mp/chromium.nix
     ../../../desknix/users/mp/clipse.nix
     ../../../desknix/users/mp/direnv.nix
-    ../../../desknix/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/language.nix
