@@ -116,5 +116,11 @@ in
       basePackage = cfg.package;
       env.STARSHIP_CONFIG.value = starshipToml;
     };
+
+    mp222.zsh.interactiveShellInit = lib.optionalString config.mp222.zsh.enable ''
+      if [[ $TERM != "dumb" ]]; then
+        eval "$(${lib.getExe config.build.packages.starship} init zsh)"
+      fi
+    '';
   };
 }

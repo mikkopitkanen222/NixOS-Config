@@ -15,6 +15,23 @@ let
         mp222 = {
           git.enable = true;
           starship.enable = true;
+          zsh = {
+            enable = true;
+            # TODO: Move to hyprland (when wrapped) or to a greeter (when setup)
+            loginShellInit = ''
+              if uwsm check may-start; then
+                exec uwsm start hyprland-uwsm.desktop
+              fi
+            '';
+            # TODO: Move to direnv (when wrapped)
+            interactiveShellInit = lib.optionalString config.home-manager.users.mp.programs.direnv.enable ''
+              eval "$(${lib.getExe config.home-manager.users.mp.programs.direnv.package} hook zsh)"
+            '';
+            # TODO: Move to vscode (when wrapped)
+            shellAliases = {
+              "code" = "codium";
+            };
+          };
         };
       }
     ];
@@ -29,6 +46,7 @@ in
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
     packages = builtins.attrValues wm-eval.config.build.packages;
+    shell = wm-eval.config.build.packages.zsh;
   };
 
   system.activationScripts."cp-authorizedKeys-mp".text = ''
@@ -62,7 +80,6 @@ in
 
   imports = [
     ./hyprland
-    ./bash.nix
     ./btop.nix
     ./chromium.nix
     ./clipse.nix
@@ -84,13 +101,4 @@ in
     ./vscode.nix
     ./waybar.nix
   ];
-
-  # TODO: Move this to bash wrapper when bash is configured using WM.
-  # This must be here for now, because wm-eval is not available in other modules.
-  # In wrapper modules it is "implicitly" available: config.build.packages.starship works.
-  home-manager.users.mp.programs.bash.initExtra = ''
-    if [[ $TERM != "dumb" ]]; then
-      eval "$(${lib.getExe wm-eval.config.build.packages.starship} init bash --print-full-init)"
-    fi
-  '';
 }

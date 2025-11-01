@@ -20,13 +20,6 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   home-manager.users.mp = {
-    # Launch Hyprland upon login in tty; There is no display manager.
-    programs.bash.profileExtra = ''
-      if uwsm check may-start; then
-        exec uwsm start hyprland-uwsm.desktop
-      fi
-    '';
-
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = false;
