@@ -6,7 +6,11 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.loader = {
-    systemd-boot.enable = true;
+    timeout = 0;
+    systemd-boot = {
+      enable = true;
+      consoleMode = "max";
+    };
     efi.canTouchEfiVariables = true;
   };
 

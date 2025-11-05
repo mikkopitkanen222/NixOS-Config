@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./boot-splash.nix
     ../desknix/games.nix
     ../desknix/iwgtk.nix
     ../desknix/locale.nix

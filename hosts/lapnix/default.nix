@@ -11,6 +11,7 @@
   boot.zfs.package = pkgs.zfs_unstable;
 
   boot.loader = {
+    timeout = 0;
     grub = {
       enable = true;
       device = "nodev";
