@@ -1,7 +1,9 @@
 { ... }:
 {
-  home-manager.users.mp = {
-    xdg.configFile."nano/nanorc".text = ''
+  programs.nano = {
+    enable = true;
+    syntaxHighlight = true;
+    nanorc = ''
       set autoindent
       set linenumbers
       set mouse

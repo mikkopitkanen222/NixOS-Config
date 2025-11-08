@@ -58,7 +58,6 @@ in
   imports = [
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/language.nix
-    ../../../desknix/users/mp/nano.nix
   ];
 
   sops.templates."secret-gitconfig" = {

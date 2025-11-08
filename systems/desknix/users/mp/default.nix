@@ -17,7 +17,7 @@ let
           starship.enable = true;
           zsh = {
             enable = true;
-            # TODO: Move to hyprland (when wrapped) or to a greeter (when setup)
+            # TODO: Move to hyprland (when wrapped)
             loginShellInit = ''
               if [[ "$(tty)" = "/dev/tty1" ]] && uwsm check may-start; then
                 exec uwsm start hyprland-uwsm.desktop
@@ -87,7 +87,6 @@ in
     ./gtk.nix
     ./kitty.nix
     ./language.nix
-    ./nano.nix
     ./nnn.nix
     ./obsidian.nix
     ./proton.nix

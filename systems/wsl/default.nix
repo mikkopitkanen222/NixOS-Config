@@ -9,6 +9,7 @@ in
     ../lapnix/nixos.nix
     ../desknix/smartcard-crypto.nix
     ../desknix/sops.nix
+    ../desknix/terminal-text-editor.nix
     ../desknix/vscode-server.nix
   ]
   ++ (lib.map (user: ./. + "/users/${user}") users);
