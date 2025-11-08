@@ -55,10 +55,7 @@ in
     };
   };
 
-  imports = [
-    ../../../desknix/users/mp/direnv.nix
-    ../../../desknix/users/mp/language.nix
-  ];
+  imports = [ ../../../desknix/users/mp/direnv.nix ];
 
   sops.templates."secret-gitconfig" = {
     content = ''

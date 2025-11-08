@@ -84,7 +84,6 @@ in
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/gtk.nix
     ../../../desknix/users/mp/kitty.nix
-    ../../../desknix/users/mp/language.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
     ../../../desknix/users/mp/proton.nix
