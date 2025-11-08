@@ -1,7 +1,5 @@
 { lib, pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
-
   system.stateVersion = "25.05";
   boot.kernelPackages = pkgs.linuxPackages_6_17;
 

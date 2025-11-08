@@ -5,13 +5,14 @@
   ...
 }:
 let
-  host = "desknix";
   users = [ "mp" ];
 in
 {
   imports = [
     ./boot-splash.nix
     ./games.nix
+    ./hardware-configuration.nix
+    ./host-configuration.nix
     ./iwgtk.nix
     ./locale.nix
     ./nixos.nix
@@ -22,7 +23,6 @@ in
     ./sops.nix
     ./vscode-server.nix
   ]
-  ++ (lib.singleton (./. + "/../../hosts/${host}"))
   ++ (lib.map (user: ./. + "/users/${user}") users);
 
   # Lone packages without further config are installed here:
