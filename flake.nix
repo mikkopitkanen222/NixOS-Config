@@ -45,23 +45,6 @@
       eachSystem =
         f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
-
-      makeConfig =
-        {
-          host,
-          system,
-          users,
-          extraModules ? [ ],
-        }:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            (./. + "/hosts/${host}")
-            (./. + "/systems/${system}")
-          ]
-          ++ (nixpkgs.lib.map (user: ./. + "/systems/${system}/users/${user}") users)
-          ++ extraModules;
-        };
     in
     {
       # > nix fmt
@@ -79,23 +62,19 @@
 
       # > nixos-rebuild ...
       nixosConfigurations = {
-        desknix = makeConfig {
-          host = "desknix";
-          system = "desknix";
-          users = [ "mp" ];
+        desknix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./systems/desknix ];
         };
 
-        lapnix = makeConfig {
-          host = "lapnix";
-          system = "lapnix";
-          users = [ "mp" ];
+        lapnix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./systems/lapnix ];
         };
 
-        wsl = makeConfig {
-          host = "wsl";
-          system = "wsl";
-          users = [ "mp" ];
-          extraModules = [ { wsl.defaultUser = "mp"; } ];
+        wsl = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./systems/wsl ];
         };
       };
     };

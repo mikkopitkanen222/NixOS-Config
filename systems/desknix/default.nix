@@ -1,4 +1,13 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  host = "desknix";
+  users = [ "mp" ];
+in
 {
   imports = [
     ./games.nix
@@ -11,7 +20,9 @@
     ./smartcard-crypto.nix
     ./sops.nix
     ./vscode-server.nix
-  ];
+  ]
+  ++ (lib.singleton (./. + "/../../hosts/${host}"))
+  ++ (lib.map (user: ./. + "/users/${user}") users);
 
   # Lone packages without further config are installed here:
   environment.systemPackages = with pkgs; [ tree ];
