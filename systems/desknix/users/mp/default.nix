@@ -19,7 +19,7 @@ let
             enable = true;
             # TODO: Move to hyprland (when wrapped) or to a greeter (when setup)
             loginShellInit = ''
-              if uwsm check may-start; then
+              if [[ "$(tty)" = "/dev/tty1" ]] && uwsm check may-start; then
                 exec uwsm start hyprland-uwsm.desktop
               fi
             '';

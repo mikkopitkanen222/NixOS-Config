@@ -31,6 +31,11 @@ in
   # Overlays output by our flake are enabled here:
   nixpkgs.overlays = [ ];
 
+  services.getty = {
+    autologinUser = lib.head users;
+    autologinOnce = true;
+  };
+
   mp222.enableFactorio = true;
 
   sops.secrets = {
