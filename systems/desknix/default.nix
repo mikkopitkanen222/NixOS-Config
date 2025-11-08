@@ -21,6 +21,7 @@ in
     ./security.nix
     ./smartcard-crypto.nix
     ./sops.nix
+    ./terminal-text-editor.nix
     ./vscode-server.nix
   ]
   ++ (lib.map (user: ./. + "/users/${user}") users);
