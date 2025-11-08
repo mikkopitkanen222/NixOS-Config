@@ -63,6 +63,7 @@ in
       stateVersion = "25.05";
       packages = with pkgs; [
         # Downtime
+        bolt-launcher
         bs-manager
         # Image, Music & Video Viewers
         qimgv
