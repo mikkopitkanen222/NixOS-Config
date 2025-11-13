@@ -24,14 +24,15 @@ let
       # combined with user level configuration in this file ($ZDOTDIR/.zshenv).
 
       # Only execute this file once per shell.
-      if [ -n "''${__ZDOTDIR_ZSHENV_SOURCED-}" ]; then
-        return;
-      fi
+      if [[ -n "''${__ZDOTDIR_ZSHENV_SOURCED-}" ]]; then return; fi
       __ZDOTDIR_ZSHENV_SOURCED=1
 
-      if [ -z "''${__NIXOS_SET_ENVIRONMENT_DONE-}" ]; then
-        source ${systemConfig.system.build.setEnvironment}
+      if [[ -z "''${__NIXOS_SET_ENVIRONMENT_DONE-}" ]]; then
+        . ${systemConfig.system.build.setEnvironment}
       fi
+
+      # TODO: Get rid of HM
+      . "${systemConfig.home-manager.users.mp.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"
 
       HELPDIR="${cfg.package}/share/zsh/$ZSH_VERSION/help"
 
@@ -58,9 +59,7 @@ let
       # combined with user level configuration in this file ($ZDOTDIR/.zprofile).
 
       # Only execute this file once per shell.
-      if [ -n "''${__ZDOTDIR_ZPROFILE_SOURCED-}" ]; then
-        return;
-      fi
+      if [[ -n "''${__ZDOTDIR_ZPROFILE_SOURCED-}" ]]; then return; fi
       __ZDOTDIR_ZPROFILE_SOURCED=1
 
       # Setup custom system level login shell init stuff.
@@ -80,16 +79,24 @@ let
       # combined with user level configuration in this file ($ZDOTDIR/.zshrc).
 
       # Only execute this file once per shell.
-      if [ -n "$__ZDOTDIR_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
-        return;
-      fi
+      if [ -n "$__ZDOTDIR_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then return; fi
       __ZDOTDIR_ZSHRC_SOURCED=1
 
+      ## Nämä on mallista, jossa tulee ehdottomasti. Selvitä mitä tekee.
+      typeset -U path cdpath fpath manpath
+
+      for profile in ''${(z)NIX_PROFILES}; do
+        fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
+      done
+
+      HELPDIR="${cfg.package}/share/zsh/$ZSH_VERSION/help"
+      ##
+
       # Set zsh options.
+      setopt NO_AUTO_CD
       setopt NO_BEEP
       setopt NOMATCH
       setopt NOTIFY
-      unsetopt AUTO_CD
 
       # Alternative method of determining short and full hostname.
       HOST=${systemConfig.networking.fqdnOrHostName}
@@ -118,6 +125,7 @@ let
       key[Right]=''${terminfo[kcuf1]}
       key[PageUp]=''${terminfo[kpp]}
       key[PageDown]=''${terminfo[knp]}
+      # TODO: ctrl+left, ctrl+right don't work!
 
       # setup key accordingly
       [[ -n "''${key[Home]}"     ]] && bindkey "''${key[Home]}"     beginning-of-line
@@ -168,12 +176,12 @@ let
       autoload -U bashcompinit && bashcompinit
 
       # Enable autosuggestions.
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#00ddff,bold"
+      . ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       export ZSH_AUTOSUGGEST_STRATEGY=(history)
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#00ddff,bold"
 
       # Enable syntax highlighting.
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      . ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
 
       # Extra colors for directory listings.
@@ -255,3 +263,12 @@ in
     };
   };
 }
+
+# TODO: Jatka riviltä 453 https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh/default.nix#L453
+# source -> .
+# [ ] -> [[ ]]  paitsi rc
+# ${v-} expandaa tyhjään stringiin, jos v ei ole asetettu
+# Mieti tarviiko jotain siirtää systeemitasolle rootia varten
+# --Käy läpi HM konffia ja tarkista puuttuuko omasta wrapperistä jotain--
+# Järjestele asiat samoin kuin yllä linkissä
+# Mieti pitäisikö jotain siirtää muihin filuihin (.env <-> .profile <-> .rc)
