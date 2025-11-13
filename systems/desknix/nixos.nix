@@ -32,4 +32,7 @@
 
   # Deterministic, declarative user configuration.
   users.mutableUsers = false;
+
+  # Get completion for system packages in zsh.
+  environment.pathsToLink = [ "/share/zsh" ];
 }

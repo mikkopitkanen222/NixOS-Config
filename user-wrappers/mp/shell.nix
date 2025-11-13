@@ -9,6 +9,7 @@
 let
   cfg = config.mp222.zsh;
 
+  # Taken from [1]
   zshAliases = builtins.concatStringsSep "\n" (
     lib.mapAttrsToList (k: v: "alias -- ${k}=${lib.escapeShellArg v}") (
       lib.filterAttrs (k: v: v != null) cfg.shellAliases
@@ -18,31 +19,30 @@ let
   zshenv = pkgs.writeTextFile {
     name = "mp-zshenv";
     text = ''
-      # The NixOS zsh options write the global init files in /etc.  We do not install
-      # zsh using the NixOS options, but by using wrapper-manager, which does not
-      # write anything in /etc.  Configuration normally found in /etc/zshenv is
-      # combined with user level configuration in this file ($ZDOTDIR/.zshenv).
+      # The global zsh init files are written to /etc when zsh is installed on
+      # the system level.  We install zsh only on the user level, so we don't
+      # read anything from /etc.  All system level configuration normally found
+      # in /etc/zshenv is combined with user level configuration in this file
+      # ($ZDOTDIR/.zshenv).
+
+      setopt no_global_rcs
 
       # Only execute this file once per shell.
-      if [ -n "''${__ZDOTDIR_ZSHENV_SOURCED-}" ]; then
-        return;
-      fi
+      if [ -n "''${__ZDOTDIR_ZSHENV_SOURCED-}" ]; then return; fi
       __ZDOTDIR_ZSHENV_SOURCED=1
 
+      # Source system level variables from NixOS modules.
       if [ -z "''${__NIXOS_SET_ENVIRONMENT_DONE-}" ]; then
-        source ${systemConfig.system.build.setEnvironment}
+        . ${systemConfig.system.build.setEnvironment}
       fi
 
-      HELPDIR="${cfg.package}/share/zsh/$ZSH_VERSION/help"
-
-      # Tell zsh how to find installed completions.
-      fpath=(${pkgs.nix-zsh-completions}/share/zsh/site-functions $fpath)
+      # TODO: Get rid of HM.
+      #       Does zsh wrapper need an option for variables for use in other wrappers? Or is wrappers.xxx.env enough?
+      # Source user level variables from Home-Manager modules.
+      . "${systemConfig.home-manager.users.mp.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh"
 
       # Setup custom system level global shell init stuff.
       ${systemConfig.environment.shellInit}
-
-      # Like already mentioned, there should be no zsh init files in /etc.
-      unsetopt GLOBAL_RCS
 
       # Setup custom user level global shell init stuff.
       ${cfg.shellInit}
@@ -52,15 +52,14 @@ let
   zprofile = pkgs.writeTextFile {
     name = "mp-zprofile";
     text = ''
-      # The NixOS zsh options write the global init files in /etc.  We do not install
-      # zsh using the NixOS options, but by using wrapper-manager, which does not
-      # write anything in /etc.  Configuration normally found in /etc/zprofile is
-      # combined with user level configuration in this file ($ZDOTDIR/.zprofile).
+      # The global zsh init files are written to /etc when zsh is installed on
+      # the system level.  We install zsh only on the user level, so we don't
+      # read anything from /etc.  All system level configuration normally found
+      # in /etc/zprofile is combined with user level configuration in this file
+      # ($ZDOTDIR/.zprofile).
 
       # Only execute this file once per shell.
-      if [ -n "''${__ZDOTDIR_ZPROFILE_SOURCED-}" ]; then
-        return;
-      fi
+      if [ -n "''${__ZDOTDIR_ZPROFILE_SOURCED-}" ]; then return; fi
       __ZDOTDIR_ZPROFILE_SOURCED=1
 
       # Setup custom system level login shell init stuff.
@@ -74,35 +73,28 @@ let
   zshrc = pkgs.writeTextFile {
     name = "mp-zshrc";
     text = ''
-      # The NixOS zsh options write the global init files in /etc.  We do not install
-      # zsh using the NixOS options, but by using wrapper-manager, which does not
-      # write anything in /etc.  Configuration normally found in /etc/zshrc is
-      # combined with user level configuration in this file ($ZDOTDIR/.zshrc).
+      # The global zsh init files are written to /etc when zsh is installed on
+      # the system level.  We install zsh only on the user level, so we don't
+      # read anything from /etc.  All system level configuration normally found
+      # in /etc/zshrc is combined with user level configuration in this file
+      # ($ZDOTDIR/.zshrc).
 
       # Only execute this file once per shell.
-      if [ -n "$__ZDOTDIR_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then
-        return;
-      fi
+      if [ -n "$__ZDOTDIR_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then return; fi
       __ZDOTDIR_ZSHRC_SOURCED=1
 
-      # Set zsh options.
-      setopt NO_BEEP
-      setopt NOMATCH
-      setopt NOTIFY
-      unsetopt AUTO_CD
+      typeset -U path cdpath fpath manpath
+
+      # Tell zsh how to find installed completions.
+      for profile in ''${(z)NIX_PROFILES}; do
+        fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
+      done
+      fpath=(${pkgs.nix-zsh-completions}/share/zsh/site-functions $fpath)
+
+      HELPDIR="${cfg.package}/share/zsh/$ZSH_VERSION/help"
 
       # Alternative method of determining short and full hostname.
       HOST=${systemConfig.networking.fqdnOrHostName}
-
-      # Setup command line history.
-      setopt APPEND_HISTORY
-      setopt HIST_SAVE_NO_DUPS
-      setopt HIST_IGNORE_SPACE
-      setopt HIST_REDUCE_BLANKS
-      # Don't export these, otherwise other shells (bash) will try to use same HISTFILE.
-      SAVEHIST=10000
-      HISTSIZE=10000
-      HISTFILE=$HOME/.zsh_history
 
       # Configure sane keyboard defaults.
       bindkey -e
@@ -118,17 +110,21 @@ let
       key[Right]=''${terminfo[kcuf1]}
       key[PageUp]=''${terminfo[kpp]}
       key[PageDown]=''${terminfo[knp]}
+      key[CtrlLeft]="^[[1;5D"
+      key[CtrlRight]="^[[1;5C"
 
       # setup key accordingly
-      [[ -n "''${key[Home]}"     ]] && bindkey "''${key[Home]}"     beginning-of-line
-      [[ -n "''${key[End]}"      ]] && bindkey "''${key[End]}"      end-of-line
-      [[ -n "''${key[Delete]}"   ]] && bindkey "''${key[Delete]}"   delete-char
-      [[ -n "''${key[Up]}"       ]] && bindkey "''${key[Up]}"       up-line-or-history
-      [[ -n "''${key[Down]}"     ]] && bindkey "''${key[Down]}"     down-line-or-history
-      [[ -n "''${key[Left]}"     ]] && bindkey "''${key[Left]}"     backward-char
-      [[ -n "''${key[Right]}"    ]] && bindkey "''${key[Right]}"    forward-char
-      [[ -n "''${key[PageUp]}"   ]] && bindkey "''${key[PageUp]}"   beginning-of-buffer-or-history
-      [[ -n "''${key[PageDown]}" ]] && bindkey "''${key[PageDown]}" end-of-buffer-or-history
+      [[ -n "''${key[Home]}"      ]] && bindkey "''${key[Home]}"      beginning-of-line
+      [[ -n "''${key[End]}"       ]] && bindkey "''${key[End]}"       end-of-line
+      [[ -n "''${key[Delete]}"    ]] && bindkey "''${key[Delete]}"    delete-char
+      [[ -n "''${key[Up]}"        ]] && bindkey "''${key[Up]}"        up-line-or-history
+      [[ -n "''${key[Down]}"      ]] && bindkey "''${key[Down]}"      down-line-or-history
+      [[ -n "''${key[Left]}"      ]] && bindkey "''${key[Left]}"      backward-char
+      [[ -n "''${key[Right]}"     ]] && bindkey "''${key[Right]}"     forward-char
+      [[ -n "''${key[PageUp]}"    ]] && bindkey "''${key[PageUp]}"    beginning-of-buffer-or-history
+      [[ -n "''${key[PageDown]}"  ]] && bindkey "''${key[PageDown]}"  end-of-buffer-or-history
+      [[ -n "''${key[CtrlLeft]}"  ]] && bindkey "''${key[CtrlLeft]}"  backward-word
+      [[ -n "''${key[CtrlRight]}" ]] && bindkey "''${key[CtrlRight]}" forward-word
 
       # Finally, make sure the terminal is in application mode, when zle is
       # active. Only then are the values from $terminfo valid.
@@ -144,6 +140,7 @@ let
       fi
 
       # Enable autocompletion.
+      autoload -U compinit && compinit
       zstyle ':completion:*' completer _complete _ignored _match _approximate
       zstyle ':completion:*' completions 1
       zstyle ':completion:*' glob 1
@@ -162,18 +159,38 @@ let
       zstyle ':completion:*' squeeze-slashes true
       zstyle ':completion:*' substitute 1
       zstyle ':completion:*' verbose true
-      autoload -U compinit && compinit
 
       # Enable compatibility with bash's completion system.
       autoload -U bashcompinit && bashcompinit
 
       # Enable autosuggestions.
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#00ddff,bold"
+      . ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       export ZSH_AUTOSUGGEST_STRATEGY=(history)
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#00ddff,bold"
+
+      # Set zsh options.
+      setopt no_auto_cd
+      setopt no_beep
+      setopt nomatch
+      setopt notify
+
+      # Setup command line history.
+      setopt append_history
+      setopt hist_save_no_dups
+      setopt hist_ignore_space
+      setopt hist_reduce_blanks
+      # Don't export these, otherwise other shells (bash) will try to use same HISTFILE.
+      SAVEHIST=10000
+      HISTSIZE=10000
+      HISTFILE=$HOME/.zsh_history
+
+      # Setup aliases.
+      alias -- ..='cd ..'
+      alias -- ...='cd ../..'
+      ${zshAliases}
 
       # Enable syntax highlighting.
-      source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      . ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
       ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
 
       # Extra colors for directory listings.
@@ -185,12 +202,7 @@ let
       # Setup custom user level interactive shell init stuff.
       tabs -2
       ${cfg.interactiveShellInit}
-
-      # Setup aliases.
-      alias -- ..='cd ..'
-      alias -- ...='cd ../..'
-      ${zshAliases}
-    '';
+    ''; # [2]
   };
 
   zdotdir = pkgs.stdenv.mkDerivation {
@@ -206,10 +218,11 @@ let
 in
 {
   options.mp222.zsh = {
-    enable = lib.mkEnableOption "the ZSH shell";
+    enable = lib.mkEnableOption "the zsh shell";
 
     package = lib.mkPackageOption pkgs "zsh" { };
 
+    # Taken from [1]
     shellAliases = lib.mkOption {
       type = with lib.types; attrsOf (nullOr (either str path));
       default = { };
@@ -239,6 +252,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Adapted from [1]
     mp222.zsh.shellAliases = builtins.mapAttrs (
       name: lib.mkDefault
     ) systemConfig.environment.shellAliases;
@@ -255,3 +269,7 @@ in
     };
   };
 }
+
+# References:
+# [1] https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/zsh/zsh.nix
+# [2] https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh/default.nix
