@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 let
   users = [ "mp" ];
 in
@@ -21,7 +26,7 @@ in
   ];
 
   # Overlays output by our flake are enabled here:
-  nixpkgs.overlays = [ ];
+  nixpkgs.overlays = [ inputs.self.outputs.overlays.nixpkgs-unstable ];
 
   wsl.defaultUser = lib.head users;
 

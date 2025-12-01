@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -30,7 +31,7 @@ in
   environment.systemPackages = with pkgs; [ tree ];
 
   # Overlays output by our flake are enabled here:
-  nixpkgs.overlays = [ ];
+  nixpkgs.overlays = [ inputs.self.outputs.overlays.nixpkgs-unstable ];
 
   services.getty = {
     autologinUser = lib.head users;
