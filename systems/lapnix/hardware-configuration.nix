@@ -17,68 +17,15 @@
     "usbhid"
     "sdhci_pci"
   ];
-  boot.initrd.kernelModules = [
-    "dm-snapshot"
-    "vfat"
-    "nls_cp437"
-    "nls_iso8859-1"
-    "usbhid"
-  ];
   boot.kernelModules = [
     "kvm-amd"
     "k10temp"
   ];
 
-  boot.initrd.luks = {
-    yubikeySupport = true;
-    devices = {
-      crypted-nixos = {
-        device = "/dev/disk/by-uuid/b0eb28f6-6f1b-4435-a9d2-358add796510";
-        preLVM = true;
-        yubikey = {
-          slot = 2;
-          twoFactor = true;
-          storage = {
-            device = "/dev/disk/by-uuid/BA47-056D";
-          };
-        };
-      };
-    };
+  boot.initrd = {
+    systemd.enable = true;
+    luks.devices."crypted".device = "/dev/disk/by-partlabel/luks";
   };
-
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "2f505119";
-  fileSystems = {
-    # nvme-SAMSUNG_MZAL8512HDLU-00BL2:
-    "/boot" = {
-      device = "/dev/disk/by-uuid/BA47-056D";
-      fsType = "vfat";
-      options = [
-        "fmask=0022"
-        "dmask=0022"
-      ];
-    };
-    "/" = {
-      device = "rpool/local/root";
-      fsType = "zfs";
-    };
-    "/nix" = {
-      device = "rpool/local/nix";
-      fsType = "zfs";
-    };
-    "/home" = {
-      device = "rpool/safe/home";
-      fsType = "zfs";
-    };
-    "/persist" = {
-      device = "rpool/safe/persist";
-      fsType = "zfs";
-    };
-  };
-
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/07e77238-58cc-4601-9202-681f975675ed"; }
-  ];
 
   # AMD Ryzen 5 5500U:
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

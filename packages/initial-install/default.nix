@@ -7,6 +7,8 @@ stdenvNoCC.mkDerivation {
       ./configuration.nix
       ./first-boot.sh
       ./install.sh
+      ../../systems/lapnix/disko.nix
+      ../../systems/lapnix/hardware-configuration.nix
     ];
   };
   installPhase = ''

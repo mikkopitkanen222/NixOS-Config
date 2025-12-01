@@ -60,7 +60,7 @@ in
     home = {
       username = "mp";
       homeDirectory = "/home/mp";
-      stateVersion = "25.05";
+      stateVersion = "25.11";
       packages = with pkgs; [
         # Image, Music & Video Viewers
         qimgv

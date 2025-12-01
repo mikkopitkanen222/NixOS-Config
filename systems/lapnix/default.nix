@@ -10,7 +10,9 @@ let
 in
 {
   imports = [
-    ./boot-splash.nix
+    inputs.disko.nixosModules.disko
+    ../desknix/boot-splash.nix
+    ./disko.nix
     ../desknix/games.nix
     ./hardware-configuration.nix
     ./host-configuration.nix
