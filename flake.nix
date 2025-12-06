@@ -48,20 +48,36 @@
       treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
     {
-      # > nix fmt
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
 
-      # > nix flake check
       checks = eachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
+
+      packages = eachSystem (pkgs: {
+        initial-install = pkgs.callPackage ./packages/initial-install { };
+      });
+
+      apps = eachSystem (
+        pkgs:
+        let
+          inherit (pkgs) system;
+          inherit (self.packages.${system}) initial-install;
+        in
+        {
+          default = self.apps.${system}.install;
+          install = {
+            type = "app";
+            program = "${initial-install}/bin/install.sh";
+          };
+        }
+      );
 
       # Modules and overlays used in configurations.
       nixosModules = import ./modules { inherit inputs; };
       overlays = import ./overlays { inherit inputs; };
       wrappers = import ./user-wrappers { inherit inputs; };
 
-      # > nixos-rebuild ...
       nixosConfigurations = {
         desknix = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
