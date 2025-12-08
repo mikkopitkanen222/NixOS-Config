@@ -15,6 +15,7 @@
         "mmioliijnhnoblpgimnlajmefafdfilb" # Shazam
         "jdocbkpgdakpekjlhemmfcncgdjeiika" # Absolute Enable Right Click
       ];
+      commandLineArgs = [ "--disable-features=WaylandWpColorManagerV1" ];
     };
   };
 }
