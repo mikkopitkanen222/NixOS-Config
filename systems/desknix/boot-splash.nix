@@ -3,9 +3,9 @@
   boot = {
     plymouth = {
       enable = true;
-      theme = "glitch";
+      theme = "dragon";
       themePackages = with pkgs; [
-        (adi1090x-plymouth-themes.override { selected_themes = [ "glitch" ]; })
+        (adi1090x-plymouth-themes.override { selected_themes = [ "dragon" ]; })
       ];
     };
 
