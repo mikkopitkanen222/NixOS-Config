@@ -9,7 +9,7 @@
       settings = {
         hide-cursor = true;
         text-cursor = true;
-        matching-algorithm = "fuzzy";
+        fuzzy-match = true;
         drun-launch = true;
         ascii-input = true;
         font = "${pkgs.nerd-fonts.hack}/share/fonts/truetype/NerdFonts/Hack/HackNerdFont-Regular.ttf";
