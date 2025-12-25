@@ -62,6 +62,8 @@ in
       homeDirectory = "/home/mp";
       stateVersion = "25.11";
       packages = with pkgs; [
+        # Downtime
+        bolt-launcher
         # Image, Music & Video Viewers
         qimgv
         vlc
