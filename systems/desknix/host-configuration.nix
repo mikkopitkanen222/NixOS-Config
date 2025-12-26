@@ -14,7 +14,6 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-    bluetooth.enable = true;
     keyboard.qmk.enable = true;
     logitech.wireless = {
       enable = true;

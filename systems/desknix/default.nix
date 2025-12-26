@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    ./bluetooth.nix
     ./boot-splash.nix
     ./games.nix
     ./hardware-configuration.nix
@@ -17,7 +18,6 @@ in
     ./iwgtk.nix
     ./locale.nix
     ./nixos.nix
-    ./overskride.nix
     ./pipewire.nix
     ./security.nix
     ./smartcard-crypto.nix

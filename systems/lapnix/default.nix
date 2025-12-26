@@ -11,6 +11,7 @@ in
 {
   imports = [
     inputs.disko.nixosModules.disko
+    ../desknix/bluetooth.nix
     ../desknix/boot-splash.nix
     ./disko.nix
     ../desknix/games.nix
@@ -19,7 +20,6 @@ in
     ../desknix/iwgtk.nix
     ../desknix/locale.nix
     ./nixos.nix
-    ../desknix/overskride.nix
     ../desknix/pipewire.nix
     ../desknix/security.nix
     ../desknix/smartcard-crypto.nix

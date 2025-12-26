@@ -12,10 +12,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  hardware = {
-    enableRedistributableFirmware = true;
-    bluetooth.enable = true;
-  };
+  hardware.enableRedistributableFirmware = true;
 
   networking = {
     hostName = "lapnix";
