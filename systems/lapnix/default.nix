@@ -19,7 +19,6 @@ in
     ../desknix/iwgtk.nix
     ../desknix/locale.nix
     ./nixos.nix
-    ../desknix/overskride.nix
     ../desknix/pipewire.nix
     ../desknix/security.nix
     ../desknix/smartcard-crypto.nix

@@ -7,7 +7,6 @@
     modules-right = lib.mkForce [
       "custom/notifications"
       "tray"
-      "bluetooth"
       "wireplumber"
       "network"
       "battery"

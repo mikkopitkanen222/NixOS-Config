@@ -22,7 +22,6 @@
           modules-right = [
             "custom/notifications"
             "tray"
-            "bluetooth"
             "wireplumber"
             "network"
             "group/resources"
@@ -40,27 +39,6 @@
               transition-left-to-right = false;
               click-to-reveal = true;
             };
-          };
-
-          bluetooth = {
-            format = " {status}";
-            format-disabled = "󰂲!";
-            format-off = "󰂲";
-            format-on = "";
-            format-connected = "󰂱";
-            format-connected-battery = "󰂱 {device_battery_percentage}%";
-            on-click = "overskride";
-            tooltip-format = lib.strings.trim ''
-              {controller_alias}
-              {num_connections} connected
-            '';
-            tooltip-format-connected = lib.strings.trim ''
-              {controller_alias}
-              {num_connections} connected:
-              {device_enumerate}
-            '';
-            tooltip-format-enumerate-connected = "{device_alias}";
-            tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_battery_percentage}%";
           };
 
           clock = {
@@ -343,7 +321,6 @@
         }
 
         #battery,
-        #bluetooth,
         #clock,
         #cpu,
         #idle_inhibitor,
@@ -363,7 +340,6 @@
           margin: 0 3px;
         }
         #battery:hover,
-        #bluetooth:hover,
         #clock:hover,
         #cpu:hover,
         #idle_inhibitor:hover,

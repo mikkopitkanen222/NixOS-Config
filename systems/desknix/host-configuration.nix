@@ -22,6 +22,8 @@
     };
   };
 
+  services.blueman.enable = true;
+
   networking = {
     hostName = "desknix";
     useDHCP = lib.mkDefault true;

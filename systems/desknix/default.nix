@@ -17,7 +17,6 @@ in
     ./iwgtk.nix
     ./locale.nix
     ./nixos.nix
-    ./overskride.nix
     ./pipewire.nix
     ./security.nix
     ./smartcard-crypto.nix

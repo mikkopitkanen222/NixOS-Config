@@ -17,6 +17,8 @@
     bluetooth.enable = true;
   };
 
+  services.blueman.enable = true;
+
   networking = {
     hostName = "lapnix";
     useDHCP = lib.mkDefault true;
