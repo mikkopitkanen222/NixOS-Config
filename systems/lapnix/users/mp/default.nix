@@ -42,6 +42,7 @@ in
     isNormalUser = true;
     extraGroups = [
       "netdev"
+      "networkmanager"
       "wheel"
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
@@ -57,6 +58,7 @@ in
 
   home-manager.users.mp = {
     programs.home-manager.enable = true;
+    programs.hyprpanel.enable = true;
     home = {
       username = "mp";
       homeDirectory = "/home/mp";
@@ -90,13 +92,13 @@ in
     ../../../desknix/users/mp/obsidian.nix
     ../../../desknix/users/mp/proton.nix
     ../../../desknix/users/mp/spotify-player.nix
-    ../../../desknix/users/mp/swaync.nix
+    #../../../desknix/users/mp/swaync.nix
     ../../../desknix/users/mp/thunderbird.nix
     ./tofi.nix
     ../../../desknix/users/mp/udiskie.nix
     ../../../desknix/users/mp/user-dirs.nix
     ../../../desknix/users/mp/vesktop.nix
     ../../../desknix/users/mp/vscode.nix
-    ./waybar.nix
+    #./waybar.nix
   ];
 }

@@ -201,6 +201,8 @@ let
 
       # Setup custom user level interactive shell init stuff.
       tabs -2
+
+      export $(dbus-launch)
       ${cfg.interactiveShellInit}
     ''; # [2]
   };

@@ -26,6 +26,11 @@
 
   networking = {
     hostName = "desknix";
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
     useDHCP = lib.mkDefault true;
   };
+  programs.nm-applet.enable = true;
 }

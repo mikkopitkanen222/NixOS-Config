@@ -21,6 +21,15 @@
 
   networking = {
     hostName = "lapnix";
+    networkmanager = {
+      enable = true;
+      wifi = {
+        backend = "iwd";
+        powersave = true;
+      };
+    };
     useDHCP = lib.mkDefault true;
   };
+  programs.nm-applet.enable = true;
+  #environment.systemPackages = with pkgs; [ hicolor-icon-theme paper-icon-theme adwaita-icon-theme adwaita-icon-theme-legacy ];
 }
