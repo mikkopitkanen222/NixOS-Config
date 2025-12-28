@@ -9,7 +9,7 @@
           output = "eDP-1";
           mode = "preferred";
           position = "auto";
-          scale = "auto";
+          scale = "1.0";
         }
         # Default placement for extra monitors:
         {
