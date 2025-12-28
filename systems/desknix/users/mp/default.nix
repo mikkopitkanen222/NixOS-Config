@@ -87,18 +87,17 @@ in
     ./clipse.nix
     ./direnv.nix
     ./gtk.nix
+    ./hyprpanel.nix
     ./kitty.nix
     ./nnn.nix
     ./obsidian.nix
     ./proton.nix
     ./spotify-player.nix
-    ./swaync.nix
     ./thunderbird.nix
     ./tofi.nix
     ./udiskie.nix
     ./user-dirs.nix
     ./vesktop.nix
     ./vscode.nix
-    ./waybar.nix
   ];
 }
