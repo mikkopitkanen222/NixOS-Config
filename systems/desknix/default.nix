@@ -15,8 +15,8 @@ in
     ./games.nix
     ./hardware-configuration.nix
     ./host-configuration.nix
-    ./iwgtk.nix
     ./locale.nix
+    ./networking.nix
     ./nixos.nix
     ./pipewire.nix
     ./security.nix

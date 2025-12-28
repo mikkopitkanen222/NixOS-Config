@@ -1,5 +1,7 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
+  networking.hostName = "desknix";
+
   system.stateVersion = "25.05";
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -19,10 +21,5 @@
       enable = true;
       enableGraphical = true;
     };
-  };
-
-  networking = {
-    hostName = "desknix";
-    useDHCP = lib.mkDefault true;
   };
 }

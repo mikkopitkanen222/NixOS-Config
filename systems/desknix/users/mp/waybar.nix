@@ -537,11 +537,5 @@
         }
       '';
     };
-
-    # Waybar network module is more featureful; iwgtk -i is not needed.
-    xdg.configFile."autostart/iwgtk-indicator.desktop".text = ''
-      [Desktop Entry]
-      Hidden=true
-    '';
   };
 }

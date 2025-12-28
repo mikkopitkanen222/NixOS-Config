@@ -1,5 +1,7 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
+  networking.hostName = "lapnix";
+
   system.stateVersion = "25.11";
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -13,9 +15,4 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-
-  networking = {
-    hostName = "lapnix";
-    useDHCP = lib.mkDefault true;
-  };
 }

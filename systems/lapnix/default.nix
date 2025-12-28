@@ -17,8 +17,8 @@ in
     ../desknix/games.nix
     ./hardware-configuration.nix
     ./host-configuration.nix
-    ../desknix/iwgtk.nix
     ../desknix/locale.nix
+    ./networking.nix
     ./nixos.nix
     ../desknix/pipewire.nix
     ../desknix/security.nix

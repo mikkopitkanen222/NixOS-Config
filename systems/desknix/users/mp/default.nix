@@ -42,6 +42,7 @@ in
     isNormalUser = true;
     extraGroups = [
       "netdev"
+      "networkmanager"
       "wheel"
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
