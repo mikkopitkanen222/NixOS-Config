@@ -35,4 +35,9 @@
 
   # Get completion for system packages in zsh.
   environment.pathsToLink = [ "/share/zsh" ];
+
+  environment.shellAliases = {
+    # The option -F is not set in the default alias `l`.
+    "l" = "ls -aFhl";
+  };
 }
