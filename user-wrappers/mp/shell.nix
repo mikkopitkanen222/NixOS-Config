@@ -80,7 +80,7 @@ let
       # ($ZDOTDIR/.zshrc).
 
       # Only execute this file once per shell.
-      if [ -n "$__ZDOTDIR_ZSHRC_SOURCED" -o -n "$NOSYSZSHRC" ]; then return; fi
+      if [ -n "''${__ZDOTDIR_ZSHRC_SOURCED-}" ]; then return; fi
       __ZDOTDIR_ZSHRC_SOURCED=1
 
       typeset -U path cdpath fpath manpath
@@ -176,6 +176,8 @@ let
 
       # Setup command line history.
       setopt append_history
+      setopt hist_expire_dups_first
+      setopt hist_ignore_all_dups
       setopt hist_save_no_dups
       setopt hist_ignore_space
       setopt hist_reduce_blanks
