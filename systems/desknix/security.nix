@@ -6,6 +6,7 @@
       settings = {
         origin = "pam://mp222";
         authfile = config.sops.secrets."u2f_keys".path;
+        pinverification = 1;
         cue = true;
       };
     };
@@ -14,6 +15,10 @@
       sudo.u2fAuth = true;
     };
   };
+
+  security.sudo.configFile = ''
+    Defaults timestamp_timeout=15
+  '';
 
   services.openssh = {
     enable = true;
