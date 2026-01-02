@@ -66,6 +66,7 @@ in
         # Downtime
         bolt-launcher
         bs-manager
+        pcsx2
         # Image, Music & Video Viewers
         qimgv
         vlc
