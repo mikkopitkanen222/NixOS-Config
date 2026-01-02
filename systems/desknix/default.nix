@@ -16,6 +16,7 @@ in
     ./hardware-configuration.nix
     ./host-configuration.nix
     ./locale.nix
+    ./mouse.nix
     ./networking.nix
     ./nixos.nix
     ./pipewire.nix
