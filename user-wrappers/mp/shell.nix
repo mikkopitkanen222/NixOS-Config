@@ -186,6 +186,11 @@ let
       HISTSIZE=10000
       HISTFILE=$HOME/.zsh_history
 
+      # Wrap 'nix-shell', 'nix develop', and 'nix shell' to use this shell instead of bash.
+      if command -v nix-your-shell > /dev/null; then
+        nix-your-shell $SHELL | source /dev/stdin
+      fi
+
       # Setup aliases.
       alias -- ..='cd ..'
       alias -- ...='cd ../..'
@@ -263,6 +268,7 @@ in
       basePackage = cfg.package;
       extraPackages = with pkgs; [
         coreutils
+        nix-your-shell
         nix-zsh-completions
         zsh-autosuggestions
         zsh-syntax-highlighting
