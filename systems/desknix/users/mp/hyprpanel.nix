@@ -111,10 +111,7 @@ in
   };
 
   home-manager.users.mp = {
-    home.packages = with pkgs; [
-      adwaita-icon-theme
-      nerd-fonts.space-mono
-    ];
+    home.packages = with pkgs; [ adwaita-icon-theme ];
 
     programs.hyprpanel = {
       enable = true;
@@ -164,7 +161,6 @@ in
               extends = "*";
               left = [ "workspaces" ];
               right = [
-                "network"
                 "volume"
                 "systray"
               ];
@@ -181,10 +177,6 @@ in
             showWifiInfo = true;
             truncation_size = 16;
           };
-          # nm-applet always shows a placeholdery "icon not found" type of tray icon.
-          # Tried installing a bunch of icon themes & launching dbus in zshrc; didn't work.
-          # -> Replace it with a generic wifi icon. Better than nothing...
-          systray.customIcons.nm-applet.icon = " ";
           clock.format = "%a  %Y-%m-%d  %H:%M:%S";
           notifications = {
             show_total = true;

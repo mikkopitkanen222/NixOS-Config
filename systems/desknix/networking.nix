@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   networking = {
     wireless.iwd = {
@@ -20,4 +20,7 @@
   };
 
   programs.nm-applet.enable = true;
+
+  # nm-applet MUST be installed like this or the icons won't be found!
+  environment.systemPackages = with pkgs; [ networkmanagerapplet ];
 }
