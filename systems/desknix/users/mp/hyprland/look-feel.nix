@@ -76,11 +76,8 @@
         animate_manual_resizes = "false";
         animate_mouse_windowdragging = "false";
         allow_session_lock_restore = "true";
-        new_window_takes_over_fullscreen = "2";
         middle_click_paste = "false";
       };
-
-      experimental.xx_color_management_v4 = "true";
     };
   };
 }

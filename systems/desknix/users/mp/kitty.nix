@@ -1,10 +1,5 @@
 # https://github.com/kovidgoyal/kitty
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, pkgs, ... }:
 {
   home-manager.users.mp = {
     programs.kitty = {
@@ -17,8 +12,9 @@
       };
       settings =
         let
-          backgrounds = config.home-manager.users.mp.services.hyprpaper.settings.reload;
-          bg-image = lib.strings.removePrefix "," (builtins.head backgrounds);
+          backgrounds =
+            config.home-manager.users.mp.services.hyprpaper.settings.wallpaper;
+          bg-image = (builtins.head backgrounds).path;
         in
         {
           background_image = "${bg-image}";

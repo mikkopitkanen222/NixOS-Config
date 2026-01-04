@@ -6,9 +6,14 @@
 
     # No need to do `clipse -listen` manually on login / in Hyprland config.
     # The HM module comes with a systemd unit `clipse.service`.
-    wayland.windowManager.hyprland.settings.windowrulev2 = [
-      "float,class:(clipse)"
-      "size 624 702,class:(clipse)"
+    wayland.windowManager.hyprland.settings.windowrule = [
+      {
+        name = "float-clipse";
+        "match:class" = "clipse";
+        float = "on";
+        size = "624 702";
+        center = "on";
+      }
     ];
 
     services.clipse = {

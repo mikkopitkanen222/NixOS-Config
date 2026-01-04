@@ -14,6 +14,7 @@
 
   programs.hyprland = {
     enable = true;
+    package = pkgs.unstable.hyprland;
     withUWSM = true;
   };
 
@@ -42,17 +43,29 @@
     services.hyprpolkitagent.enable = true;
 
     wayland.windowManager.hyprland.settings = {
+      misc.disable_watchdog_warning = true;
       ecosystem.enforce_permissions = "true";
       permission = [
+        "${lib.getExe pkgs.hyprlock}, screencopy, allow"
         "${lib.getExe pkgs.hyprpicker}, screencopy, allow"
         "${lib.getExe pkgs.xdg-desktop-portal-hyprland}, screencopy, allow"
-        "${lib.getExe pkgs.hyprlock}, screencopy, allow"
       ];
       windowrule = [
-        # Ignore maximize requests from apps.
-        "suppressevent maximize, class:.*"
-        # Fix some dragging issues with XWayland.
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        {
+          name = "ignore-maximize-requests";
+          "match:class" = ".*";
+          suppress_event = "maximize";
+        }
+        {
+          name = "fix-xwayland-drag";
+          "match:class" = "^$";
+          "match:title" = "^$";
+          "match:xwayland" = 1;
+          "match:float" = 1;
+          "match:fullscreen" = 0;
+          "match:pin" = 0;
+          no_focus = "on";
+        }
       ];
     };
   };
