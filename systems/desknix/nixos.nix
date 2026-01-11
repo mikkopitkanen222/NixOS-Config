@@ -40,4 +40,7 @@
     # The option -F is not set in the default alias `l`.
     "l" = "ls -aFhl";
   };
+
+  # Get the commit this system was built from: nixos-version --configuration-revision
+  system.configurationRevision = "${inputs.self.rev or inputs.self.dirtyRev}";
 }
