@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    systems.url = "github:nix-systems/x86_64-linux";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,30 +45,38 @@
     {
       self,
       nixpkgs,
+      systems,
       treefmt-nix,
       ...
     }@inputs:
     let
-      systems = [ "x86_64-linux" ];
       eachSystem =
-        f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
-      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+        f:
+        nixpkgs.lib.genAttrs (import systems) (
+          system: f nixpkgs.legacyPackages.${system} system
+        );
+      treefmtEval = eachSystem (
+        pkgs: system: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
+      );
     in
     {
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      formatter = eachSystem (
+        pkgs: system: treefmtEval.${system}.config.build.wrapper
+      );
 
-      checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
-      });
+      checks = eachSystem (
+        pkgs: system: { formatting = treefmtEval.${system}.config.build.check self; }
+      );
 
-      packages = eachSystem (pkgs: {
-        initial-install = pkgs.callPackage ./packages/initial-install { };
-      });
+      packages = eachSystem (
+        pkgs: system: {
+          initial-install = pkgs.callPackage ./packages/initial-install { };
+        }
+      );
 
       apps = eachSystem (
-        pkgs:
+        pkgs: system:
         let
-          inherit (pkgs) system;
           inherit (self.packages.${system}) initial-install;
         in
         {
