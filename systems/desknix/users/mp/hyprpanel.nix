@@ -66,6 +66,7 @@ let
         tooltip.text = primary1Color;
         menu = {
           bluetooth.scroller.color = primary1Color;
+          media.timestamp = primary1Color;
           network.scroller.color = primary1Color;
           notifications = {
             pager.background = background2Color;
@@ -149,7 +150,7 @@ in
                 "hypridle"
               ];
               right = [
-                "netstat"
+                "media"
                 "network"
                 "bluetooth"
                 "volume"
@@ -182,13 +183,7 @@ in
             show_total = true;
             hideCountWhenZero = true;
           };
-          customModules = {
-            netstat = {
-              dynamicIcon = true;
-              round = false;
-            };
-            power.rightClick = "hyprpanel toggleWindow settings-dialog";
-          };
+          customModules.power.rightClick = "hyprpanel toggleWindow settings-dialog";
         };
         notifications = {
           showActionsOnHover = true;
@@ -203,6 +198,10 @@ in
             unit = "metric";
             interval = 300000;
           };
+        };
+        menus.media = {
+          displayTime = true;
+          displayTimeTooltip = true;
         };
       };
     };
