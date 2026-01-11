@@ -65,6 +65,7 @@ in
       packages = with pkgs; [
         # Downtime
         bolt-launcher
+        spotify
         # Image, Music & Video Viewers
         qimgv
         vlc
@@ -91,7 +92,6 @@ in
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
     ../../../desknix/users/mp/proton.nix
-    ../../../desknix/users/mp/spotify-player.nix
     ../../../desknix/users/mp/thunderbird.nix
     ./tofi.nix
     ../../../desknix/users/mp/udiskie.nix

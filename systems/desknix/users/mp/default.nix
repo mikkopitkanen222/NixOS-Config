@@ -67,6 +67,7 @@ in
         bolt-launcher
         bs-manager
         pcsx2
+        spotify
         # Image, Music & Video Viewers
         qimgv
         vlc
@@ -93,7 +94,6 @@ in
     ./nnn.nix
     ./obsidian.nix
     ./proton.nix
-    ./spotify-player.nix
     ./thunderbird.nix
     ./tofi.nix
     ./udiskie.nix
