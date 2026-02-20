@@ -46,6 +46,7 @@
     ./btop.nix
     ../../../desknix/users/mp/chromium.nix
     ../../../desknix/users/mp/clipse.nix
+    ../../../desknix/users/mp/dank.nix
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix

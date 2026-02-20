@@ -30,6 +30,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dms = {
+      url = "github:avengemedia/dankmaterialshell/stable";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    dgop = {
+      url = "github:avengemedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
