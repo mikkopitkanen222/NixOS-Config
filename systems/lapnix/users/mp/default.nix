@@ -42,7 +42,6 @@
   };
 
   imports = [
-    ./hyprland
     ./btop.nix
     ../../../desknix/users/mp/chromium.nix
     ../../../desknix/users/mp/clipse.nix
@@ -50,6 +49,7 @@
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix
+    ./hyprland.nix
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
