@@ -75,6 +75,10 @@
           no_focus = "on";
         }
       ];
+      workspace = [
+        "1, monitor:eDP-1, persistent:true"
+        "10, monitor:eDP-1, persistent:true, layout:scrolling"
+      ];
     };
   };
 }

@@ -75,6 +75,11 @@
           no_focus = "on";
         }
       ];
+      workspace = [
+        "1, monitor:DP-1, persistent:true"
+        "2, monitor:HDMI-A-1, persistent:true"
+        "10, monitor:DP-1, persistent:true, layout:scrolling"
+      ];
     };
   };
 }

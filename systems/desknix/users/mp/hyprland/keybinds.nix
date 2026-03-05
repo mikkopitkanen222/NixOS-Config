@@ -24,6 +24,11 @@
         "$mainMod, code:49, exec, kitten quick-access-terminal"
         "$mainMod, L, exec, uwsm app -- hyprlock --immediate"
         "$mainMod, V, exec, kitty --class clipse -e 'clipse'"
+        "$mainMod, Comma, layoutmsg, focus l"
+        "$mainMod SHIFT, Comma, layoutmsg, swapcol l"
+        "$mainMod, Minus, layoutmsg, promote"
+        "$mainMod, Period, layoutmsg, focus r"
+        "$mainMod SHIFT, Period, layoutmsg, swapcol r"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"

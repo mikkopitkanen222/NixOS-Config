@@ -69,6 +69,11 @@
         preserve_split = "true";
       };
 
+      scrolling = {
+        column_width = "0.49";
+        follow_min_visible = "0.0";
+      };
+
       misc = {
         disable_splash_rendering = "true";
         force_default_wallpaper = "2";
