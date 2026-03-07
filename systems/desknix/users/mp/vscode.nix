@@ -5,16 +5,26 @@
       enable = true;
       package = pkgs.vscodium;
       profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
-          ms-vscode.cmake-tools
-          yzhang.markdown-all-in-one
-          yzane.markdown-pdf
-          jnoortheen.nix-ide
-          tomoki1207.pdf
-          jebbs.plantuml
-          llvm-vs-code-extensions.vscode-clangd
-          wakatime.vscode-wakatime
-        ];
+        extensions =
+          (with pkgs.vscode-extensions; [
+            ms-vscode.cmake-tools
+            moshfeu.compare-folders
+            yzhang.markdown-all-in-one
+            yzane.markdown-pdf
+            jnoortheen.nix-ide
+            tomoki1207.pdf
+            jebbs.plantuml
+            rust-lang.rust-analyzer
+            llvm-vs-code-extensions.vscode-clangd
+          ])
+          ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "vscode-hyprls";
+              publisher = "ewen-lbh";
+              version = "0.4.1";
+              sha256 = "sha256-NOEuatXKx5NRd+MfKFiNiwZLhnPuD0Gkes8ni5vF3kM=";
+            }
+          ]);
         userSettings = {
           "editor.accessibilitySupport" = "off";
           "editor.emptySelectionClipboard" = false;
@@ -22,6 +32,8 @@
             "'Droid Sans Mono', 'monospace', monospace, 'SpaceMono Nerd Font'";
           "editor.guides.bracketPairs" = "active";
           "editor.guides.highlightActiveBracketPair" = false;
+          "editor.hover.delay" = 100;
+          "editor.hover.sticky" = false;
           "editor.inlayHints.enabled" = "offUnlessPressed";
           "editor.multiCursorModifier" = "ctrlCmd";
           "editor.renderWhitespace" = "all";
@@ -35,6 +47,9 @@
           "editor.suggest.matchOnWordStartOnly" = false;
           "files.trimFinalNewlines" = true;
           "files.trimTrailingWhitespace" = true;
+          "search.showLineNumbers" = true;
+          "terminal.integrated.defaultProfile.linux" = "zsh";
+          "terminal.integrated.suggest.enabled" = true;
           "workbench.startupEditor" = "newUntitledFile";
           "workbench.tips.enabled" = false;
           "workbench.tree.indent" = 12;
@@ -68,6 +83,11 @@
                 };
               };
             };
+          };
+          "[cpp]" = {
+            "editor.detectIndentation" = false;
+            "editor.insertSpaces" = false;
+            "editor.tabSize" = 2;
           };
         };
       };
