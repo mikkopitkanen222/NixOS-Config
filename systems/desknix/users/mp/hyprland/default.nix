@@ -3,7 +3,6 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ./hyprpaper.nix
     ./input.nix
     ./keybinds.nix
     ./look-feel.nix

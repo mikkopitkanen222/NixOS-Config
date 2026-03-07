@@ -61,5 +61,6 @@
     ../../../desknix/users/mp/user-dirs.nix
     ../../../desknix/users/mp/vesktop.nix
     ../../../desknix/users/mp/vscode.nix
+    ../../../desknix/users/mp/walls.nix
   ];
 }

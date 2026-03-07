@@ -1,5 +1,5 @@
 # https://github.com/kovidgoyal/kitty
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home-manager.users.mp = {
     programs.kitty = {
@@ -12,13 +12,16 @@
       };
       settings =
         let
-          backgrounds =
-            config.home-manager.users.mp.services.hyprpaper.settings.wallpaper;
-          bg-image = (builtins.head backgrounds).path;
+          background = pkgs.fetchurl {
+            url = "https://wallpapercave.com/download/brand-of-sacrifice-wallpapers-wp8812347";
+            hash = "sha256-8h4kyDFE4CFDMBmxz6TbgbN0kCE0ACHSDqTd4Do8V9o=";
+            # The requested URL returns error 403 when no user agent is set:
+            curlOpts = "--user-agent 'Chrome/137.0.0.0'";
+          };
         in
         {
-          background_image = "${bg-image}";
-          background_tint = 0.25;
+          background_image = "${background}";
+          background_tint = 0.99;
           cursor_stop_blinking_after = 0.0;
           tab_bar_style = "powerline";
           tab_powerline_style = "angled";

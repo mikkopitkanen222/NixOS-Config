@@ -3,7 +3,6 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ../../../../desknix/users/mp/hyprland/hyprpaper.nix
     ./input.nix
     ../../../../desknix/users/mp/hyprland/keybinds.nix
     ../../../../desknix/users/mp/hyprland/look-feel.nix
