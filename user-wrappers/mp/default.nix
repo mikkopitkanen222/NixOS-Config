@@ -1,7 +1,4 @@
 { ... }:
 {
-  imports = [
-    ./prompt.nix
-    ./shell.nix
-  ];
+  imports = [ ./prompt.nix ];
 }

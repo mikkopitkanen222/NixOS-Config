@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -14,23 +13,6 @@ let
       {
         mp222 = {
           starship.enable = true;
-          zsh = {
-            enable = true;
-            # TODO: Move to hyprland (when wrapped)
-            loginShellInit = ''
-              if [[ "$(tty)" = "/dev/tty1" ]] && uwsm check may-start; then
-                exec uwsm start hyprland-uwsm.desktop
-              fi
-            '';
-            # TODO: Move to direnv (when wrapped)
-            interactiveShellInit = lib.optionalString config.home-manager.users.mp.programs.direnv.enable ''
-              eval "$(${lib.getExe config.home-manager.users.mp.programs.direnv.package} hook zsh)"
-            '';
-            # TODO: Move to vscode (when wrapped)
-            shellAliases = {
-              "code" = "codium";
-            };
-          };
         };
       }
     ];
@@ -46,7 +28,7 @@ in
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
     packages = builtins.attrValues wm-eval.config.build.packages;
-    shell = wm-eval.config.build.packages.zsh;
+    shell = pkgs.zsh;
   };
 
   system.activationScripts."cp-authorizedKeys-mp".text = ''
@@ -94,6 +76,7 @@ in
     ./nnn.nix
     ./obsidian.nix
     ./proton.nix
+    ./shell.nix
     ./thunderbird.nix
     ./tofi.nix
     ./udiskie.nix

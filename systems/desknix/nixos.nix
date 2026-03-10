@@ -33,11 +33,9 @@
   # Deterministic, declarative user configuration.
   users.mutableUsers = false;
 
-  # Get completion for system packages in zsh.
-  environment.pathsToLink = [ "/share/zsh" ];
-
   environment.shellAliases = {
-    # The option -F is not set in the default alias `l`.
+    ".." = "cd ..";
+    "..." = "cd ../..";
     "l" = "ls -aFhl";
   };
 

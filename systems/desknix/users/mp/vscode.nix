@@ -72,5 +72,9 @@
         };
       };
     };
+
+    home.shellAliases = {
+      "code" = "codium";
+    };
   };
 }

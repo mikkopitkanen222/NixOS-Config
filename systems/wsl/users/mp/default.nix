@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -14,13 +13,6 @@ let
       {
         mp222 = {
           starship.enable = true;
-          zsh = {
-            enable = true;
-            # TODO: Move to direnv (when wrapped)
-            interactiveShellInit = lib.optionalString config.home-manager.users.mp.programs.direnv.enable ''
-              eval "$(${lib.getExe config.home-manager.users.mp.programs.direnv.package} hook zsh)"
-            '';
-          };
         };
       }
     ];
@@ -32,7 +24,7 @@ in
     extraGroups = [ "wheel" ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
     packages = builtins.attrValues wm-eval.config.build.packages;
-    shell = wm-eval.config.build.packages.zsh;
+    shell = pkgs.zsh;
   };
 
   home-manager.users.mp = {
@@ -51,5 +43,6 @@ in
   imports = [
     ../../../desknix/users/mp/direnv.nix
     ./git.nix
+    ../../../desknix/users/mp/shell.nix
   ];
 }

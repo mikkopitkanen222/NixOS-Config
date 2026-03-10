@@ -31,6 +31,12 @@
 
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
+    programs.zsh.profileExtra = lib.mkAfter ''
+      if [[ "$(tty)" = "/dev/tty1" ]] && uwsm check may-start; then
+        exec uwsm start hyprland-uwsm.desktop
+      fi
+    '';
+
     home.packages = with pkgs; [
       hyprland-qt-support
       hyprland-qtutils
