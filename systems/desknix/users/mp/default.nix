@@ -13,7 +13,6 @@ let
       { _module.args.systemConfig = config; }
       {
         mp222 = {
-          git.enable = true;
           starship.enable = true;
           zsh = {
             enable = true;
@@ -88,6 +87,7 @@ in
     ./chromium.nix
     ./clipse.nix
     ./direnv.nix
+    ./git.nix
     ./gtk.nix
     ./hyprpanel.nix
     ./kitty.nix

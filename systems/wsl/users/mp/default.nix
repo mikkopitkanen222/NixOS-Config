@@ -13,13 +13,6 @@ let
       { _module.args.systemConfig = config; }
       {
         mp222 = {
-          git = {
-            enable = true;
-            includes = ''
-              [include]
-                path = ${config.sops.templates."secret-gitconfig".path}
-            '';
-          };
           starship.enable = true;
           zsh = {
             enable = true;
@@ -55,13 +48,8 @@ in
     };
   };
 
-  imports = [ ../../../desknix/users/mp/direnv.nix ];
-
-  sops.templates."secret-gitconfig" = {
-    content = ''
-      [user]
-        email = "${config.sops.placeholder."work_email"}"
-    '';
-    owner = config.users.users.mp.name;
-  };
+  imports = [
+    ../../../desknix/users/mp/direnv.nix
+    ./git.nix
+  ];
 }
