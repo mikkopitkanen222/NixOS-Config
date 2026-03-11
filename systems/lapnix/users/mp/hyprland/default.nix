@@ -20,6 +20,9 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  programs.uwsm.waylandCompositors.hyprland.binPath =
+    lib.mkForce "/run/current-system/sw/bin/start-hyprland";
+
   home-manager.users.mp = {
     wayland.windowManager.hyprland = {
       enable = true;
@@ -33,7 +36,7 @@
 
     programs.zsh.profileExtra = lib.mkAfter ''
       if [[ "$(tty)" = "/dev/tty1" ]] && uwsm check may-start; then
-        exec uwsm start hyprland-uwsm.desktop
+        exec uwsm start -eD Hyprland hyprland-uwsm.desktop
       fi
     '';
 
@@ -49,7 +52,6 @@
     services.hyprpolkitagent.enable = true;
 
     wayland.windowManager.hyprland.settings = {
-      misc.disable_watchdog_warning = true;
       ecosystem.enforce_permissions = "true";
       permission = [
         "${lib.getExe pkgs.hyprlock}, screencopy, allow"
