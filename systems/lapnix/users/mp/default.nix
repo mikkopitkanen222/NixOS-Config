@@ -1,23 +1,4 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
-let
-  wm-eval = inputs.wrapper-manager.lib {
-    inherit pkgs;
-    modules = [
-      inputs.self.wrappers.mp
-      { _module.args.systemConfig = config; }
-      {
-        mp222 = {
-          starship.enable = true;
-        };
-      }
-    ];
-  };
-in
+{ config, pkgs, ... }:
 {
   users.users.mp = {
     isNormalUser = true;
@@ -27,7 +8,6 @@ in
       "wheel"
     ];
     hashedPasswordFile = config.sops.secrets."passwd_mp".path;
-    packages = builtins.attrValues wm-eval.config.build.packages;
     shell = pkgs.zsh;
   };
 
@@ -73,6 +53,7 @@ in
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
+    ../../../desknix/users/mp/prompt.nix
     ../../../desknix/users/mp/proton.nix
     ../../../desknix/users/mp/shell.nix
     ../../../desknix/users/mp/thunderbird.nix

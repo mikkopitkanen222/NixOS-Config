@@ -10,7 +10,6 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    wrapper-manager.url = "github:viperml/wrapper-manager";
 
     disko = {
       url = "github:nix-community/disko";
@@ -91,7 +90,6 @@
       # Modules and overlays used in configurations.
       nixosModules = import ./modules { inherit inputs; };
       overlays = import ./overlays { inherit inputs; };
-      wrappers = import ./user-wrappers { inherit inputs; };
 
       nixosConfigurations = {
         desknix = nixpkgs.lib.nixosSystem {
