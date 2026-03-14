@@ -50,7 +50,6 @@
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix
-    ./hyprpanel.nix
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
@@ -58,7 +57,6 @@
     ../../../desknix/users/mp/proton.nix
     ../../../desknix/users/mp/shell.nix
     ../../../desknix/users/mp/thunderbird.nix
-    ./tofi.nix
     ../../../desknix/users/mp/udiskie.nix
     ../../../desknix/users/mp/user-dirs.nix
     ../../../desknix/users/mp/vesktop.nix

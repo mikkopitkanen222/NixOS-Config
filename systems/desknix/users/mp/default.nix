@@ -52,7 +52,6 @@
     ./direnv.nix
     ./git.nix
     ./gtk.nix
-    ./hyprpanel.nix
     ./kitty.nix
     ./nnn.nix
     ./obsidian.nix
@@ -60,7 +59,6 @@
     ./proton.nix
     ./shell.nix
     ./thunderbird.nix
-    ./tofi.nix
     ./udiskie.nix
     ./user-dirs.nix
     ./vesktop.nix

@@ -3,8 +3,6 @@
 { lib, pkgs, ... }:
 {
   imports = [
-    ./hypridle.nix
-    ./hyprlock.nix
     ./hyprpaper.nix
     ./input.nix
     ./keybinds.nix

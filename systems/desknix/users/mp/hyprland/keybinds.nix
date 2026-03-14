@@ -18,11 +18,11 @@
         "$mainMod, F, togglefloating,"
         "$mainMod, J, togglesplit,"
         "$mainMod, E, exec, kitty --class nnn -e 'nnn'"
-        "$mainMod, R, exec, tofi-drun"
+        "$mainMod, R, exec, dms ipc call spotlight toggle"
         "$mainMod, T, exec, uwsm app -- kitty"
         # Key 49 (§): below esc, above tab, left of 1
         "$mainMod, code:49, exec, kitten quick-access-terminal"
-        "$mainMod, L, exec, uwsm app -- hyprlock --immediate"
+        "$mainMod, L, exec, dms ipc call lock lock"
         "$mainMod, V, exec, kitty --class clipse -e 'clipse'"
         "$mainMod, Comma, layoutmsg, focus l"
         "$mainMod SHIFT, Comma, layoutmsg, swapcol l"
