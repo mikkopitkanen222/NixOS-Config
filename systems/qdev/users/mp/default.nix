@@ -36,7 +36,7 @@
     ../../../lapnix/users/mp/btop.nix
     ./chromium.nix
     ../../../desknix/users/mp/clipse.nix
-    ../../../desknix/users/mp/dank.nix
+    ./dank.nix
     ../../../desknix/users/mp/direnv.nix
     ../../../wsl/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix

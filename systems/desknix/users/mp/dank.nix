@@ -309,9 +309,9 @@ let
     dockMargin = 0;
     dockIconSize = 40;
     dockIndicatorStyle = "circle";
-    dockBorderEnabled = false;
+    dockBorderEnabled = true;
     dockBorderColor = "surfaceText";
-    dockBorderOpacity = 1;
+    dockBorderOpacity = 0.3;
     dockBorderThickness = 1;
     dockIsolateDisplays = false;
     dockLauncherEnabled = true;
@@ -321,8 +321,8 @@ let
     dockLauncherLogoSizeOffset = 0;
     dockLauncherLogoBrightness = 0.5;
     dockLauncherLogoContrast = 1;
-    dockMaxVisibleApps = 0;
-    dockMaxVisibleRunningApps = 0;
+    dockMaxVisibleApps = 10;
+    dockMaxVisibleRunningApps = 10;
     dockShowOverflowBadge = true;
     notificationOverlayEnabled = false;
     notificationPopupShadowEnabled = true;
