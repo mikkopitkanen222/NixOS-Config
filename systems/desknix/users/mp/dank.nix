@@ -765,7 +765,7 @@ let
         owner = "derethil";
         repo = "dms-hue-manager";
         rev = "9901e6aa83099ad4aa91b9a8477fdf1703eee044";
-        sha256 = "sha256-/Cc5AMRAWi125mA2o59yK/DmpybqPSxpZ4RpJ7j2RgE=";
+        sha256 = "sha256-s/KgTULlBn/GBod4kvFsrvhoQgJoqv44j8hu5nwDxyM=";
       };
       settings = {
         openHuePath = "openhue";
