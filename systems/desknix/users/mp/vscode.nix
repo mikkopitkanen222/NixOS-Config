@@ -9,6 +9,7 @@
           (with pkgs.vscode-extensions; [
             ms-vscode.cmake-tools
             moshfeu.compare-folders
+            llvm-vs-code-extensions.lldb-dap
             yzhang.markdown-all-in-one
             yzane.markdown-pdf
             jnoortheen.nix-ide
