@@ -6,7 +6,7 @@
 
   home-manager.users.mp = {
     wayland.windowManager.hyprland.settings = {
-      # https://wiki.hypr.land/Configuring/Monitors/
+      # https://wiki.hypr.land/0.54.0/Configuring/Monitors/
       monitorv2 = lib.mkForce [
         {
           output = "desc:AU Optronics 0x4A99";
@@ -23,20 +23,20 @@
         }
       ];
 
-      # https://wiki.hypr.land/Configuring/Variables/#input
+      # https://wiki.hypr.land/0.54.0/Configuring/Variables/#input
       input.touchpad = {
         natural_scroll = true;
         drag_lock = 1;
       };
 
-      # https://wiki.hypr.land/Configuring/Variables/#decoration
+      # https://wiki.hypr.land/0.54.0/Configuring/Variables/#decoration
       decoration = {
-        # https://wiki.hypr.land/Configuring/Performance/#how-do-i-make-hyprland-draw-as-little-power-as-possible-on-my-laptop
+        # https://wiki.hypr.land/0.54.0/Configuring/Performance/#how-do-i-make-hyprland-draw-as-little-power-as-possible-on-my-laptop
         blur.enabled = lib.mkForce false;
         shadow.enabled = lib.mkForce false;
       };
 
-      # https://wiki.hypr.land/Configuring/Workspace-Rules/
+      # https://wiki.hypr.land/0.54.0/Configuring/Workspace-Rules/
       workspace = lib.mkForce [
         "1, monitor:desc:AU Optronics 0x4A99, persistent:true"
         "10, monitor:desc:AU Optronics 0x4A99, persistent:true, layout:scrolling"

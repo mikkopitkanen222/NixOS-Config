@@ -3,18 +3,16 @@
 { lib, pkgs, ... }:
 let
   settings = {
-    # https://wiki.hypr.land/Configuring/Monitors/
+    # https://wiki.hypr.land/0.54.0/Configuring/Monitors/
     monitorv2 = [
       {
         output = "desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685";
-        # Maximum refresh rate supporting both bitdepth=10 and HDR is 144 Hz:
+        # Maximum refresh rate supporting bitdepth=10 or HDR is 144 Hz:
         mode = "3440x1440@144";
         position = "0x0";
         scale = 1.0;
         bitdepth = 10;
-        cm = "hdr";
-        sdrbrightness = 1.3;
-        sdrsaturation = 1.3;
+        cm = "wide";
       }
       {
         output = "desc:Acer Technologies Acer KG241 P 0x91305EF3";
@@ -33,7 +31,7 @@ let
       }
     ];
 
-    # https://wiki.hypr.land/Configuring/Variables/#input
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#input
     input = {
       kb_model = "pc105";
       kb_layout = "fi";
@@ -44,7 +42,7 @@ let
       scroll_factor = 0.8;
     };
 
-    # https://wiki.hypr.land/Configuring/Variables/#general
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#general
     general = {
       border_size = 3;
       gaps_in = 0;
@@ -54,7 +52,7 @@ let
       layout = "dwindle";
     };
 
-    # https://wiki.hypr.land/Configuring/Variables/#decoration
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#decoration
     decoration = {
       rounding = 10;
       rounding_power = 2.0;
@@ -66,7 +64,7 @@ let
       };
     };
 
-    # https://wiki.hypr.land/Configuring/Variables/#animations
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#animations
     animations = {
       workspace_wraparound = true;
       bezier = [
@@ -97,25 +95,24 @@ let
       ];
     };
 
-    # https://wiki.hypr.land/Configuring/Dwindle-Layout/
+    # https://wiki.hypr.land/0.54.0/Configuring/Dwindle-Layout/
     dwindle = {
-      pseudotile = true;
       preserve_split = true;
     };
 
-    # https://wiki.hypr.land/Configuring/Scrolling-Layout/
+    # https://wiki.hypr.land/0.54.0/Configuring/Scrolling-Layout/
     scrolling = {
       column_width = 0.49;
       follow_min_visible = 0.0;
     };
 
-    # https://wiki.hypr.land/Configuring/Variables/#ecosystem
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#ecosystem
     ecosystem = {
       no_update_news = true;
       no_donation_nag = true;
     };
 
-    # https://wiki.hypr.land/Configuring/Variables/#misc
+    # https://wiki.hypr.land/0.54.0/Configuring/Variables/#misc
     misc = {
       disable_splash_rendering = true;
       vrr = 3;
@@ -123,7 +120,7 @@ let
       middle_click_paste = false;
     };
 
-    # https://wiki.hypr.land/Configuring/Permissions/
+    # https://wiki.hypr.land/0.54.0/Configuring/Permissions/
     ecosystem.enforce_permissions = true;
     permission = [
       # TODO: .quickshell-wrapped
@@ -131,7 +128,7 @@ let
       "${lib.getExe pkgs.xdg-desktop-portal-hyprland}, screencopy, allow"
     ];
 
-    # https://wiki.hypr.land/Configuring/Binds/
+    # https://wiki.hypr.land/0.54.0/Configuring/Binds/
     bind = [
       # Application Launchers
       "SUPER,            E, exec, kitty --class nnn -e 'nnn'"
@@ -259,7 +256,7 @@ let
       ",  XF86AudioNext, exec, dms ipc call mpris next"
     ];
 
-    # https://wiki.hypr.land/Configuring/Window-Rules/
+    # https://wiki.hypr.land/0.54.0/Configuring/Window-Rules/
     windowrule = [
       {
         name = "suppress-maximize-events";
@@ -278,7 +275,7 @@ let
       }
     ];
 
-    # https://wiki.hypr.land/Configuring/Workspace-Rules/
+    # https://wiki.hypr.land/0.54.0/Configuring/Workspace-Rules/
     workspace = [
       "1, monitor:desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685, persistent:true"
       "2, monitor:desc:Acer Technologies Acer KG241 P 0x91305EF3, persistent:true"
