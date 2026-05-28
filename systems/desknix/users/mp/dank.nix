@@ -809,7 +809,6 @@ in
     programs.dank-material-shell = {
       enable = true;
       systemd.enable = true;
-      enableVPN = false;
       inherit settings clipboardSettings plugins;
     };
 

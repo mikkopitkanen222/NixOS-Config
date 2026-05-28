@@ -31,7 +31,7 @@
     };
 
     dms = {
-      url = "github:avengemedia/dankmaterialshell/stable";
+      url = "github:avengemedia/dankmaterialshell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     dank-search = {
