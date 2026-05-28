@@ -139,7 +139,7 @@ let
       "SUPER SHIFT,      V, exec, dms ipc call clipboard toggle"
       "SUPER,            X, exec, dms ipc call powermenu toggle"
       "SUPER,       Delete, exec, kitty --class btop -e 'btop'"
-      "SUPER SHIFT, Delete, exec, dms ipc call processlist focusOrToggle"
+      "SUPER SHIFT, Delete, exec, kitty --class dgop -e 'dgop'"
       "SUPER,      Section, exec, uwsm app -- kitten quick-access-terminal"
       "SUPER,          Tab, exec, dms ipc call hypr toggleOverview"
 
