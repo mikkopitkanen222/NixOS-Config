@@ -34,6 +34,10 @@
       url = "github:avengemedia/dankmaterialshell/stable";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    dank-search = {
+      url = "github:avengemedia/danksearch";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";

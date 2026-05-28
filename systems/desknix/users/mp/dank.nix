@@ -777,7 +777,10 @@ let
 in
 {
   home-manager.users.mp = {
-    imports = [ inputs.dms.homeModules.dank-material-shell ];
+    imports = [
+      inputs.dms.homeModules.dank-material-shell
+      inputs.dank-search.homeModules.dsearch
+    ];
 
     home.packages =
       with pkgs;
@@ -799,5 +802,7 @@ in
       enableVPN = false;
       inherit settings clipboardSettings plugins;
     };
+
+    programs.dsearch.enable = true;
   };
 }
