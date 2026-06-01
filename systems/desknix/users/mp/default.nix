@@ -62,7 +62,7 @@
     ./udiskie.nix
     ./user-dirs.nix
     ./vesktop.nix
-    ./vscode.nix
+    ./vscodium.nix
     ./walls.nix
   ];
 }

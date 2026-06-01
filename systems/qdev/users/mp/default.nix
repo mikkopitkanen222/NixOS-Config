@@ -49,7 +49,7 @@
     ./slack.nix
     ../../../desknix/users/mp/udiskie.nix
     ../../../desknix/users/mp/user-dirs.nix
-    ../../../desknix/users/mp/vscode.nix
+    ../../../desknix/users/mp/vscodium.nix
     ../../../desknix/users/mp/walls.nix
   ];
 
