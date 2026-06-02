@@ -1,6 +1,12 @@
 # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
 # https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/
-{ lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 let
   settings = {
     # https://wiki.hypr.land/0.54.0/Configuring/Monitors/
@@ -125,7 +131,7 @@ let
     permission = [
       # TODO: .quickshell-wrapped
       "${lib.getExe pkgs.hyprpicker}, screencopy, allow"
-      "${lib.getExe pkgs.xdg-desktop-portal-hyprland}, screencopy, allow"
+      "${lib.getExe config.programs.hyprland.portalPackage}, screencopy, allow"
     ];
 
     # https://wiki.hypr.land/0.54.0/Configuring/Binds/
@@ -284,17 +290,40 @@ let
   };
 in
 {
-  programs.hyprland = {
-    enable = true;
-    package = pkgs.unstable.hyprland;
-    withUWSM = true;
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
   };
+
+  programs.hyprland =
+    let
+      hyprPkgs = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      enable = true;
+      package = hyprPkgs.hyprland;
+      portalPackage = hyprPkgs.xdg-desktop-portal-hyprland;
+      withUWSM = true;
+    };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  hardware.graphics =
+    let
+      hyprNixpkgs =
+        inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      package = hyprNixpkgs.mesa;
+      package32 = hyprNixpkgs.pkgsi686Linux.mesa;
+    };
 
   home-manager.users.mp = {
     wayland.windowManager.hyprland = {
       enable = true;
-      systemd.enable = false;
+      systemd.enable = !config.programs.hyprland.withUWSM;
       inherit settings;
       # Use the packages from the NixOS module:
       package = null;

@@ -30,6 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland.url = "github:hyprwm/hyprland";
     dms = {
       url = "github:avengemedia/dankmaterialshell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
