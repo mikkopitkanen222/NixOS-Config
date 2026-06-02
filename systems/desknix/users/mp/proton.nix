@@ -3,7 +3,7 @@
   home-manager.users.mp = {
     home.packages = with pkgs; [
       proton-pass
-      protonvpn-gui
+      proton-vpn
     ];
 
     services.protonmail-bridge.enable = true;
