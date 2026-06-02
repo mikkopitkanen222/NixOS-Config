@@ -291,9 +291,6 @@ in
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  programs.uwsm.waylandCompositors.hyprland.binPath =
-    lib.mkForce "/run/current-system/sw/bin/start-hyprland";
-
   home-manager.users.mp = {
     wayland.windowManager.hyprland = {
       enable = true;
