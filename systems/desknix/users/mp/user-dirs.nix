@@ -8,17 +8,19 @@
       {
         enable = true;
         createDirectories = true;
+        setSessionVariables = true;
 
-        # No switch exists that disables localization of default directory names,
-        # for some mentally delayed reason. LC_ALL can be used to force English
-        # names [Arch Wiki], but I'll instead take this opportunity to also hide
-        # these dirs. I don't use them anyway, but some apps do. Also, paths
-        # should be all lowercase.
+        # For some mentally delayed reason, no switch exists to disable
+        # localization of default directory names. LC_ALL can be used to force
+        # English names [Arch Wiki], but I'll instead take this opportunity to
+        # group this garbage under a hidden directory. I don't like knowing they
+        # exist, but some apps do use them. Also, all paths should be lowercase.
         desktop = "${dirsPrefix}/desktop";
         documents = "${dirsPrefix}/documents";
         download = "${dirsPrefix}/downloads";
         music = "${dirsPrefix}/music";
         pictures = "${dirsPrefix}/pictures";
+        projects = "${dirsPrefix}/projects";
         publicShare = "${dirsPrefix}/public";
         templates = "${dirsPrefix}/templates";
         videos = "${dirsPrefix}/videos";
