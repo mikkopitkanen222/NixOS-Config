@@ -52,8 +52,37 @@
     ../../../desknix/users/mp/walls.nix
   ];
 
-  mp222.slack = {
-    enable = true;
-    autostart.enable = true;
+  mp222 = {
+    hyprland = {
+      monitors.monitors = [
+        {
+          output = "desc:Lenovo Group Limited D27-40 URHMMCKN";
+          mode = "1920x1080@60";
+          position = "0x0";
+          scale = 1;
+        }
+        # Position on the left, rotated 90 degrees counter-clockwise:
+        {
+          output = "desc:Lenovo Group Limited LEN T27h-20 VNA5XD80";
+          mode = "2560x1440@60";
+          position = "-1440x-1000";
+          transform = 3;
+          scale = 1;
+        }
+        # Position on the right:
+        {
+          output = "desc:Chimei Innolux Corporation 0x1614";
+          mode = "1920x1200@60";
+          position = "1920x350";
+          scale = 1;
+        }
+      ];
+      savePower = true;
+    };
+
+    slack = {
+      enable = true;
+      autostart.enable = true;
+    };
   };
 }

@@ -99,7 +99,6 @@
                 vscode-marketplace.llvm-vs-code-extensions.vscode-clangd
                 vscode-marketplace.ms-vscode.cmake-tools
                 vscode-marketplace.moshfeu.compare-folders
-                vscode-marketplace.ewen-lbh.vscode-hyprls
                 vscode-marketplace.llvm-vs-code-extensions.lldb-dap
                 vscode-marketplace.yzhang.markdown-all-in-one
                 vscode-marketplace.yzane.markdown-pdf

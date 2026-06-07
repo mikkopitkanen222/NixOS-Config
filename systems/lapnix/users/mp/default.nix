@@ -62,4 +62,18 @@
     ../../../desknix/users/mp/vscodium.nix
     ../../../desknix/users/mp/walls.nix
   ];
+
+  mp222 = {
+    hyprland = {
+      monitors.monitors = [
+        {
+          output = "desc:AU Optronics 0x4A99";
+          mode = "1920x1080@60";
+          position = "0x0";
+          scale = 1;
+        }
+      ];
+      savePower = true;
+    };
+  };
 }
