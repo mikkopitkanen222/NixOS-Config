@@ -5,6 +5,8 @@
   ...
 }:
 let
+  # How to change managed settings:
+  # https://danklinux.com/docs/dankmaterialshell/nixos-flake#settings-home-manager-only
   settings = {
     currentThemeName = "dynamic";
     currentThemeCategory = "dynamic";

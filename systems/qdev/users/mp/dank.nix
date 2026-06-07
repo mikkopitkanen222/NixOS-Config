@@ -8,6 +8,7 @@
         bluetoothDevicePins.preferredDevice = lib.mkForce [ ];
         lockScreenShowProfileImage = lib.mkForce true;
         lockScreenShowPasswordField = lib.mkForce true;
+        enableFprint = lib.mkForce true;
         lockScreenNotificationMode = lib.mkForce 1;
         barConfigs = lib.mkForce [
           {
