@@ -48,7 +48,7 @@
     ../../../desknix/users/mp/direnv.nix
     ../../../desknix/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix
-    ./hyprland.nix
+    ../../../desknix/users/mp/hyprland.nix
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
@@ -62,4 +62,51 @@
     ../../../desknix/users/mp/vscodium.nix
     ../../../desknix/users/mp/walls.nix
   ];
+
+  mp222 = {
+    hyprland = {
+      monitors.monitors = [
+        {
+          output = "desc:AU Optronics 0x4A99";
+          mode = "1920x1080@60";
+          position = "0x0";
+          scale = 1;
+        }
+      ];
+      windowrules = [
+        {
+          name = "suppress-maximize-events";
+          match.class = ".*";
+          suppress_event = "maximize";
+        }
+        {
+          name = "fix-xwayland-drags";
+          match = {
+            class = "^$";
+            title = "^$";
+            xwayland = true;
+            float = true;
+            fullscreen = false;
+            pin = false;
+          };
+          no_focus = true;
+        }
+      ];
+      workspaces = [
+        {
+          workspace = "1";
+          monitor = "desc:AU Optronics 0x4A99";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "10";
+          monitor = "desc:AU Optronics 0x4A99";
+          persistent = true;
+          layout = "scrolling";
+        }
+      ];
+      savePower = true;
+    };
+  };
 }

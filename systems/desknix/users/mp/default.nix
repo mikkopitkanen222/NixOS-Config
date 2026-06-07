@@ -1,4 +1,10 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   users.users.mp = {
     isNormalUser = true;
     extraGroups = [
@@ -64,4 +70,71 @@
     ./vscodium.nix
     ./walls.nix
   ];
+
+  mp222 = {
+    hyprland = {
+      config = {
+        cursor.default_monitor =
+          (lib.head config.mp222.hyprland.monitors.monitors).output;
+      };
+      monitors.monitors = [
+        # Maximum refresh rate supporting bitdepth=10 or HDR is 144 Hz:
+        {
+          output = "desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685";
+          mode = "3440x1440@144";
+          position = "0x0";
+          scale = 1.0;
+          bitdepth = 10;
+          cm = "wide";
+        }
+        # Position on the left, rotated 90 degrees counter-clockwise:
+        {
+          output = "desc:Acer Technologies Acer KG241 P 0x91305EF3";
+          mode = "1920x1080@120";
+          position = "-1080x-400";
+          transform = 3;
+          scale = 1.0;
+        }
+      ];
+      windowrules = [
+        {
+          name = "suppress-maximize-events";
+          match.class = ".*";
+          suppress_event = "maximize";
+        }
+        {
+          name = "fix-xwayland-drags";
+          match = {
+            class = "^$";
+            title = "^$";
+            xwayland = true;
+            float = true;
+            fullscreen = false;
+            pin = false;
+          };
+          no_focus = true;
+        }
+      ];
+      workspaces = [
+        {
+          workspace = "1";
+          monitor = "desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "2";
+          monitor = "desc:Acer Technologies Acer KG241 P 0x91305EF3";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "10";
+          monitor = "desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685";
+          persistent = true;
+          layout = "scrolling";
+        }
+      ];
+    };
+  };
 }

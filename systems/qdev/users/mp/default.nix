@@ -39,7 +39,7 @@
     ../../../desknix/users/mp/direnv.nix
     ../../../wsl/users/mp/git.nix
     ../../../desknix/users/mp/gtk.nix
-    ./hyprland.nix
+    ../../../desknix/users/mp/hyprland.nix
     ../../../desknix/users/mp/kitty.nix
     ../../../desknix/users/mp/nnn.nix
     ../../../desknix/users/mp/obsidian.nix
@@ -52,8 +52,82 @@
     ../../../desknix/users/mp/walls.nix
   ];
 
-  mp222.slack = {
-    enable = true;
-    autostart.enable = true;
+  mp222 = {
+    hyprland = {
+      monitors.monitors = [
+        {
+          output = "desc:Lenovo Group Limited D27-40 URHMMCKN";
+          mode = "1920x1080@60";
+          position = "0x0";
+          scale = 1;
+        }
+        # Position on the left, rotated 90 degrees counter-clockwise:
+        {
+          output = "desc:Lenovo Group Limited LEN T27h-20 VNA5XD80";
+          mode = "2560x1440@60";
+          position = "-1440x-1000";
+          transform = 3;
+          scale = 1;
+        }
+        # Position on the right:
+        {
+          output = "desc:Chimei Innolux Corporation 0x1614";
+          mode = "1920x1200@60";
+          position = "1920x350";
+          scale = 1;
+        }
+      ];
+      windowrules = [
+        {
+          name = "suppress-maximize-events";
+          match.class = ".*";
+          suppress_event = "maximize";
+        }
+        {
+          name = "fix-xwayland-drags";
+          match = {
+            class = "^$";
+            title = "^$";
+            xwayland = true;
+            float = true;
+            fullscreen = false;
+            pin = false;
+          };
+          no_focus = true;
+        }
+      ];
+      workspaces = [
+        {
+          workspace = "1";
+          monitor = "desc:Lenovo Group Limited D27-40 URHMMCKN";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "2";
+          monitor = "desc:Lenovo Group Limited LEN T27h-20 VNA5XD80";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "3";
+          monitor = "desc:Chimei Innolux Corporation 0x1614";
+          persistent = true;
+          default = true;
+        }
+        {
+          workspace = "10";
+          monitor = "desc:Lenovo Group Limited D27-40 URHMMCKN";
+          persistent = true;
+          layout = "scrolling";
+        }
+      ];
+      savePower = true;
+    };
+
+    slack = {
+      enable = true;
+      autostart.enable = true;
+    };
   };
 }
