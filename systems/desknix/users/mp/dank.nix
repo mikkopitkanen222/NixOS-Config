@@ -5,6 +5,11 @@
   ...
 }:
 let
+  # Changing managed settings:
+  # 1. Edit settings in Dank Settings app
+  # 2. Dump settings to .json and convert to .nix:
+  # `dms ipc call settings dump > dank.json && echo -e "dank.json\ndank.nix" | nix run github:sempruijs/json2nix -- -`
+  # https://danklinux.com/docs/dankmaterialshell/nixos-flake#settings-home-manager-only
   settings = {
     currentThemeName = "dynamic";
     currentThemeCategory = "dynamic";
@@ -328,6 +333,7 @@ let
     notificationPopupShadowEnabled = true;
     notificationPopupPrivacyMode = false;
     modalDarkenBackground = true;
+    lockPamExternallyManaged = true;
     lockScreenShowPowerActions = true;
     lockScreenShowSystemIcons = false;
     lockScreenShowTime = true;
@@ -779,6 +785,7 @@ in
   home-manager.users.mp = {
     imports = [
       inputs.dms.homeModules.dank-material-shell
+      inputs.dank-calendar.homeModules.dank-calendar
       inputs.dank-search.homeModules.dsearch
     ];
 
@@ -802,6 +809,11 @@ in
       inherit settings clipboardSettings plugins;
     };
 
+    programs.dank-calendar = {
+      enable = true;
+      systemd.enable = true;
+      settings = { };
+    };
     programs.dsearch.enable = true;
   };
 }
