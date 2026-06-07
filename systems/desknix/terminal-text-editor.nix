@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   programs.nano = {
     enable = true;
     syntaxHighlight = true;

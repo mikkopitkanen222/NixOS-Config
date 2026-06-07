@@ -1,6 +1,5 @@
 # https://github.com/aristocratos/btop
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   imports = [ ../../../desknix/users/mp/btop.nix ];
 
   home-manager.users.mp.programs.btop = {

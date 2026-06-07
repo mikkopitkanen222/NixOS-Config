@@ -1,6 +1,5 @@
 # https://github.com/Mic92/sops-nix
-{ config, inputs, ... }:
-{
+{ config, inputs, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {

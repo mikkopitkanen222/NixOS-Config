@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   imports = [ ../../../desknix/users/mp/git.nix ];
 
   home-manager.users.mp = {

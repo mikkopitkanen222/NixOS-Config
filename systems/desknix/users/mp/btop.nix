@@ -1,6 +1,5 @@
 # https://github.com/aristocratos/btop
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     programs.btop = {
       enable = true;

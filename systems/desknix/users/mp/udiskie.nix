@@ -1,6 +1,5 @@
 # https://github.com/coldfix/udiskie
-{ ... }:
-{
+{ ... }: {
   services.udisks2.enable = true;
 
   home-manager.users.mp = {

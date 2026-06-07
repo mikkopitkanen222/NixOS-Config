@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   networking.hostName = "lapnix";
 
   system.stateVersion = "25.11";

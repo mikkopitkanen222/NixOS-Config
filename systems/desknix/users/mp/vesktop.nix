@@ -1,6 +1,5 @@
 # https://github.com/Vencord/Vesktop
-{ ... }:
-{
+{ ... }: {
   home-manager.users.mp = {
     programs.vesktop = {
       enable = true;

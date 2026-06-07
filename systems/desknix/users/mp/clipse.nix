@@ -1,6 +1,5 @@
 # https://github.com/savedra1/clipse
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     home.packages = [ pkgs.wl-clipboard ];
 

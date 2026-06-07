@@ -2,8 +2,7 @@
 # It will be used only as the initial configuration when installing NixOS.
 # After the first boot the actual config is installed. (The installation
 # always froze when I tried to nixos-install my full configuration.)
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   imports = [
     "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ./disko.nix

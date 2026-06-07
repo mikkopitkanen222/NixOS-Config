@@ -1,6 +1,5 @@
 # https://github.com/jarun/nnn
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     programs.nnn = {
       enable = true;

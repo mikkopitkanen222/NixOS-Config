@@ -1,7 +1,6 @@
 # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
 # https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/
-{ lib, ... }:
-{
+{ lib, ... }: {
   imports = [ ../../../desknix/users/mp/hyprland.nix ];
 
   home-manager.users.mp = {

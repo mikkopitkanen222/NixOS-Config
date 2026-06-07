@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   imports = [ ../desknix/nixos.nix ];
 
   nix.gc = {

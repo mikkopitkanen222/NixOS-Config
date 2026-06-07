@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     programs.chromium = {
       enable = true;

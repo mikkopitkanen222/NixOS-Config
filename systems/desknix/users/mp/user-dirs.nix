@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   home-manager.users.mp = {
     xdg.userDirs =
       let

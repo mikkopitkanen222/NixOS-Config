@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     home.packages = with pkgs; [
       proton-pass

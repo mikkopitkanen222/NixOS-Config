@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   home-manager.users.mp = {
     programs.git = {
       enable = true;

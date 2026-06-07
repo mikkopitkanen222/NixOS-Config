@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   hardware.logitech.wireless = {
     enable = true;
     # solaar is less featureful than libratbag, but it shows remaining charge and works wirelessly.

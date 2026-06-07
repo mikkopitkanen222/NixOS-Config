@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{ lib, ... }: {
   imports = [ ../../../desknix/users/mp/dank.nix ];
 
   home-manager.users.mp = {

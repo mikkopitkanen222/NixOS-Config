@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   networking.hostName = "qdev";
 
   system.stateVersion = "25.11";

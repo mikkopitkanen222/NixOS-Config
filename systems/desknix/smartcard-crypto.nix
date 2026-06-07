@@ -1,7 +1,6 @@
 # https://nixos.wiki/wiki/Yubikey
 # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # For SSH, we're using gpg-agent instead of ssh-agent.
   # ssh-agent can't use GPG keys for SSH authentication.
   programs.ssh.startAgent = false;

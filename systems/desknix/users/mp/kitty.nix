@@ -1,6 +1,5 @@
 # https://github.com/kovidgoyal/kitty
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   home-manager.users.mp = {
     programs.kitty = {
       enable = true;

@@ -2,8 +2,8 @@
   description = "NixOS configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz";
+    nixpkgs-unstable.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     systems.url = "github:nix-systems/x86_64-linux";
 
     home-manager = {

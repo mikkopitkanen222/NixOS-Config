@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   networking.hostName = "desknix";
 
   system.stateVersion = "25.05";

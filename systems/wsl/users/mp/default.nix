@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   users.users.mp = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

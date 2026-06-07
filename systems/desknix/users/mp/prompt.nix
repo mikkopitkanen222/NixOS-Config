@@ -1,6 +1,5 @@
 # https://github.com/starship/starship
-{ ... }:
-{
+{ ... }: {
   home-manager.users.mp = {
     programs.starship = {
       enable = true;
