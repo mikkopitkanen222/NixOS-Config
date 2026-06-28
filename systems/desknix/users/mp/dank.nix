@@ -1,5 +1,4 @@
 {
-  config,
   inputs,
   lib,
   pkgs,
@@ -777,15 +776,6 @@ let
   };
 in
 {
-  imports = [ inputs.dms.nixosModules.greeter ];
-
-  programs.dank-material-shell.greeter = {
-    enable = true;
-    compositor.name = "hyprland";
-    configHome = config.users.users.mp.home;
-    logs.save = true;
-  };
-
   home-manager.users.mp = {
     imports = [
       inputs.dms.homeModules.dank-material-shell
