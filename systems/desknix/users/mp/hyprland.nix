@@ -45,7 +45,6 @@ let
       numlock_by_default = true;
       scroll_method = "on_button_down";
       scroll_button = 274;
-      scroll_factor = 0.8;
     };
 
     # https://wiki.hypr.land/0.54.0/Configuring/Variables/#general
@@ -283,8 +282,8 @@ let
 
     # https://wiki.hypr.land/0.54.0/Configuring/Workspace-Rules/
     workspace = [
-      "1, monitor:desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685, persistent:true"
-      "2, monitor:desc:Acer Technologies Acer KG241 P 0x91305EF3, persistent:true"
+      "1, monitor:desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685, persistent:true, default:true"
+      "2, monitor:desc:Acer Technologies Acer KG241 P 0x91305EF3, persistent:true, default:true"
       "10, monitor:desc:ASUSTek COMPUTER INC VG34VQ3B SCLMTF073685, persistent:true, layout:scrolling"
     ];
   };

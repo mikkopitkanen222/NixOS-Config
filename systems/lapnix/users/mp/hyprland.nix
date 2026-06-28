@@ -37,7 +37,7 @@
 
       # https://wiki.hypr.land/0.54.0/Configuring/Workspace-Rules/
       workspace = lib.mkForce [
-        "1, monitor:desc:AU Optronics 0x4A99, persistent:true"
+        "1, monitor:desc:AU Optronics 0x4A99, persistent:true, default:true"
         "10, monitor:desc:AU Optronics 0x4A99, persistent:true, layout:scrolling"
       ];
     };
