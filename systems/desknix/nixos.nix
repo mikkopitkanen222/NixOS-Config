@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ config, inputs, ... }: {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   nix = {
@@ -8,13 +8,15 @@
 
     # Help nixd find modules.
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  };
 
-    # Delete old profiles and unreachable objects from the Nix store.
-    # Does not delete the current generation of any profile.
-    gc = {
-      automatic = true;
+  programs.nh = {
+    enable = true;
+    flake = "${config.users.users.mp.home}/nixos-config";
+    clean = {
+      enable = true;
       dates = "daily";
-      options = "--delete-older-than 7d";
+      extraArgs = "--keep-since 7d";
     };
   };
 

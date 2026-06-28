@@ -1,8 +1,8 @@
 { lib, ... }: {
   imports = [ ../desknix/nixos.nix ];
 
-  nix.gc = {
+  programs.nh.clean = {
     dates = lib.mkForce "weekly";
-    options = lib.mkForce "--delete-older-than 14d";
+    extraArgs = lib.mkForce "--keep-since 14d";
   };
 }
