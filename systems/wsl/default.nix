@@ -9,11 +9,11 @@ let
 in
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
     ./host-configuration.nix
     ../desknix/locale.nix
     ../lapnix/nixos.nix
     ../desknix/smartcard-crypto.nix
-    ../desknix/sops.nix
     ../desknix/terminal-text-editor.nix
     ../desknix/vscode-server.nix
   ]

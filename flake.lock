@@ -537,23 +537,6 @@
         "type": "github"
       }
     },
-    "nixos-secrets": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1772787458,
-        "narHash": "sha256-VUnsQkWppBtWM1gTWNse2ODyN/WbO/Ncj6vS2JCHk4I=",
-        "ref": "refs/heads/master",
-        "rev": "9fc7c356df6d9eecba1e122448387b948465ff5b",
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/mikkopitkanen222/nixos-secrets.git"
-      },
-      "original": {
-        "shallow": true,
-        "type": "git",
-        "url": "ssh://git@github.com/mikkopitkanen222/nixos-secrets.git"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -662,7 +645,6 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-vscode-extensions": "nix-vscode-extensions",
-        "nixos-secrets": "nixos-secrets",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",

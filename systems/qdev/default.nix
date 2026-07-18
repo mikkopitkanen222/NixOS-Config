@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
     ../desknix/bluetooth.nix
     ../desknix/boot-splash.nix
     ./hardware-configuration.nix
@@ -20,7 +21,6 @@ in
     ../desknix/pipewire.nix
     ../desknix/security.nix
     ../desknix/smartcard-crypto.nix
-    ../desknix/sops.nix
     ../desknix/terminal-text-editor.nix
     ../desknix/vscode-server.nix
   ]
