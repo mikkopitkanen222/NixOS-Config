@@ -41,6 +41,7 @@ let
     (attrsOf int)
   ]);
 
+  # This be dumb...
   toString' =
     value:
     if (builtins.isBool value) then
@@ -71,12 +72,17 @@ let
         end
       end
 
-      require("config")
-      require("monitors")
-      require("decoration")
-      require("binds")
-      require("animations")
-      require("input")
+      require("mp222/config")
+      require("mp222/monitors")
+      require("mp222/decoration")
+      require("mp222/binds")
+      require("mp222/animations")
+      require("mp222/input")
+
+      --requireOptional("dms/colors.lua")
+      --requireOptional("dms/cursor.lua")
+      requireOptional("dms/layout.lua")
+      requireOptional("dms/windowrules.lua")
     '';
 
     config = ''
@@ -88,10 +94,12 @@ let
           gaps_out = 0,
           float_gaps = 0,
           gaps_workspaces = 0,
-          col.inactive_border = "#2c2c2cec",
-          col.active_border = { colors = { "#541680f4", "#d0a028f4" }, angle = 90 },
-          col.nogroup_border = "#ffaaffff",
-          col.nogroup_border_active = "#ff00ffff",
+          col = {
+            inactive_border = "#2c2c2cec",
+            active_border = { colors = { "#541680f4", "#d0a028f4" }, angle = 90 },
+            nogroup_border = "#ffaaffff",
+            nogroup_border_active = "#ff00ffff",
+          },
           layout = "dwindle",
           no_focus_fallback = false,
           resize_on_border = false,
@@ -127,14 +135,17 @@ let
           merge_groups_on_groupbar = true,
           merge_floated_into_tiled_on_groupbar = false,
           group_on_movetoworkspace = false,
-          col.border_active = "#ffff0066",
-          col.border_inactive = "#77770066",
-          col.border_locked_active = "#ff550066",
-          col.border_locked_inactive = "#77550066",
+          col = {
+            border_active = "#ffff0066",
+            border_inactive = "#77770066",
+            border_locked_active = "#ff550066",
+            border_locked_inactive = "#77550066",
+          },
 
           -- https://wiki.hypr.land/Configuring/Basics/Variables/#groupbar
           groupbar = {
             enabled = true,
+            disable_when_only = false,
             -- font_family = "",
             font_size = 8,
             font_weight_active = "normal",
@@ -159,10 +170,12 @@ let
             text_color_inactive = "#ffffffff",
             text_color_locked_active = "#ffffffff",
             text_color_locked_inactive = "#ffffffff",
-            col.active = "#ffff0066",
-            col.inactive = "#77770066",
-            col.locked_active = "#ff550066",
-            col.locked_inactive = "#77550066",
+            col = {
+              active = "#ffff0066",
+              inactive = "#77770066",
+              locked_active = "#ff550066",
+              locked_inactive = "#77550066",
+            },
             gaps_in = 2,
             gaps_out = 2,
             keep_upper_gap = true,
@@ -176,7 +189,7 @@ let
           disable_hyprland_logo = false,
           disable_splash_rendering = true,
           disable_scale_notification = false,
-          col.splash = "#ffffffff",
+          col = { splash = "#ffffffff" },
           font_family = "Sans",
           -- splash_font_family = "",
           force_default_wallpaper = -1,
@@ -196,20 +209,26 @@ let
           mouse_move_focuses_monitor = true,
           allow_session_lock_restore = false,
           session_lock_xray = false,
+          session_lock_blur = false,
           background_color = "#111111",
           close_special_on_empty = true,
           on_focus_under_fullscreen = 2,
           exit_window_retains_fullscreen = false,
           initial_workspace_tracking = 1,
+          initial_workspace_token_timeout = 10,
           middle_click_paste = false,
           render_unfocused_fps = 15,
           disable_xdg_env_checks = false,
-          disable_hyprland_qtutils_check = false,
+          disable_hyprland_guiutils_check = false,
           lockdead_screen_delay = 1000,
           enable_anr_dialog = true,
           anr_missed_pings = 5,
           size_limits_tiled = false,
+          screencopy_force_8b = true,
           disable_watchdog_warning = false,
+          bell_sound = "default",
+          float_force_onscreen = 0,
+          new_float_force_onscreen = 1,
         },
 
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#layout
@@ -250,6 +269,9 @@ let
           use_fp16 = 2,
           keep_unmodified_copy = 2,
           use_shader_blur_blend = false,
+          icc_vcgt_enabled = true,
+          fp16_sdr_tf = 0,
+          not_shown_fifo_lock = "always",
         },
 
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#cursor
@@ -288,6 +310,13 @@ let
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#quirks
         quirks = {
           prefer_hdr = 2,
+          skip_non_kms_dmabuf_formats = false,
+        },
+
+        -- https://wiki.hypr.land/Configuring/Basics/Variables/#input-capture
+        input_capture = {
+          capture_modifiers = false,
+          enforce_barriers = true,
         },
       })
     '';
@@ -372,6 +401,18 @@ let
             enabled = false,
             samples = 7,
           },
+
+          -- https://wiki.hypr.land/Configuring/Basics/Variables/#wobble
+          wobble = {
+            enabled = false,
+            mesh = 12,
+            stiffness = 200.0,
+            damping = 12.0,
+            mass = 1.0,
+            intensity = 0.2,
+            value_epsilon = 0.25,
+            velocity_epsilon = 2.0,
+          },
         },
       })
     '';
@@ -382,18 +423,19 @@ let
         binds = {
           pass_mouse_when_bound = false,
           scroll_event_delay = 300,
-          workspace_back_and_forth = false,  -- TODO: Try it!
+          workspace_back_and_forth = true,
           hide_special_on_workspace_change = true,
-          allow_workspace_cycles = false,
+          allow_workspace_cycles = true,
           workspace_center_on = 1,
           focus_preferred_method = 0,
           ignore_group_lock = false,
           movefocus_cycles_fullscreen = false,
-          movefocus_cycles_groupfirst = false,  -- TODO: Try it!
+          movefocus_cycles_groupfirst = true,
           window_direction_monitor_fallback = true,
           disable_keybind_grabbing = false,
           allow_pin_fullscreen = false,
           drag_threshold = 0,
+          drag_center_window = false,
         },
       })
 
@@ -567,7 +609,7 @@ let
           -- scroll_points = "",
           scroll_method = "on_button_down",
           scroll_button = 274,
-          scroll_button_lock = true,
+          scroll_button_lock = false,
           scroll_factor = 1.0,
           natural_scroll = false,
           follow_mouse = 1,
@@ -577,7 +619,7 @@ let
           mouse_refocus = true,
           float_switch_override_focus = 1,
           special_fallthrough = false,
-          off_window_axis_events = 1
+          off_window_axis_events = 1,
           emulate_discrete_scroll = 1,
 
           -- https://wiki.hypr.land/Configuring/Basics/Variables/#touchpad
@@ -631,7 +673,7 @@ let
           },
         },
 
-        https://wiki.hypr.land/Configuring/Basics/Variables/#gestures
+        -- https://wiki.hypr.land/Configuring/Basics/Variables/#gestures
         gestures = {
           workspace_swipe_distance = 300,
           workspace_swipe_touch = false,
@@ -645,6 +687,12 @@ let
           workspace_swipe_forever = false,
           workspace_swipe_use_r = false,
           close_max_timeout = 1000,
+
+          -- https://wiki.hypr.land/Configuring/Basics/Variables/#scrolling
+          scrolling = {
+            move_snap_to_grid = true,
+            move_snap_cursor = true,
+          },
         },
       })
     '';
