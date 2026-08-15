@@ -65,10 +65,8 @@ let
     main = ''
       function requireOptional(moduleName)
         local status, value = pcall(require, moduleName)
-        if status then
-          print("Successfully loaded module '", moduleName, "'")
-        else
-          print("Failed to load module '", moduleName, "': ", value)
+        if not status then
+          print(value)
         end
       end
 
@@ -79,10 +77,10 @@ let
       require("mp222/animations")
       require("mp222/input")
 
-      --requireOptional("dms/colors.lua")
-      --requireOptional("dms/cursor.lua")
-      requireOptional("dms/layout.lua")
-      requireOptional("dms/windowrules.lua")
+      -- requireOptional("dms/colors")
+      -- requireOptional("dms/cursor")
+      -- requireOptional("dms/layout")
+      -- requireOptional("dms/windowrules")
     '';
 
     config = ''
@@ -601,7 +599,7 @@ let
           resolve_binds_by_sym = false,
           repeat_rate = 25,
           repeat_delay = 500,
-          sensitivity = 0.0,
+          sensitivity = 1.0,
           accel_profile = "flat",
           force_no_accel = false,
           rotation = 0,
