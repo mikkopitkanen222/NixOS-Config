@@ -41,25 +41,35 @@ let
     (attrsOf int)
   ]);
 
-  # This be dumb...
+  attrsToLua =
+    attrs: indent:
+    let
+      indentStep = "  ";
+      baseIndent = lib.concatStrings (map (i: indentStep) (lib.range 1 indent));
+    in
+    lib.concatStringsSep "\n${baseIndent}" (
+      lib.flatten [
+        "{"
+        (lib.mapAttrsToList (
+          name: value: "${indentStep}${name} = ${toString' value (indent + 1)},"
+        ) attrs)
+        "}"
+      ]
+    );
+
   toString' =
-    value:
+    value: indent:
     if (builtins.isBool value) then
       lib.boolToString value
     else if ((builtins.isInt value) || (builtins.isFloat value)) then
       lib.toString value
     else if (builtins.isAttrs value) then
-      attrsToLua value
+      attrsToLua value indent
     else
       ''"${value}"'';
 
-  attrsToLua =
-    attrs:
-    "{ ${
-      lib.strings.concatStringsSep ", " (
-        lib.attrsets.mapAttrsToList (name: value: "${name} = ${toString' value}") attrs
-      )
-    } }";
+  # TODO: Add one version of toString' not requiring indent.
+  # May need to rename toString' to something else, but retain ' on internal one.
 
   hyprConfigFiles = {
     main = ''
@@ -81,6 +91,10 @@ let
       -- requireOptional("dms/cursor")
       -- requireOptional("dms/layout")
       -- requireOptional("dms/windowrules")
+
+      -- mp222/extra.lua may or may not exist. It can be used to add extra
+      -- config without having to rebuild the whole NixOS configuration.
+      requireOptional("mp222/extra")
     '';
 
     config = ''
@@ -322,17 +336,26 @@ let
     monitors = lib.strings.concatStringsSep "\n" [
       (lib.strings.optionalString (cfg.monitors.cursorDefaultMonitor != null) ''
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#cursor
-        hl.config({ cursor.default_monitor = "${cfg.monitors.cursorDefaultMonitor}" })
+        hl.config({
+          cursor = {
+            default_monitor = "${cfg.monitors.cursorDefaultMonitor}",
+          },
+        })
       '')
       ''
         -- https://wiki.hypr.land/Configuring/Basics/Monitors/
         ${lib.strings.concatStringsSep "\n" (
-          map (monitor: "hl.monitor(${attrsToLua monitor})") cfg.monitors.monitors
+          map (monitor: "hl.monitor(${toString' monitor 0})") cfg.monitors.monitors
         )}
       ''
       (lib.strings.optionalString cfg.monitors.addDefaultPlacement ''
         -- Default placement for extra monitors:
-        hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1.0 })
+        hl.monitor({
+          output = "",
+          mode = "preferred",
+          position = "auto",
+          scale = 1.0,
+        })
       '')
     ];
 
@@ -752,9 +775,20 @@ in
         type = listOf monitorType;
         default = [ ];
         description = "List of attribute sets describing Hyprland monitors.";
-        example = ''
-          [ { output = "DP-1", mode = "1920x1080@144", position = "0x0", scale = 1.0 } ]
-        '';
+        example = [
+          {
+            output = "DP-1";
+            mode = "1920x1080@144";
+            position = "0x0";
+            scale = 1.0;
+          }
+          {
+            output = "DP-2";
+            mode = "preferred";
+            position = "auto";
+            scale = 1.0;
+          }
+        ];
       };
 
       addDefaultPlacement = lib.mkOption {
