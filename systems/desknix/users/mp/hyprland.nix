@@ -22,15 +22,15 @@ let
     listOf
     ;
 
-  # settingValueType = nullOr (oneOf [
-  #   bool
-  #   int
-  #   float
-  #   str
-  #   path
-  #   (attrsOf settingValueType)
-  #   (listOf settingValueType)
-  # ]);
+  settingValueType = nullOr (oneOf [
+    bool
+    int
+    float
+    str
+    path
+    (attrsOf settingValueType)
+    (listOf settingValueType)
+  ]);
 
   monitorType = attrsOf (oneOf [
     bool
@@ -41,35 +41,510 @@ let
     (attrsOf int)
   ]);
 
-  attrsToLua =
-    attrs: indent:
+  nix2lua' =
+    indent: value:
     let
       indentStep = "  ";
-      baseIndent = lib.concatStrings (map (i: indentStep) (lib.range 1 indent));
-    in
-    lib.concatStringsSep "\n${baseIndent}" (
-      lib.flatten [
-        "{"
-        (lib.mapAttrsToList (
-          name: value: "${indentStep}${name} = ${toString' value (indent + 1)},"
-        ) attrs)
-        "}"
-      ]
-    );
+      baseIndent = lib.concatStrings (map (_: indentStep) (lib.range 1 indent));
+      makeBlock = lines: ''
+        {
+        ${lib.concatMapStringsSep ",\n" (
+          line: "${baseIndent}${indentStep}${line}"
+        ) lines}
+        ${baseIndent}}'';
 
-  toString' =
-    value: indent:
+      list2Lua =
+        list:
+        let
+          isSimple = value: !(builtins.isList value || builtins.isAttrs value);
+          noWrap = (builtins.length list <= 2) && (builtins.all isSimple list);
+        in
+        if noWrap then
+          "{ ${lib.concatMapStringsSep ", " nix2lua list} }"
+        else
+          makeBlock (map (value: "${nix2lua' (indent + 1) value}") list);
+
+      attrs2Lua =
+        attrs:
+        makeBlock (
+          lib.mapAttrsToList (
+            name: value: "${name} = ${nix2lua' (indent + 1) value}"
+          ) attrs
+        );
+    in
     if (builtins.isBool value) then
       lib.boolToString value
-    else if ((builtins.isInt value) || (builtins.isFloat value)) then
+    else if (builtins.isInt value || builtins.isFloat value) then
       lib.toString value
+    else if (builtins.isList value) then
+      list2Lua value
     else if (builtins.isAttrs value) then
-      attrsToLua value indent
+      attrs2Lua value
     else
       ''"${value}"'';
 
-  # TODO: Add one version of toString' not requiring indent.
-  # May need to rename toString' to something else, but retain ' on internal one.
+  nix2lua = nix2lua' 0;
+
+  defaultConfig = {
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#general
+    general = {
+      border_size = 3;
+      gaps_in = 0;
+      gaps_out = 0;
+      float_gaps = 0;
+      gaps_workspaces = 0;
+      col = {
+        inactive_border = "#2c2c2cec";
+        active_border = {
+          colors = [
+            "#541680f4"
+            "#d0a028f4"
+          ];
+          angle = 90;
+        };
+        nogroup_border = "#ffaaffff";
+        nogroup_border_active = "#ff00ffff";
+      };
+      layout = "dwindle";
+      no_focus_fallback = false;
+      resize_on_border = false;
+      extend_border_grab_area = 15;
+      hover_icon_on_border = true;
+      allow_tearing = false;
+      resize_corner = 0;
+      modal_parent_blocking = true;
+      # locale = "";
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#snap
+      snap = {
+        enabled = false;
+        window_gap = 10;
+        monitor_gap = 10;
+        border_overlap = true;
+        respect_gaps = false;
+      };
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
+    decoration = {
+      rounding = 10;
+      rounding_power = 2.0;
+      active_opacity = 1.0;
+      inactive_opacity = 1.0;
+      fullscreen_opacity = 1.0;
+      dim_modal = true;
+      dim_inactive = false;
+      dim_strength = 0.5;
+      dim_special = 0.2;
+      dim_around = 0.4;
+      # screen_shader = "";
+      border_part_of_window = true;
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#blur
+      blur = {
+        enabled = !cfg.savePower;
+        size = 8;
+        passes = 1;
+        ignore_opacity = true;
+        new_optimizations = true;
+        xray = true;
+        noise = 0.0117;
+        contrast = 0.8916;
+        brightness = 0.8172;
+        vibrancy = 0.1696;
+        vibrancy_darkness = 0.0;
+        special = false;
+        popups = false; # TODO: Try it!
+        popups_ignorealpha = 0.2;
+        input_methods = false;
+        input_methods_ignorealpha = 0.2;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#shadow
+      shadow = {
+        enabled = !cfg.savePower;
+        range = 12;
+        render_power = 3;
+        sharp = false;
+        color = "#00000034";
+        color_inactive = "#00000034";
+        offset = [
+          3
+          4
+        ];
+        scale = 1.0;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#glow
+      glow = {
+        enabled = false;
+        range = 12;
+        render_power = 3;
+        color = "#1a1a1a34";
+        color_inactive = "#00000000";
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#motion-blur
+      motion_blur = {
+        enabled = false;
+        samples = 7;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#wobble
+      wobble = {
+        enabled = false;
+        mesh = 12;
+        stiffness = 200.0;
+        damping = 12.0;
+        mass = 1.0;
+        intensity = 0.2;
+        value_epsilon = 0.25;
+        velocity_epsilon = 2.0;
+      };
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#animations
+    animations = {
+      enabled = true;
+      workspace_wraparound = true;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#input
+    input = {
+      kb_model = "pc105";
+      kb_layout = "fi";
+      kb_variant = "winkeys";
+      # kb_options = "";
+      # kb_rules = "";
+      # kb_file = "";
+      numlock_by_default = true;
+      resolve_binds_by_sym = false;
+      repeat_rate = 25;
+      repeat_delay = 500;
+      sensitivity = 1.0;
+      accel_profile = "flat";
+      force_no_accel = false;
+      rotation = 0;
+      left_handed = false;
+      # scroll_points = "";
+      scroll_method = "on_button_down";
+      scroll_button = 274;
+      scroll_button_lock = false;
+      scroll_factor = 1.0;
+      natural_scroll = false;
+      follow_mouse = 1;
+      follow_mouse_shrink = 0;
+      follow_mouse_threshold = 0.0;
+      focus_on_close = 1;
+      mouse_refocus = true;
+      float_switch_override_focus = 1;
+      special_fallthrough = false;
+      off_window_axis_events = 1;
+      emulate_discrete_scroll = 1;
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#touchpad
+      touchpad = {
+        disable_while_typing = true;
+        natural_scroll = true;
+        scroll_factor = 1.0;
+        middle_button_emulation = false;
+        tap_button_map = "lrm";
+        clickfinger_behavior = false;
+        tap_to_click = true;
+        drag_lock = 1;
+        tap_and_drag = true;
+        flip_x = false;
+        flip_y = false;
+        drag_3fg = 0;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#touchdevice
+      touchdevice = {
+        transform = 0;
+        # output = "";
+        enabled = true;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#virtualkeyboard
+      virtualkeyboard = {
+        share_states = 2;
+        release_pressed_on_close = false;
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#tablet
+      tablet = {
+        transform = 0;
+        # output = "";
+        region_position = [
+          0
+          0
+        ];
+        absolute_region_position = false;
+        region_size = [
+          0
+          0
+        ];
+        relative_input = false;
+        left_handed = false;
+        active_area_size = [
+          0
+          0
+        ];
+        active_area_position = [
+          0
+          0
+        ];
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#tablettool
+      tablettool = {
+        eraser_button_mode = 0;
+        eraser_button_override = 0;
+        pressure_range_min = -1.0;
+        pressure_range_max = -1.0;
+      };
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#gestures
+    gestures = {
+      workspace_swipe_distance = 300;
+      workspace_swipe_touch = false;
+      workspace_swipe_invert = true;
+      workspace_swipe_touch_invert = false;
+      workspace_swipe_min_speed_to_force = 30;
+      workspace_swipe_cancel_ratio = 0.5;
+      workspace_swipe_create_new = true;
+      workspace_swipe_direction_lock = true;
+      workspace_swipe_direction_lock_threshold = 10;
+      workspace_swipe_forever = false;
+      workspace_swipe_use_r = false;
+      close_max_timeout = 1000;
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#scrolling
+      scrolling = {
+        move_snap_to_grid = true;
+        move_snap_cursor = true;
+      };
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#group
+    group = {
+      auto_group = true;
+      insert_after_current = false;
+      focus_removed_window = true;
+      drag_into_group = 1;
+      merge_groups_on_drag = true;
+      merge_groups_on_groupbar = true;
+      merge_floated_into_tiled_on_groupbar = false;
+      group_on_movetoworkspace = false;
+      col = {
+        border_active = "#ffff0066";
+        border_inactive = "#77770066";
+        border_locked_active = "#ff550066";
+        border_locked_inactive = "#77550066";
+      };
+
+      # https://wiki.hypr.land/Configuring/Basics/Variables/#groupbar
+      groupbar = {
+        enabled = true;
+        disable_when_only = false;
+        # font_family = "";
+        font_size = 8;
+        font_weight_active = "normal";
+        font_weight_inactive = "normal";
+        gradients = true;
+        height = 14;
+        indicator_gap = 0;
+        indicator_height = 3;
+        stacked = false;
+        priority = 3;
+        render_titles = true;
+        text_offset = 0;
+        text_padding = 0;
+        scrolling = true;
+        rounding = 1;
+        rounding_power = 2.0;
+        gradient_rounding = 2;
+        gradient_rounding_power = 2.0;
+        round_only_edges = true;
+        gradient_round_only_edges = true;
+        text_color = "#ffffffff";
+        text_color_inactive = "#ffffffff";
+        text_color_locked_active = "#ffffffff";
+        text_color_locked_inactive = "#ffffffff";
+        col = {
+          active = "#ffff0066";
+          inactive = "#77770066";
+          locked_active = "#ff550066";
+          locked_inactive = "#77550066";
+        };
+        gaps_in = 2;
+        gaps_out = 2;
+        keep_upper_gap = true;
+        middle_click_close = true;
+        blur = false;
+      };
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#misc
+    misc = {
+      disable_hyprland_logo = false;
+      disable_splash_rendering = true;
+      disable_scale_notification = false;
+      col = {
+        splash = "#ffffffff";
+      };
+      font_family = "Sans";
+      # splash_font_family = "";
+      force_default_wallpaper = -1;
+      vrr = 3;
+      mouse_move_enables_dpms = false;
+      key_press_enables_dpms = false;
+      name_vk_after_proc = true;
+      always_follow_on_dnd = true;
+      layers_hog_keyboard_focus = true;
+      animate_manual_resizes = false;
+      animate_mouse_windowdragging = false;
+      disable_autoreload = true;
+      enable_swallow = false;
+      # swallow_regex = "";
+      # swallow_exception_regex = "";
+      focus_on_activate = false;
+      mouse_move_focuses_monitor = true;
+      allow_session_lock_restore = false;
+      session_lock_xray = false;
+      session_lock_blur = false;
+      background_color = "#111111";
+      close_special_on_empty = true;
+      on_focus_under_fullscreen = 2;
+      exit_window_retains_fullscreen = false;
+      initial_workspace_tracking = 1;
+      initial_workspace_token_timeout = 10;
+      middle_click_paste = false;
+      render_unfocused_fps = 15;
+      disable_xdg_env_checks = false;
+      disable_hyprland_guiutils_check = false;
+      lockdead_screen_delay = 1000;
+      enable_anr_dialog = true;
+      anr_missed_pings = 5;
+      size_limits_tiled = false;
+      screencopy_force_8b = true;
+      disable_watchdog_warning = false;
+      bell_sound = "default";
+      float_force_onscreen = 0;
+      new_float_force_onscreen = 1;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#layout
+    layout = {
+      single_window_aspect_ratio = [
+        0
+        0
+      ];
+      single_window_aspect_ratio_tolerance = 0.1;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#binds
+    binds = {
+      pass_mouse_when_bound = false;
+      scroll_event_delay = 300;
+      workspace_back_and_forth = true;
+      hide_special_on_workspace_change = true;
+      allow_workspace_cycles = true;
+      workspace_center_on = 1;
+      focus_preferred_method = 0;
+      ignore_group_lock = false;
+      movefocus_cycles_fullscreen = false;
+      movefocus_cycles_groupfirst = true;
+      window_direction_monitor_fallback = true;
+      disable_keybind_grabbing = false;
+      allow_pin_fullscreen = false;
+      drag_threshold = 0;
+      drag_center_window = false;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#xwayland
+    xwayland = {
+      enabled = true;
+      use_nearest_neighbor = true;
+      force_zero_scaling = false;
+      create_abstract_socket = false;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#opengl
+    opengl = {
+      nvidia_anti_flicker = true;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#render
+    render = {
+      direct_scanout = 2;
+      expand_undersized_textures = true;
+      xp_mode = false;
+      ctm_animation = 2;
+      cm_enabled = true;
+      send_content_type = true;
+      cm_auto_hdr = 1;
+      new_render_scheduling = true;
+      non_shader_cm = 2;
+      non_shader_cm_interop = 2;
+      cm_sdr_eotf = "default";
+      commit_timing_enabled = true;
+      use_fp16 = 2;
+      keep_unmodified_copy = 2;
+      use_shader_blur_blend = false;
+      icc_vcgt_enabled = true;
+      fp16_sdr_tf = 0;
+      not_shown_fifo_lock = "always";
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#cursor
+    cursor = {
+      invisible = false;
+      sync_gsettings_theme = true;
+      no_hardware_cursors = 2;
+      no_break_fs_vrr = 2;
+      min_refresh_rate = 60;
+      hotspot_padding = 1;
+      inactive_timeout = 0.0;
+      no_warps = false;
+      persistent_warps = true;
+      warp_on_change_workspace = 1;
+      warp_on_toggle_special = 1;
+      # default_monitor = "";  -- Might be set in monitors.lua   TODO: NOT set in monitors; Check if needs to be left commented for default behavior
+      zoom_factor = 1.0;
+      zoom_rigid = false;
+      zoom_detached_camera = true;
+      enable_hyprcursor = true;
+      hide_on_key_press = false;
+      hide_on_touch = true;
+      hide_on_tablet = true;
+      use_cpu_buffer = 2;
+      warp_back_after_non_mouse_input = false;
+      zoom_disable_aa = false;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#ecosystem
+    ecosystem = {
+      no_update_news = true;
+      no_donation_nag = true;
+      enforce_permissions = true;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#quirks
+    quirks = {
+      prefer_hdr = 2;
+      skip_non_kms_dmabuf_formats = false;
+    };
+
+    # https://wiki.hypr.land/Configuring/Basics/Variables/#input-capture
+    input_capture = {
+      capture_modifiers = false;
+      enforce_barriers = true;
+    };
+  };
+
+  finalConfig = lib.recursiveUpdate defaultConfig cfg.config;
 
   hyprConfigFiles = {
     main = ''
@@ -82,10 +557,8 @@ let
 
       require("mp222/config")
       require("mp222/monitors")
-      require("mp222/decoration")
       require("mp222/binds")
       require("mp222/animations")
-      require("mp222/input")
 
       -- requireOptional("dms/colors")
       -- requireOptional("dms/cursor")
@@ -97,369 +570,20 @@ let
       requireOptional("mp222/extra")
     '';
 
-    config = ''
-      hl.config({
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
-        general = {
-          border_size = 3,
-          gaps_in = 0,
-          gaps_out = 0,
-          float_gaps = 0,
-          gaps_workspaces = 0,
-          col = {
-            inactive_border = "#2c2c2cec",
-            active_border = { colors = { "#541680f4", "#d0a028f4" }, angle = 90 },
-            nogroup_border = "#ffaaffff",
-            nogroup_border_active = "#ff00ffff",
-          },
-          layout = "dwindle",
-          no_focus_fallback = false,
-          resize_on_border = false,
-          extend_border_grab_area = 15,
-          hover_icon_on_border = true,
-          allow_tearing = false,
-          resize_corner = 0,
-          modal_parent_blocking = true,
-          -- locale = "",
+    config = "hl.config(${nix2lua finalConfig})";
 
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#snap
-          snap = {
-            enabled = false,
-            window_gap = 10,
-            monitor_gap = 10,
-            border_overlap = true,
-            respect_gaps = false,
-          },
-        },
-
-        -- Decorations are set in decoration.lua
-        -- Animations are set in animations.lua
-        -- Inputs are set in input.lua
-        -- Gestures are set in input.lua
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#group
-        group = {
-          auto_group = true,
-          insert_after_current = false,
-          focus_removed_window = true,
-          drag_into_group = 1,
-          merge_groups_on_drag = true,
-          merge_groups_on_groupbar = true,
-          merge_floated_into_tiled_on_groupbar = false,
-          group_on_movetoworkspace = false,
-          col = {
-            border_active = "#ffff0066",
-            border_inactive = "#77770066",
-            border_locked_active = "#ff550066",
-            border_locked_inactive = "#77550066",
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#groupbar
-          groupbar = {
-            enabled = true,
-            disable_when_only = false,
-            -- font_family = "",
-            font_size = 8,
-            font_weight_active = "normal",
-            font_weight_inactive = "normal",
-            gradients = true,
-            height = 14,
-            indicator_gap = 0,
-            indicator_height = 3,
-            stacked = false,
-            priority = 3,
-            render_titles = true,
-            text_offset = 0,
-            text_padding = 0,
-            scrolling = true,
-            rounding = 1,
-            rounding_power = 2.0,
-            gradient_rounding = 2,
-            gradient_rounding_power = 2.0,
-            round_only_edges = true,
-            gradient_round_only_edges = true,
-            text_color = "#ffffffff",
-            text_color_inactive = "#ffffffff",
-            text_color_locked_active = "#ffffffff",
-            text_color_locked_inactive = "#ffffffff",
-            col = {
-              active = "#ffff0066",
-              inactive = "#77770066",
-              locked_active = "#ff550066",
-              locked_inactive = "#77550066",
-            },
-            gaps_in = 2,
-            gaps_out = 2,
-            keep_upper_gap = true,
-            middle_click_close = true,
-            blur = false,
-          },
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#misc
-        misc = {
-          disable_hyprland_logo = false,
-          disable_splash_rendering = true,
-          disable_scale_notification = false,
-          col = { splash = "#ffffffff" },
-          font_family = "Sans",
-          -- splash_font_family = "",
-          force_default_wallpaper = -1,
-          vrr = 3,
-          mouse_move_enables_dpms = false,
-          key_press_enables_dpms = false,
-          name_vk_after_proc = true,
-          always_follow_on_dnd = true,
-          layers_hog_keyboard_focus = true,
-          animate_manual_resizes = false,
-          animate_mouse_windowdragging = false,
-          disable_autoreload = true,
-          enable_swallow = false,
-          -- swallow_regex = "",
-          -- swallow_exception_regex = "",
-          focus_on_activate = false,
-          mouse_move_focuses_monitor = true,
-          allow_session_lock_restore = false,
-          session_lock_xray = false,
-          session_lock_blur = false,
-          background_color = "#111111",
-          close_special_on_empty = true,
-          on_focus_under_fullscreen = 2,
-          exit_window_retains_fullscreen = false,
-          initial_workspace_tracking = 1,
-          initial_workspace_token_timeout = 10,
-          middle_click_paste = false,
-          render_unfocused_fps = 15,
-          disable_xdg_env_checks = false,
-          disable_hyprland_guiutils_check = false,
-          lockdead_screen_delay = 1000,
-          enable_anr_dialog = true,
-          anr_missed_pings = 5,
-          size_limits_tiled = false,
-          screencopy_force_8b = true,
-          disable_watchdog_warning = false,
-          bell_sound = "default",
-          float_force_onscreen = 0,
-          new_float_force_onscreen = 1,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#layout
-        layout = {
-          single_window_aspect_ratio = { 0, 0 },
-          single_window_aspect_ratio_tolerance = 0.1,
-        },
-
-        -- Binds are set in binds.lua
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#xwayland
-        xwayland = {
-          enabled = true,
-          use_nearest_neighbor = true,
-          force_zero_scaling = false,
-          create_abstract_socket = false,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#opengl
-        opengl = {
-          nvidia_anti_flicker = true,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#render
-        render = {
-          direct_scanout = 2,
-          expand_undersized_textures = true,
-          xp_mode = false,
-          ctm_animation = 2,
-          cm_enabled = true,
-          send_content_type = true,
-          cm_auto_hdr = 1,
-          new_render_scheduling = true,
-          non_shader_cm = 2,
-          non_shader_cm_interop = 2,
-          cm_sdr_eotf = "default",
-          commit_timing_enabled = true,
-          use_fp16 = 2,
-          keep_unmodified_copy = 2,
-          use_shader_blur_blend = false,
-          icc_vcgt_enabled = true,
-          fp16_sdr_tf = 0,
-          not_shown_fifo_lock = "always",
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#cursor
-        cursor = {
-          invisible = false,
-          sync_gsettings_theme = true,
-          no_hardware_cursors = 2,
-          no_break_fs_vrr = 2,
-          min_refresh_rate = 60,
-          hotspot_padding = 1,
-          inactive_timeout = 0.0,
-          no_warps = false,
-          persistent_warps = true,
-          warp_on_change_workspace = 1,
-          warp_on_toggle_special = 1,
-          -- default_monitor = "",  -- Might be set in monitors.lua
-          zoom_factor = 1.0,
-          zoom_rigid = false,
-          zoom_detached_camera = true,
-          enable_hyprcursor = true,
-          hide_on_key_press = false,
-          hide_on_touch = true,
-          hide_on_tablet = true,
-          use_cpu_buffer = 2,
-          warp_back_after_non_mouse_input = false,
-          zoom_disable_aa = false,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#ecosystem
-        ecosystem = {
-          no_update_news = true,
-          no_donation_nag = true,
-          enforce_permissions = true,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#quirks
-        quirks = {
-          prefer_hdr = 2,
-          skip_non_kms_dmabuf_formats = false,
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#input-capture
-        input_capture = {
-          capture_modifiers = false,
-          enforce_barriers = true,
-        },
-      })
-    '';
-
-    monitors = lib.strings.concatStringsSep "\n" [
-      (lib.strings.optionalString (cfg.monitors.cursorDefaultMonitor != null) ''
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#cursor
-        hl.config({
-          cursor = {
-            default_monitor = "${cfg.monitors.cursorDefaultMonitor}",
-          },
-        })
-      '')
-      ''
-        -- https://wiki.hypr.land/Configuring/Basics/Monitors/
-        ${lib.strings.concatStringsSep "\n" (
-          map (monitor: "hl.monitor(${toString' monitor 0})") cfg.monitors.monitors
-        )}
-      ''
-      (lib.strings.optionalString cfg.monitors.addDefaultPlacement ''
+    monitors = ''
+      -- https://wiki.hypr.land/Configuring/Basics/Monitors/
+      ${lib.concatMapStringsSep "\n" (
+        monitor: "hl.monitor(${nix2lua monitor})"
+      ) cfg.monitors.monitors}
+      ${lib.optionalString (cfg.monitors.defaultPlacement != null) ''
         -- Default placement for extra monitors:
-        hl.monitor({
-          output = "",
-          mode = "preferred",
-          position = "auto",
-          scale = 1.0,
-        })
-      '')
-    ];
-
-    decoration = ''
-      hl.config({
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
-        decoration = {
-          rounding = 10,
-          rounding_power = 2.0,
-          active_opacity = 1.0,
-          inactive_opacity = 1.0,
-          fullscreen_opacity = 1.0,
-          dim_modal = true,
-          dim_inactive = false,
-          dim_strength = 0.5,
-          dim_special = 0.2,
-          dim_around = 0.4,
-          -- screen_shader = "",
-          border_part_of_window = true,
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#blur
-          blur = {
-            enabled = ${lib.boolToString (!cfg.savePower)},
-            size = 8,
-            passes = 1,
-            ignore_opacity = true,
-            new_optimizations = true,
-            xray = true,
-            noise = 0.0117,
-            contrast = 0.8916,
-            brightness = 0.8172,
-            vibrancy = 0.1696,
-            vibrancy_darkness = 0.0,
-            special = false,
-            popups = false, -- TODO: Try it!
-            popups_ignorealpha = 0.2,
-            input_methods = false,
-            input_methods_ignorealpha = 0.2,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#shadow
-          shadow = {
-            enabled = ${lib.boolToString (!cfg.savePower)},
-            range = 12,
-            render_power = 3,
-            sharp = false,
-            color = "#00000034",
-            color_inactive = "#00000034",
-            offset = { 3, 4 },
-            scale = 1.0,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#glow
-          glow = {
-            enabled = false,
-            range = 12,
-            render_power = 3,
-            color = "#1a1a1a34",
-            color_inactive = "#00000000",
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#motion-blur
-          motion_blur = {
-            enabled = false,
-            samples = 7,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#wobble
-          wobble = {
-            enabled = false,
-            mesh = 12,
-            stiffness = 200.0,
-            damping = 12.0,
-            mass = 1.0,
-            intensity = 0.2,
-            value_epsilon = 0.25,
-            velocity_epsilon = 2.0,
-          },
-        },
-      })
+        hl.monitor(${nix2lua cfg.monitors.defaultPlacement})
+      ''}
     '';
 
     binds = ''
-      hl.config({
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#binds
-        binds = {
-          pass_mouse_when_bound = false,
-          scroll_event_delay = 300,
-          workspace_back_and_forth = true,
-          hide_special_on_workspace_change = true,
-          allow_workspace_cycles = true,
-          workspace_center_on = 1,
-          focus_preferred_method = 0,
-          ignore_group_lock = false,
-          movefocus_cycles_fullscreen = false,
-          movefocus_cycles_groupfirst = true,
-          window_direction_monitor_fallback = true,
-          disable_keybind_grabbing = false,
-          allow_pin_fullscreen = false,
-          drag_threshold = 0,
-          drag_center_window = false,
-        },
-      })
-
       -- https://wiki.hypr.land/Configuring/Basics/Binds/
       -- https://wiki.hypr.land/Configuring/Basics/Dispatchers/
 
@@ -573,14 +697,6 @@ let
     '';
 
     animations = ''
-      hl.config({
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#animations
-        animations = {
-          enabled = true,
-          workspace_wraparound = true,
-        },
-      })
-
       -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/#curves
       hl.curve("easeOutQuint",   { type = "bezier", points = { { 0.23, 1.00 }, { 0.32, 1.00 } } })
       hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1.00 } } })
@@ -606,116 +722,6 @@ let
       hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 2.00, bezier = "easeInOutCubic", style = "slidefade 30%" })
       hl.animation({ leaf = "workspacesOut", enabled = true, speed = 2.00, bezier = "easeInOutCubic", style = "slidefade 30%" })
       hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 7.00, bezier = "quick" })
-    '';
-
-    input = ''
-      hl.config({
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#input
-        input = {
-          kb_model = "pc105",
-          kb_layout = "fi",
-          kb_variant = "winkeys",
-          -- kb_options = "",
-          -- kb_rules = "",
-          -- kb_file = "",
-          numlock_by_default = true,
-          resolve_binds_by_sym = false,
-          repeat_rate = 25,
-          repeat_delay = 500,
-          sensitivity = 1.0,
-          accel_profile = "flat",
-          force_no_accel = false,
-          rotation = 0,
-          left_handed = false,
-          -- scroll_points = "",
-          scroll_method = "on_button_down",
-          scroll_button = 274,
-          scroll_button_lock = false,
-          scroll_factor = 1.0,
-          natural_scroll = false,
-          follow_mouse = 1,
-          follow_mouse_shrink = 0,
-          follow_mouse_threshold = 0.0,
-          focus_on_close = 1,
-          mouse_refocus = true,
-          float_switch_override_focus = 1,
-          special_fallthrough = false,
-          off_window_axis_events = 1,
-          emulate_discrete_scroll = 1,
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#touchpad
-          touchpad = {
-            disable_while_typing = true,
-            natural_scroll = true,
-            scroll_factor = 1.0,
-            middle_button_emulation = false,
-            tap_button_map = "lrm",
-            clickfinger_behavior = false,
-            tap_to_click = true,
-            drag_lock = 1,
-            tap_and_drag = true,
-            flip_x = false,
-            flip_y = false,
-            drag_3fg = 0,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#touchdevice
-          touchdevice = {
-            transform = 0,
-            -- output = "",
-            enabled = true,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#virtualkeyboard
-          virtualkeyboard = {
-            share_states = 2,
-            release_pressed_on_close = false,
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#tablet
-          tablet = {
-            transform = 0,
-            -- output = "",
-            region_position = { 0, 0 },
-            absolute_region_position = false,
-            region_size = { 0, 0 },
-            relative_input = false,
-            left_handed = false,
-            active_area_size = { 0, 0 },
-            active_area_position = { 0, 0 },
-          },
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#tablettool
-          tablettool = {
-            eraser_button_mode = 0,
-            eraser_button_override = 0,
-            pressure_range_min = -1.0,
-            pressure_range_max = -1.0,
-          },
-        },
-
-        -- https://wiki.hypr.land/Configuring/Basics/Variables/#gestures
-        gestures = {
-          workspace_swipe_distance = 300,
-          workspace_swipe_touch = false,
-          workspace_swipe_invert = true,
-          workspace_swipe_touch_invert = false,
-          workspace_swipe_min_speed_to_force = 30,
-          workspace_swipe_cancel_ratio = 0.5,
-          workspace_swipe_create_new = true,
-          workspace_swipe_direction_lock = true,
-          workspace_swipe_direction_lock_threshold = 10,
-          workspace_swipe_forever = false,
-          workspace_swipe_use_r = false,
-          close_max_timeout = 1000,
-
-          -- https://wiki.hypr.land/Configuring/Basics/Variables/#scrolling
-          scrolling = {
-            move_snap_to_grid = true,
-            move_snap_cursor = true,
-          },
-        },
-      })
     '';
   };
 
@@ -770,6 +776,19 @@ let
 in
 {
   options.mp222.hyprland = {
+    config = lib.mkOption {
+      type = attrsOf settingValueType;
+      default = { };
+      description = ''
+        Attribute set of Hyprland configuration options.
+        See https://wiki.hypr.land/Configuring/Basics/Variables/
+      '';
+      example = {
+        general.border_size = 3;
+        animations.enabled = true;
+      };
+    };
+
     monitors = {
       monitors = lib.mkOption {
         type = listOf monitorType;
@@ -784,29 +803,20 @@ in
           }
           {
             output = "DP-2";
-            mode = "preferred";
-            position = "auto";
             scale = 1.0;
           }
         ];
       };
 
-      addDefaultPlacement = lib.mkOption {
-        type = bool;
-        default = true;
-        description = "Add default placement for extra monitors.";
-        example = false;
-      };
-
-      cursorDefaultMonitor = lib.mkOption {
-        type = nullOr str;
-        default = null;
-        description = ''
-          The name of a default monitor for the cursor to be set to on startup.
-          Leave `null` to let Hyprland decide (will probably use the first monitor in `monitors`).
-          TODO: Need to test if this works with output name, description, or either.
-        '';
-        example = "DP-1";
+      defaultPlacement = lib.mkOption {
+        type = nullOr monitorType;
+        default = {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = 1.0;
+        };
+        description = "Default placement for extra monitors.";
       };
     };
 
