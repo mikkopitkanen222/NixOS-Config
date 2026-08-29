@@ -330,6 +330,7 @@ let
     notificationPopupShadowEnabled = true;
     notificationPopupPrivacyMode = false;
     modalDarkenBackground = true;
+    lockPamExternallyManaged = true;
     lockScreenShowPowerActions = true;
     lockScreenShowSystemIcons = false;
     lockScreenShowTime = true;
@@ -781,6 +782,7 @@ in
   home-manager.users.mp = {
     imports = [
       inputs.dms.homeModules.dank-material-shell
+      inputs.dank-calendar.homeModules.dank-calendar
       inputs.dank-search.homeModules.dsearch
     ];
 
@@ -804,6 +806,7 @@ in
       inherit settings clipboardSettings plugins;
     };
 
+    #programs.dank-calendar.settings = {};
     programs.dsearch.enable = true;
   };
 }

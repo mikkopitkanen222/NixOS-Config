@@ -131,5 +131,5 @@
     opencl.enable = true;
     overdrive.enable = config.services.lact.enable;
   };
-  services.lact.enable = true;
+  services.lact.enable = false;
 }
