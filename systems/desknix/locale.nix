@@ -1,5 +1,5 @@
 { ... }: {
-  time.timeZone = "Europe/Helsinki";
+  services.automatic-timezoned.enable = true;
 
   i18n = {
     defaultLocale = "fi_FI.UTF-8";
