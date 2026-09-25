@@ -1,52 +1,94 @@
+<div align="center">
+
 # NixOS-Config
-This repository contains my NixOS configuration flake, used to configure multiple machines.
-There are three components in each configuration: `host`, `system`, and `users`.
-Each type of component resides in a separate sub-directory of this repo:
 
-- [Host configs](hosts) are specific to each physical (or virtual) machine.
-They configure options depending on the installed hardware, such as host platforms (e.g. `x86_64-linux`), file system mount options, and video drivers.
-Host configs also set host specific options not dependent on installed hardware, such as kernel versions, boot loaders, and host names.
-Only one host config can be enabled per built NixOS config.
+**My NixOS configuration**
 
-- [System configs](systems) are specific to each workflow.
-They configure options depending on the use case, such as desktop environments, programs, services, and settings.
-System configs install things required by their users, things which must be installed on the system level.
-System configs are shared by all users of the machine.
-Only one system config can be enabled per built NixOS config.
+<p>
+<img alt="The purest slop, AI-free forever" src="https://img.shields.io/badge/Hacked-together-green?style=for-the-badge&logo=github"/>
+</p>
 
-- [User configs](users) are specific to each user.
-They configure options depending on the user, such as home directories, programs, services, and settings.
-User configs modify settings and install software only in the user's own profile.
-Multiple user configs can be enabled per built NixOS config.
+</div>
 
-Anything that can be configured on the user level should be configured on the user level, using Home Manager if possible.
-Things should be configured on the system level only if they require changes to the system / outside user home directories.
+This repository contains my NixOS configuration flake.
+I use it to configure multiple machines of mine.
+Each host supports multiple users, but currently only one is used.
 
+> [!WARNING]
+> This flake contains only the public part of my configurations.
+> It will not build on its own.
+> This flake is only made public so it may serve as a simple example of a working configuration.
+>
+> To `nixos-rebuild` this flake standalone, remove all `sops` attributes.
+> At the time of writing that should be enough. See [Usage](#usage).
+> (Not that anyone should do that, for the reason stated above.)
 
-# Usage
-Build the configs with [`nixos-rebuild`](https://nixos.org/manual/nixos/stable/#sec-changing-config). Remember to use `sudo` with `nixos-rebuild` operations `boot` and `switch`.
-```sh
-# sudo nixos-rebuild switch --flake <PATH>#<CFG>
-# <PATH> is path to flake; <CFG> is config name in flake.nix:
-sudo nixos-rebuild switch --flake .#desknix
-# Config name defaults to current hostname:
-sudo nixos-rebuild switch --flake .#
+## Structure
+
+- `modules`: Reusable modules, shareable between hosts (placeholder)
+- `overlays`: Reusable overlays, shareable between hosts
+- `packages/initial-install`: Helper script to reinstall existing configs from scratch
+- `systems/<host>`: System configurations organized by host.
+  - `users/<user>`: User configurations organized by user
+
+System configurations reuse configs from other systems.
+`desknix` has the main system configuration and other systems import configs from that, adding and `mkForce`ing things as needed.
+
+> [!INFO]
+> Improving this structure is a work in progress.
+
+## Usage
+
+This flake contains only the public part of my configurations.
+It's almost complete; it just misses the `sops.defaultSopsFile` and key config.
+
+There is also a secret flake, which contains the above mentioned attributes and all `sops` files.
+It has a flake like this:
+
+```nix
+{
+  description = "Private NixOS configurations";
+
+  inputs.nixos-config.url = "github:mikkopitkanen222/nixos-config";
+  #inputs.nixos-config.url = "git+file:///path/to/public/nixos-config";
+
+  outputs =
+    { self, nixos-config, ... }:
+    nixos-config
+    // {
+      nixosConfigurations = builtins.mapAttrs (
+        name: value:
+        value.extendModules {
+          modules = [
+            ({ config, lib, ... }: {
+              sops = {
+                defaultSopsFile = "${self}/${name}.yaml";
+                age = {
+                  generateKey = false;
+                  sshKeyPaths = [ ];
+                };
+                gnupg = {
+                  home = "/path/to/sops/server/key";
+                  sshKeyPaths = [ ];
+                };
+              };
+
+              # Already defined in nixos-config; override to this secrets flake, instead.
+              programs.nh.flake = lib.mkForce "/path/to/this/repo/outside/store";
+
+              # Get the commit this system was built from: nixos-version --configuration-revision
+              # Already defined in nixos-config; override to this secrets flake, instead.
+              system.configurationRevision = lib.mkForce "${self.dirtyRev or self.rev}";
+            })
+          ];
+        }
+      ) nixos-config.nixosConfigurations;
+    };
+}
 ```
 
-Create a symlink `/etc/nixos/flake.nix` targeting the `flake.nix` file in this repository and you can omit the `--flake` option:
-```sh
-# Build the config matching current hostname:
-sudo nixos-rebuild switch
-```
+Update process for a two-flake setup:
 
-Home Manager is used as a NixOS module, rather than the standalone tool, allowing the user profiles to be built together with the system. See the [manual](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes) for more info.
-
-
-# Note
-Don't use this flake as is on your own machine. At least some modifications must be made first, such as:
-- Host configurations should be generated with [`nixos-generate-config`](https://nixos.org/manual/nixos/stable/#sec-installation-manual-installing). Some hand edits may be needed to fit in the rest of the configs.
-- Pick your own host/config names.
-- Change user names and emails.
-- Don't install my ssh keys or I will be able to log in on your machine.
-
-<b>For best results, you should craft your own flake. This repo structure is not optimal when you have only one machine to configure.</b>
+- Commit (and push, if not using `git+file://` url) all changes in the public repo
+- `nix flake update` in the private repo
+- `nh os boot && reboot`
