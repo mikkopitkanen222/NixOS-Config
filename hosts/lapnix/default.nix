@@ -30,10 +30,7 @@ in
   ++ (lib.map (user: ./. + "/users/${user}") users);
 
   # Lone packages without further config are installed here:
-  environment.systemPackages = with pkgs; [
-    tree
-    tuned
-  ];
+  environment.systemPackages = with pkgs; [ tree ];
 
   # Overlays output by our flake are enabled here:
   nixpkgs.overlays = [ inputs.self.outputs.overlays.nixpkgs-unstable ];

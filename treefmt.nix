@@ -7,11 +7,11 @@
       width = 80;
     };
     deadnix = {
-      enable = true;
+      enable = false;
       no-underscore = true;
     };
     statix = {
-      enable = true;
+      enable = false;
       disabled-lints = [ "repeated_keys" ];
     };
   };

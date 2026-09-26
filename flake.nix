@@ -116,7 +116,7 @@
 
         wsl = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./systems/wsl ];
+          modules = [ ./hosts/wsl ];
         };
 
         qdev = nixpkgs.lib.nixosSystem {

@@ -1,0 +1,23 @@
+{ config, lib, ... }:
+let
+  cfg = config.mp222.clipse;
+in
+{
+  home-manager.users.mp = {
+    programs.git = {
+      enable = true;
+      settings = {
+        user = {
+          name = "Mikko Pitkänen";
+          email = "mikko.pitkanen.code@pm.me";
+        };
+        core = {
+          editor = "codium --wait";
+          pager = "less -x2";
+        };
+        init.defaultBranch = "master";
+      };
+      signing.signByDefault = true;
+    };
+  };
+}

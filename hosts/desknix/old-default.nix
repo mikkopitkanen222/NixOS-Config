@@ -10,38 +10,31 @@ let
 in
 {
   imports = [
-    inputs.disko.nixosModules.disko
     inputs.sops-nix.nixosModules.sops
-    ../desknix/bluetooth.nix
-    ../desknix/boot-splash.nix
-    ./disko.nix
-    ../desknix/games.nix
+    ./bluetooth.nix
+    ./boot-splash.nix
+    ./games.nix
     ./hardware-configuration.nix
     ./host-configuration.nix
-    ../desknix/locale.nix
+    ./locale.nix
+    ./mouse.nix
     ./networking.nix
     ./nixos.nix
-    ../desknix/pipewire.nix
-    ../desknix/security.nix
-    ../desknix/smartcard-crypto.nix
-    ../desknix/terminal-text-editor.nix
-    ../desknix/vscode-server.nix
+    ./pipewire.nix
+    ./security.nix
+    ./smartcard-crypto.nix
+    ./terminal-text-editor.nix
+    ./vscode-server.nix
   ]
   ++ (lib.map (user: ./. + "/users/${user}") users);
 
   # Lone packages without further config are installed here:
-  environment.systemPackages = with pkgs; [
-    tree
-    tuned
-  ];
+  environment.systemPackages = with pkgs; [ tree ];
 
   # Overlays output by our flake are enabled here:
   nixpkgs.overlays = [ inputs.self.outputs.overlays.nixpkgs-unstable ];
 
-  services.getty = {
-    autologinUser = lib.head users;
-    autologinOnce = true;
-  };
+  mp222.enableFactorio = true;
 
   sops.secrets = {
     "passwd_mp".neededForUsers = true;

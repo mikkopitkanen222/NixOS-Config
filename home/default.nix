@@ -1,0 +1,25 @@
+{
+  imports = [
+    ./btop.nix
+    ./chromium.nix
+    ./clipse.nix
+    ./comma.nix
+    ./dank.nix
+    ./direnv.nix
+    ./git.nix
+    ./gtk.nix
+    ./hyprland.nix
+    ./kitty.nix
+    ./nnn.nix
+    ./obsidian.nix
+    ./prompt.nix
+    ./proton.nix
+    ./shell.nix
+    ./thunderbird.nix
+    ./udiskie.nix
+    ./user-dirs.nix
+    ./vesktop.nix
+    ./vscodium.nix
+    ./walls.nix
+  ];
+}
