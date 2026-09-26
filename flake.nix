@@ -61,26 +61,26 @@
           system: f nixpkgs.legacyPackages.${system} system
         );
       treefmtEval = eachSystem (
-        pkgs: system: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
+        pkgs: _system: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
       );
     in
     {
       formatter = eachSystem (
-        pkgs: system: treefmtEval.${system}.config.build.wrapper
+        _pkgs: system: treefmtEval.${system}.config.build.wrapper
       );
 
       checks = eachSystem (
-        pkgs: system: { formatting = treefmtEval.${system}.config.build.check self; }
+        _pkgs: system: { formatting = treefmtEval.${system}.config.build.check self; }
       );
 
       packages = eachSystem (
-        pkgs: system: {
+        pkgs: _system: {
           initial-install = pkgs.callPackage ./packages/initial-install { };
         }
       );
 
       apps = eachSystem (
-        pkgs: system:
+        _pkgs: system:
         let
           inherit (self.packages.${system}) initial-install;
         in
