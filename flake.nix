@@ -93,8 +93,6 @@
         }
       );
 
-      # Modules and overlays used in configurations.
-      nixosModules = import ./modules { inherit inputs; };
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {

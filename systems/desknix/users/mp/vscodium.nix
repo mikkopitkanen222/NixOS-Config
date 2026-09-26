@@ -25,7 +25,7 @@
           versionedExtensions = pkgs.nix-vscode-extensions.forVSCodeVersion (
             removeLeadingZeros vscodiumPackage.version
           );
-          vscode-marketplace = versionedExtensions.vscode-marketplace;
+          inherit (versionedExtensions) vscode-marketplace;
         in
         {
           # Profile "default" is never used. The following configuration options
