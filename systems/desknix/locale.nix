@@ -1,4 +1,4 @@
-{ ... }: {
+{
   services.automatic-timezoned.enable = true;
 
   i18n = {

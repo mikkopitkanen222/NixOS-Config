@@ -1,4 +1,4 @@
-{ ... }: {
+{
   home-manager.users.mp = {
     gtk = {
       enable = true;

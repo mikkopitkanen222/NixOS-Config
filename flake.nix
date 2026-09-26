@@ -59,26 +59,22 @@
           system: f nixpkgs.legacyPackages.${system} system
         );
       treefmtEval = eachSystem (
-        pkgs: system: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
+        pkgs: _: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
       );
     in
     {
-      formatter = eachSystem (
-        pkgs: system: treefmtEval.${system}.config.build.wrapper
-      );
+      formatter = eachSystem (_: system: treefmtEval.${system}.config.build.wrapper);
 
       checks = eachSystem (
-        pkgs: system: { formatting = treefmtEval.${system}.config.build.check self; }
+        _: system: { formatting = treefmtEval.${system}.config.build.check self; }
       );
 
       packages = eachSystem (
-        pkgs: system: {
-          initial-install = pkgs.callPackage ./packages/initial-install { };
-        }
+        pkgs: _: { initial-install = pkgs.callPackage ./packages/initial-install { }; }
       );
 
       apps = eachSystem (
-        pkgs: system:
+        _: system:
         let
           inherit (self.packages.${system}) initial-install;
         in
@@ -91,8 +87,6 @@
         }
       );
 
-      # Modules and overlays used in configurations.
-      nixosModules = import ./modules { inherit inputs; };
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
