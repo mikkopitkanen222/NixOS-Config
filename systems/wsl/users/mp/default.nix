@@ -20,6 +20,7 @@
   };
 
   imports = [
+    ../../../desknix/users/mp/comma.nix
     ../../../desknix/users/mp/direnv.nix
     ./git.nix
     ../../../desknix/users/mp/prompt.nix

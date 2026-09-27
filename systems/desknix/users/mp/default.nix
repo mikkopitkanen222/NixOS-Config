@@ -46,6 +46,7 @@
     ./btop.nix
     ./chromium.nix
     ./clipse.nix
+    ./comma.nix
     ./dank.nix
     ./direnv.nix
     ./git.nix
