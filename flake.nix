@@ -88,6 +88,15 @@
         }
       );
 
+      devShells = eachSystem (
+        pkgs: system: {
+          default = self.devShells.${system}.checks;
+          checks = pkgs.mkShellNoCC {
+            inputsFrom = [ self.checks.${system}.formatting ];
+          };
+        }
+      );
+
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
