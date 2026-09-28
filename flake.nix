@@ -87,6 +87,10 @@
         }
       );
 
+      devShells = eachSystem (
+        _: system: { default = treefmtEval.${system}.config.build.devShell; }
+      );
+
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = {
