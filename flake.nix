@@ -74,15 +74,10 @@
       );
 
       apps = eachSystem (
-        _: system:
-        let
-          inherit (self.packages.${system}) initial-install;
-        in
-        {
-          default = self.apps.${system}.install;
+        _: system: {
           install = {
             type = "app";
-            program = "${initial-install}/bin/install.sh";
+            program = "${self.packages.${system}.initial-install}/bin/install.sh";
           };
         }
       );
