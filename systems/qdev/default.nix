@@ -34,7 +34,11 @@ in
 
   sops.secrets = {
     "passwd_mp".neededForUsers = true;
-    "openssh_mp" = { };
+    "openssh_mp" = {
+      path = "/etc/ssh/authorized_keys.d/mp";
+      owner = "mp";
+      mode = "0400";
+    };
     "u2f_keys" = {
       group = config.users.users.mp.group;
       mode = "0440";

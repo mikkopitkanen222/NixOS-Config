@@ -10,12 +10,6 @@
     shell = pkgs.zsh;
   };
 
-  system.activationScripts."cp-authorizedKeys-mp".text = ''
-    mkdir -p "/etc/ssh/authorized_keys.d";
-    cp "${config.sops.secrets."openssh_mp".path}" "/etc/ssh/authorized_keys.d/mp";
-    chmod +r "/etc/ssh/authorized_keys.d/mp"
-  '';
-
   home-manager.users.mp = {
     programs.home-manager.enable = true;
     home = {
