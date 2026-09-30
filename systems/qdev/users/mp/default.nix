@@ -26,7 +26,7 @@
   };
 
   imports = [
-    ../../../lapnix/users/mp/btop.nix
+    ./btop.nix
     ./chromium.nix
     ../../../desknix/users/mp/clipse.nix
     ../../../desknix/users/mp/comma.nix
