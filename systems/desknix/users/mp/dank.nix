@@ -776,6 +776,10 @@ let
   };
 in
 {
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.accounts-daemon.enable = true;
+
   home-manager.users.mp = { config, ... }: {
     imports = [
       inputs.dms.homeModules.dank-material-shell
