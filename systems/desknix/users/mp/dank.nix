@@ -776,13 +776,16 @@ let
   };
 in
 {
-  home-manager.users.mp = {
+  home-manager.users.mp = { config, ... }: {
     imports = [
       inputs.dms.homeModules.dank-material-shell
       inputs.dank-search.homeModules.dsearch
     ];
 
     home.packages =
+      let
+        inherit (config.programs.dank-material-shell) plugins;
+      in
       with pkgs;
       [ adwaita-icon-theme ]
       ++ lib.optionals (
