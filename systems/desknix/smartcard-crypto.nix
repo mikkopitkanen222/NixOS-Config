@@ -1,6 +1,6 @@
 # https://nixos.wiki/wiki/Yubikey
 # https://ludovicrousseau.blogspot.com/2019/06/gnupg-and-pcsc-conflicts.html
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   # For SSH, we're using gpg-agent instead of ssh-agent.
   # ssh-agent can't use GPG keys for SSH authentication.
   programs.ssh.startAgent = false;
@@ -9,7 +9,16 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+    # pinentry-qt opens a dialog in a graphical session and falls back to the
+    # terminal elsewhere (e.g. over SSH). Qt is only pulled in on hosts that
+    # already have it for DMS.
+    pinentryPackage =
+      if
+        config.home-manager.users.mp.programs.dank-material-shell.enable or false
+      then
+        pkgs.pinentry-qt
+      else
+        pkgs.pinentry-curses;
     settings = {
       default-cache-ttl = 30;
       max-cache-ttl = 60;
