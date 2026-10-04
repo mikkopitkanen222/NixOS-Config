@@ -128,6 +128,7 @@ in
                 "editor.inlayHints.enabled" = "offUnlessPressed";
                 "editor.multiCursorModifier" = "ctrlCmd";
                 "editor.renderWhitespace" = "all";
+                "editor.rulers" = [ 80 ];
                 "editor.smoothScrolling" = true;
                 "editor.tabSize" = 2;
                 "editor.wordWrap" = "on";
@@ -169,6 +170,12 @@ in
                       };
                     };
                   };
+                };
+                "[git-commit]" = {
+                  "editor.rulers" = [
+                    50
+                    72
+                  ];
                 };
                 "[cpp]" = {
                   "editor.detectIndentation" = false;
