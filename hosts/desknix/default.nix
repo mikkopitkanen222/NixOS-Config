@@ -92,7 +92,14 @@
   hardware.keyboard.qmk.enable = true;
 
   # Programs:
-  mp222.factorio.enable = true;
+  sops.secrets.factorio_game_password = { };
+  sops.templates.factorio-extra-settings.content = builtins.toJSON {
+    game_password = config.sops.placeholder.factorio_game_password;
+  };
+  mp222.factorio = {
+    enable = true;
+    settingsFile = config.sops.templates.factorio-extra-settings.path;
+  };
   home-manager.users.mp.home.packages = [
     pkgs.bs-manager
     pkgs.pcsx2
