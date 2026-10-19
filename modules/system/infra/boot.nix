@@ -55,7 +55,7 @@ in
         boot = {
           plymouth = {
             enable = true;
-            theme = "dragon";
+            theme = lib.mkDefault "splash";
             themePackages = [
               (pkgs.adi1090x-plymouth-themes.override {
                 selected_themes = [ config.boot.plymouth.theme ];
