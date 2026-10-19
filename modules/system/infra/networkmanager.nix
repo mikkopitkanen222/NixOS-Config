@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.mp222.networkmanager;
 in
@@ -28,13 +23,9 @@ in
           Settings.AutoConnect = true;
         };
       };
-      useDHCP = lib.mkDefault true;
     };
 
     programs.nm-applet.enable = true;
-
-    # nm-applet MUST be installed like this or the icons won't be found!
-    environment.systemPackages = [ pkgs.networkmanagerapplet ];
 
     users.users = lib.mapAttrs (_: _: {
       extraGroups = [
