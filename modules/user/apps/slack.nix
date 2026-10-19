@@ -37,8 +37,13 @@ in
         PartOf = [ "graphical-session.target" ];
         After = [ "graphical-session.target" ];
       };
-      Service.ExecStart =
-        "${lib.getExe cfg.package} -s" + (if cfg.autostart.hidden then " -u" else "");
+      Service.ExecStart = lib.concatStringsSep " " (
+        [
+          (lib.getExe cfg.package)
+          "--silent"
+        ]
+        ++ lib.optional cfg.autostart.hidden "--startup"
+      );
       Install.WantedBy = [
         "graphical-session.target"
         "tray.target"
