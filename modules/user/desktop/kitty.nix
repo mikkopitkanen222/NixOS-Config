@@ -14,6 +14,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    mp222.walls.wallpapers."kitty-teeth.jpg" = {
+      url = "https://wallpapercave.com/download/brand-of-sacrifice-wallpapers-wp8812347";
+      hash = "sha256-8h4kyDFE4CFDMBmxz6TbgbN0kCE0ACHSDqTd4Do8V9o=";
+      outDir = "backgrounds";
+    };
+
     programs.kitty = {
       enable = true;
       themeFile = "PaulMillr";
@@ -22,22 +28,13 @@ in
         package = pkgs.nerd-fonts.hack;
         size = 12;
       };
-      settings =
-        let
-          background = pkgs.fetchurl {
-            url = "https://wallpapercave.com/download/brand-of-sacrifice-wallpapers-wp8812347";
-            hash = "sha256-8h4kyDFE4CFDMBmxz6TbgbN0kCE0ACHSDqTd4Do8V9o=";
-            # The requested URL returns error 403 when no user agent is set:
-            curlOpts = "--user-agent 'Chrome/137.0.0.0'";
-          };
-        in
-        {
-          background_image = "${background}";
-          background_tint = 0.99;
-          cursor_stop_blinking_after = 0.0;
-          tab_bar_style = "powerline";
-          tab_powerline_style = "angled";
-        };
+      settings = {
+        background_image = config.mp222.walls.wallpapers."kitty-teeth.jpg".path;
+        background_tint = 0.99;
+        cursor_stop_blinking_after = 0.0;
+        tab_bar_style = "powerline";
+        tab_powerline_style = "angled";
+      };
     };
 
     xdg.configFile."kitty/quick-access-terminal.conf".text = ''
