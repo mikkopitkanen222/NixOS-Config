@@ -11,7 +11,6 @@ in
     services.btrfs.autoScrub = {
       enable = true;
       interval = lib.mkDefault "weekly";
-      fileSystems = [ "/" ];
     };
   };
 }
