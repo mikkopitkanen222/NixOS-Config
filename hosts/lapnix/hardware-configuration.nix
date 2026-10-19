@@ -13,7 +13,6 @@
     "ahci"
     "xhci_pci"
     "usbhid"
-    "sdhci_pci"
   ];
   boot.kernelModules = [ "kvm-amd" ];
 

@@ -9,11 +9,9 @@
 
   # https://gist.github.com/CMCDragonkai/810f78ee29c8fce916d072875f7e1751
   boot.initrd.availableKernelModules = [
-    "thunderbolt"
     "nvme"
     "xhci_pci"
     "usbhid"
-    "usb_storage"
     "sd_mod"
   ];
   boot.kernelModules = [ "kvm-intel" ];
