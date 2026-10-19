@@ -7,8 +7,8 @@ stdenvNoCC.mkDerivation {
       ./configuration.nix
       ./first-boot.sh
       ./install.sh
-      ../../systems/lapnix/disko.nix
-      ../../systems/lapnix/hardware-configuration.nix
+      ../../hosts/lapnix/disko.nix
+      ../../hosts/lapnix/hardware-configuration.nix
     ];
   };
   installPhase = ''
@@ -17,6 +17,6 @@ stdenvNoCC.mkDerivation {
 
     mkdir -p $out/share
     cp packages/initial-install/configuration.nix $out/share
-    cp -r systems/*/ $out/share
+    cp -r hosts/*/ $out/share
   '';
 }

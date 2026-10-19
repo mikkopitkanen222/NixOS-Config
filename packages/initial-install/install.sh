@@ -19,7 +19,7 @@ Usage:
 
 Options:
   --system <system>   Name of system whose disk configuration shall be installed.
-                      The filepath systems/\$system/disko.nix must point to an
+                      The filepath hosts/\$system/disko.nix must point to an
                       existing file in this repository. Required on step 0.
   --step <step>       Installation step to be performed. Number in range 0-2.
                       Steps must be run in order. Defaults to 0.

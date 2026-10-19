@@ -62,17 +62,12 @@
         nixpkgs.lib.genAttrs (import systems) (
           system: f nixpkgs.legacyPackages.${system} system
         );
+
       treefmtEval = eachSystem (
         pkgs: _: treefmt-nix.lib.evalModule pkgs ./treefmt.nix
       );
     in
     {
-      formatter = eachSystem (_: system: treefmtEval.${system}.config.build.wrapper);
-
-      checks = eachSystem (
-        _: system: { formatting = treefmtEval.${system}.config.build.check self; }
-      );
-
       packages = eachSystem (
         pkgs: _: { initial-install = pkgs.callPackage ./packages/initial-install { }; }
       );
@@ -86,32 +81,73 @@
         }
       );
 
+      formatter = eachSystem (_: system: treefmtEval.${system}.config.build.wrapper);
+
+      checks = eachSystem (
+        pkgs: system:
+        {
+          formatting = treefmtEval.${system}.config.build.check self;
+        }
+        // import ./checks/hosts.nix { inherit pkgs self; }
+      );
+
       devShells = eachSystem (
         _: system: { default = treefmtEval.${system}.config.build.devShell; }
       );
 
       overlays = import ./overlays { inherit inputs; };
 
-      nixosConfigurations = {
-        desknix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./systems/desknix ];
-        };
+      lib =
+        let
+          inherit (nixpkgs) lib;
 
-        lapnix = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./systems/lapnix ];
-        };
+          subdirsIn =
+            dir:
+            lib.pipe dir [
+              builtins.readDir
+              (lib.filterAttrs (_: type: type == "directory"))
+              lib.attrNames
+            ];
 
-        wsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./systems/wsl ];
-        };
+          nixFilesIn =
+            dirs:
+            lib.pipe dirs [
+              (map lib.filesystem.listFilesRecursive)
+              lib.flatten
+              (lib.filter (lib.hasSuffix ".nix"))
+            ];
 
-        qdev = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./systems/qdev ];
+          hostNames = subdirsIn ./hosts;
+          userNames = subdirsIn ./users;
+
+          systemModules = nixFilesIn [
+            ./modules/system
+            ./profiles/system
+          ];
+          userModules = nixFilesIn [
+            ./modules/user
+            ./profiles/user
+          ];
+        in
+        {
+          inherit hostNames;
+
+          mkHost =
+            host: extraModules:
+            lib.nixosSystem {
+              specialArgs = { inherit inputs; };
+              modules =
+                systemModules
+                ++ (map (name: ./users/${name}) userNames)
+                ++ [
+                  ./hosts/${host}
+                  {
+                    networking.hostName = lib.mkDefault host;
+                    home-manager.sharedModules = userModules;
+                  }
+                ]
+                ++ extraModules;
+            };
         };
-      };
     };
 }
