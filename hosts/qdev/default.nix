@@ -1,5 +1,5 @@
 # Lenovo ThinkPad T16 Gen 2
-{ pkgs, ... }: {
+{
   imports = [ ./hardware-configuration.nix ];
 
   # Profiles and users:
@@ -80,8 +80,6 @@
 
   # Dual-boots Windows, which is picked from the boot menu.
   boot.loader.timeout = 5;
-
-  environment.systemPackages = [ pkgs.tree ];
 
   system.stateVersion = "25.11";
 }

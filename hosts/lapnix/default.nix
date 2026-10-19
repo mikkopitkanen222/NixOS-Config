@@ -1,11 +1,5 @@
 # Lenovo IdeaPad 1 15ALC7
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
-{
+{ config, inputs, ... }: {
   imports = [
     inputs.disko.nixosModules.disko
     ./disko.nix
@@ -57,8 +51,6 @@
 
   # Peripherals:
   mp222.fprintd.enable = true;
-
-  environment.systemPackages = [ pkgs.tree ];
 
   system.stateVersion = "25.11";
 }

@@ -105,7 +105,5 @@
     pkgs.pcsx2
   ];
 
-  environment.systemPackages = [ pkgs.tree ];
-
   system.stateVersion = "25.05";
 }

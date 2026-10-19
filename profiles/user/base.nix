@@ -24,6 +24,9 @@ in
       zsh.enable = true;
     };
 
-    home.packages = [ pkgs.nixd ];
+    home.packages = [
+      pkgs.nixd
+      pkgs.tree
+    ];
   };
 }
