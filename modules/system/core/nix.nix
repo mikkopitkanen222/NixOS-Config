@@ -2,10 +2,14 @@
   nix = {
     # Channels are dirty, impure even.
     channel.enable = false;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      # The default 1 MiB buffer stalls downloads with "buffer full".
+      download-buffer-size = 128 * 1024 * 1024;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
     # Make <nixpkgs> point to the nixpkgs (in store) this system was built from.
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
