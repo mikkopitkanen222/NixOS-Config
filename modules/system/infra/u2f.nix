@@ -29,7 +29,9 @@ in
       };
     };
 
-    security.sudo.configFile = ''
+    # PIN verification makes every sudo slower, so ask less often than the
+    # default 5 minutes.
+    security.sudo.extraConfig = ''
       Defaults timestamp_timeout=15
     '';
   };
