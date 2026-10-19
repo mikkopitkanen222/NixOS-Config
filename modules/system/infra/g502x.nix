@@ -13,12 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.logitech.wireless = {
-      enable = true;
-      # solaar is less featureful than libratbag, but it shows remaining charge
-      # and works wirelessly.
-      enableGraphical = true;
-    };
+    hardware.logitech.wireless.enable = true;
 
     # piper is a GUI for ratbagctl, used to remap mouse buttons.
     environment.systemPackages = [ pkgs.piper ];
